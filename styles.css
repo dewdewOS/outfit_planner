@@ -1,0 +1,102 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f8f8f8;
+}
+
+.app-container {
+    width: 100%;
+    max-width: 400px;
+    margin: auto;
+    background: white;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background: #fff;
+    border-bottom: 1px solid #ddd;
+}
+
+.profile {
+    display: flex;
+    align-items: center;
+}
+
+.profile img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+
+
+.tabs {
+    display: flex;
+    justify-content: space-around;
+    background: #fff;
+    padding: 10px 0;
+}
+
+.tabs button {
+    border: none;
+    background: none;
+    font-size: 16px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+
+.tabs .active {
+    font-weight: bold;
+    border-bottom: 2px solid black;
+}
+
+.clothes-section {
+    padding: 15px;
+}
+
+.clothes-category h3 {
+    display: flex;
+    justify-content: space-between;
+}
+
+.clothes-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-top: 10px;
+}
+
+.clothes-item {
+    width: 100%;
+    height: 80px;
+    background: #ddd;
+    border-radius: 5px;
+}
+
+footer {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px;
+    background: #fff;
+    border-top: 1px solid #ddd;
+}
+
+.add-button {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: none;
+    background: black;
+    color: white;
+    font-size: 20px;
+    cursor: pointer;
+}
