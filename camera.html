@@ -1,80 +1,83 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Webcam Capture</title>
     <style>
-        video {
-            transform: scaleX(-1); /* Fix live preview flip */
-            -webkit-transform: scaleX(-1);
-            width: 100%;
-            max-width: 500px;
-        }
-        img {
-            width: 100%;
-            max-width: 500px;
-            display: none;
-        }
+      video {
+        transform: scaleX(-1);
+        -webkit-transform: scaleX(-1);
+        width: 100%;
+        max-width: 500px;
+      }
+      img {
+        width: 100%;
+        max-width: 500px;
+        display: none;
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <h1>Webcam Capture</h1>
     <video id="videoElement" autoplay></video>
-    <button id="startButton">Start Webcam</button>
-    <button id="captureButton" disabled>Capture Photo</button>
+    <button id="captureButton">Capture Photo</button>
     <button id="uploadButton" disabled>Upload (Non-Functional)</button>
-    <canvas id="canvasElement" style="display: none;"></canvas>
-    <img id="photoElement">
+    <canvas id="canvasElement" style="display: none"></canvas>
+    <img id="photoElement" />
 
     <script>
-        const { ipcRenderer } = require('electron'); // Import Electron IPC
-        const videoElement = document.getElementById('videoElement');
-        const canvasElement = document.getElementById('canvasElement');
-        const photoElement = document.getElementById('photoElement');
-        const startButton = document.getElementById('startButton');
-        const captureButton = document.getElementById('captureButton');
-        const uploadButton = document.getElementById('uploadButton');
+      const { ipcRenderer } = require("electron");
+      const videoElement = document.getElementById("videoElement");
+      const canvasElement = document.getElementById("canvasElement");
+      const photoElement = document.getElementById("photoElement");
+      const captureButton = document.getElementById("captureButton");
+      const uploadButton = document.getElementById("uploadButton");
 
-        let stream;
+      let stream;
 
-        async function startWebcam() {
-            try {
-                stream = await navigator.mediaDevices.getUserMedia({ video: true });
-                videoElement.srcObject = stream;
-                startButton.disabled = true;
-                captureButton.disabled = false;
-            } catch (error) {
-                console.error('Error accessing webcam:', error);
-            }
+      async function startWebcam() {
+        try {
+          stream = await navigator.mediaDevices.getUserMedia({ video: true });
+          videoElement.srcObject = stream;
+          captureButton.disabled = false; // Enable capture button
+        } catch (error) {
+          console.error("Error accessing webcam:", error);
         }
+      }
 
-        function capturePhoto() {
-            canvasElement.width = videoElement.videoWidth;
-            canvasElement.height = videoElement.videoHeight;
-            const ctx = canvasElement.getContext('2d');
+      function capturePhoto() {
+        canvasElement.width = videoElement.videoWidth;
+        canvasElement.height = videoElement.videoHeight;
+        const ctx = canvasElement.getContext("2d");
 
-            // Flip image horizontally before drawing
-            ctx.translate(canvasElement.width, 0);
-            ctx.scale(-1, 1);
-            ctx.drawImage(videoElement, 0, 0, canvasElement.width, canvasElement.height);
+        // Flip image horizontally before drawing
+        ctx.translate(canvasElement.width, 0);
+        ctx.scale(-1, 1);
+        ctx.drawImage(
+          videoElement,
+          0,
+          0,
+          canvasElement.width,
+          canvasElement.height
+        );
 
-            // Convert to Base64 and display image
-            const photoDataUrl = canvasElement.toDataURL('image/jpeg');
-            photoElement.src = photoDataUrl;
-            photoElement.style.display = 'block';
+        // Convert to Base64 and display image
+        const photoDataUrl = canvasElement.toDataURL("image/jpeg");
+        photoElement.src = photoDataUrl;
+        photoElement.style.display = "block";
 
-            // Send data to Electron main process to save image
-            ipcRenderer.send('save-image', photoDataUrl);
-        }
+        // Send data to Electron main process to save image
+        ipcRenderer.send("save-image", photoDataUrl);
+      }
 
-        startButton.addEventListener('click', startWebcam);
-        captureButton.addEventListener('click', capturePhoto);
+      // Start the webcam automatically when the page loads
+      window.onload = startWebcam;
 
-        // Non-functional Upload button (for future use)
-        uploadButton.addEventListener('click', () => {
-            alert('Upload feature is not implemented yet.');
-        });
+      captureButton.addEventListener("click", capturePhoto);
+      uploadButton.addEventListener("click", () => {
+        alert("Upload feature is not implemented yet.");
+      });
     </script>
-</body>
+  </body>
 </html>
