@@ -59,7 +59,7 @@ header {
 
 .clothes-section {
     padding: 15px;
-    max-height: 400px; /* Adjust based on item size */
+    max-height: 500px; /* Adjust based on item size */
     overflow-y: auto;  /* Enable scrolling */
 }
 
@@ -77,11 +77,17 @@ header {
     align-items: center;
 }
 
-
 .clothes-item {
     width: 100%;
-    height: 150px; 
+    height: 200px; 
     background: #ddd;
+    border-radius: 5px;
+}
+
+.clothes-item img{
+    width: 100%;
+    height: 200px; /* Adjust if needed */
+    
     border-radius: 5px;
 }
 
