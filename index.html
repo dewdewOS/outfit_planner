@@ -109,7 +109,16 @@
 
       <footer>
         <button class="nav-btn"><i class="fa-solid fa-shirt"></i></button> <!-- Dress Icon -->
-        <button class="nav-btn add-btn"><i class="fa-solid fa-plus"></i></button> <!-- Plus Icon -->
+        <!-- Home Page HTML -->
+        <button id="openCameraButton" class="plus-button">+</button>
+
+        <script>
+          // Add an event listener to open the camera page
+          document.getElementById("openCameraButton").addEventListener("click", function () {
+          window.location.href = "camera.html"; // Navigate to the camera view
+          });
+        </script>
+
         <button class="nav-btn"><i class="fa-solid fa-basket-shopping"></i></button> <!-- Basket Icon -->
       </footer>
     </div>
