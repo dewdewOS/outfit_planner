@@ -3,13 +3,14 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Webcam Capture</title>
+    <title>Cloth Capture</title>
+    <link rel="stylesheet" href="camera.css" />
     <style>
       video {
         transform: scaleX(-1);
         -webkit-transform: scaleX(-1);
         width: 100%;
-        max-width: 500px;
+        max-width: 450px;
       }
       img {
         width: 100%;
@@ -23,11 +24,11 @@
       <button class="back-button" onclick="window.location.href='index.html'">
         &lt; Back
       </button>
-      <h1>Webcam Capture</h1>
+      <h1>Capture Cloth</h1>
     </div>
     <video id="videoElement" autoplay></video>
     <button id="captureButton">Capture Photo</button>
-    <button id="uploadButton" disabled>Upload (Non-Functional)</button>
+    <button id="uploadButton" disabled>Upload</button>
     <canvas id="canvasElement" style="display: none"></canvas>
     <img id="photoElement" />
 

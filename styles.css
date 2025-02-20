@@ -1,269 +1,268 @@
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f8f8f8;
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f8f8f8;
 }
 
 .app-container {
-    width: 100%;
-    max-width: 1500px;
-    min-height: 100vh;
-    margin: auto;
-    background: white;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    border-radius: 10px;
-    overflow: hidden;
+  width: 100%;
+  max-width: 1500px;
+  min-height: 100vh;
+  margin: auto;
+  background: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  overflow: hidden;
 }
 
 header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 15px;
-    background: #fff;
-    border-bottom: 1px solid #ddd;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 25px;
+  background: #fdead4;
+  border-bottom: 1px solid #ddd;
 }
 
 .profile {
-    display: flex;
-    align-items: center;
+  display: flex;
+  align-items: center;
 }
 
 .profile img {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    margin-right: 10px;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  margin-right: 10px;
 }
 
 .tabs {
-    display: flex;
-    justify-content: space-around;
-    background: #fff;
-    padding: 10px 0;
+  display: flex;
+  justify-content: space-around;
+  background: #fff;
+  padding: 10px 0;
 }
 
 .tabs button {
-    border: none;
-    background: none;
-    font-size: 16px;
-    padding: 5px 10px;
-    cursor: pointer;
+  border: none;
+  background: none;
+  font-size: 16px;
+  padding: 5px 10px;
+  cursor: pointer;
 }
 
 .tabs .active {
-    font-weight: bold;
-    border-bottom: 2px solid black;
+  font-weight: bold;
+  border-bottom: 2px solid black;
 }
 
 .clothes-section {
-    padding: 15px;
-    max-height: 500px; /* Adjust based on item size */
-    overflow-y: auto;  /* Enable scrolling */
+  padding: 15px;
+  max-height: 500px; /* Adjust based on item size */
+  overflow-y: auto; /* Enable scrolling */
 }
 
 .clothes-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr); /* Keep 2 columns */
-    gap: 10px;
-    margin-top: 10px;
-    text-align: left;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* Keep 2 columns */
+  gap: 10px;
+  margin-top: 10px;
+  text-align: left;
 }
 
 .clothes-box {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 .clothes-item {
-    width: 100%;
-    height: 200px; 
-    background: #ddd;
-    border-radius: 5px;
+  width: 100%;
+  height: 200px;
+  background: #ddd;
+  border-radius: 5px;
 }
 
-.clothes-item img{
-    width: 100%;
-    height: 200px; /* Adjust if needed */
-    
-    border-radius: 5px;
+.clothes-item img {
+  width: 100%;
+  height: 200px; /* Adjust if needed */
+
+  border-radius: 5px;
 }
 
 .clothes-box p {
-    margin-top: 5px;
-    font-size: 14px;
-    font-weight: bold;
-    color: black;
+  margin-top: 5px;
+  font-size: 14px;
+  font-weight: bold;
+  color: black;
 }
 
 footer {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    padding: 10px;
-    background: #fff;
-    border-top: 1px solid #ddd;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 10px;
+  background: #fff;
+  border-top: 1px solid #ddd;
 }
 
 .plus-button {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    border: none;
-    background: black;
-    color: white;
-    font-size: 20px;
-    cursor: pointer;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: none;
+  background: #723d00;
+  color: white;
+  font-size: 20px;
+  cursor: pointer;
 }
 
 /* ALL CLOTHES PAGE */
 .all-clothes-container {
-    max-width: 500px;
-    margin: auto;
-    padding: 20px;
-    background: white;
+  max-width: 500px;
+  margin: auto;
+  padding: 20px;
+  background: white;
 }
 
 .back-button {
-    background: #ddd;
-    border: none;
-    padding: 10px 15px;
-    font-size: 16px;
-    cursor: pointer;
-    border-radius: 5px;
+  background: #ddd;
+  border: none;
+  padding: 10px 15px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 5px;
 }
 
 .back-button:hover {
-    background: #bbb;
+  background: #bbb;
 }
 
 .allclothes-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr); 
-    gap: 10px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
 }
 
 .item {
-    width: 100%;
-    height: 200px; 
-    background: #ddd;
-    border-radius: 5px;
+  width: 100%;
+  height: 200px;
+  background: #ddd;
+  border-radius: 5px;
 }
 
 /* SHIRTS PAGE */
 .shirts-container {
-    max-width: 500px;
-    margin: auto;
-    padding: 20px;
-    background: white;
+  max-width: 500px;
+  margin: auto;
+  padding: 20px;
+  background: white;
 }
 
 .shirts-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr); 
-    gap: 10px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
 }
 
 /* PANTS PAGE */
 
 .pants-container {
-    max-width: 500px;
-    margin: auto;
-    padding: 20px;
-    background: white;
+  max-width: 500px;
+  margin: auto;
+  padding: 20px;
+  background: white;
 }
 
 .pants-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr); 
-    gap: 10px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 10px;
 }
-
 
 /* HEART BUTTON */
 
 /* Grid Layout */
 .allclothes-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr); /* 2 items per row */
-    gap: 10px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2 items per row */
+  gap: 10px;
 }
 
 /* Individual items */
 .item {
-    position: relative;
-    background: #e0e0e0;
-    height: 200px;
-    border-radius: 10px;
-    overflow: hidden;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  position: relative;
+  background: #e0e0e0;
+  height: 200px;
+  border-radius: 10px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .item img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
 }
 
 /* Heart Button */
 .heart-button {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    background: none;
-    border: none;
-    font-size: 24px;
-    cursor: pointer;
-    color: black;
-    transition: color 0.3s ease;
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: none;
+  border: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: black;
+  transition: color 0.3s ease;
 }
 
 /* Filled heart */
 .heart-button.active {
-    color: red;
+  color: red;
 }
 
 /* Bottom Navigation */
 .footer {
-    display: flex;
-    justify-content: space-around;
-    padding: 10px;
-    background: white;
-    border-top: 1px solid #ddd;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
-    max-width: 500px;
+  display: flex;
+  justify-content: space-around;
+  padding: 10px;
+  background: white;
+  border-top: 1px solid #ddd;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+  max-width: 500px;
 }
 
 /* Style for buttons */
 .nav-btn {
-    border: none;
-    background: none;
-    font-size: 24px;
-    cursor: pointer;
-    color: black; /* Ensures black icons */
+  border: none;
+  background: none;
+  font-size: 24px;
+  cursor: pointer;
+  color: #723d00; /* Ensures black icons */
 }
 
 /* Middle Plus Button */
 .add-btn {
-    font-size: 28px;
-    background: black;
-    color: white;
-    padding: 10px 15px;
-    border-radius: 50%;
+  font-size: 28px;
+  background: #723d00;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 50%;
 }
 
 /* If using SVGs */
 .nav-btn img {
-    width: 24px;
-    height: 24px;
+  width: 24px;
+  height: 24px;
 }
 
 .nav-btn i {
-    font-size: 24px;
+  font-size: 24px;
 }

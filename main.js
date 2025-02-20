@@ -9,7 +9,7 @@ app.whenReady().then(() => {
   // Create the main application window
   mainWindow = new BrowserWindow({
     width: 400,
-    height: 780,
+    height: 790,
     webPreferences: {
       nodeIntegration: true,
       contextIsolation: false, // Ensure IPC communication works
@@ -17,7 +17,7 @@ app.whenReady().then(() => {
   });
 
   // Load the main index.html
-  mainWindow.loadFile('signup.html');
+  mainWindow.loadFile('index.html');
 
   // Create a camera window when requested
   ipcMain.on('open-camera', () => {
