@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Closet - Skin Tone & Hair Color</title>
+    <link rel="stylesheet" href="skin.css" />
+  </head>
+  <body>
+    <div class="selection-container">
+      <div class="logo">
+        <img
+          src="https://i.pinimg.com/736x/e5/15/69/e515692f60320700d9f86d9fe0691e03.jpg"
+          alt="My Closet Logo"
+        />
+      </div>
+      <h2>Customize Your Profile</h2>
+      <p>
+        Select your skin tone, hair color, and gender to personalize your
+        experience.
+      </p>
+
+      <!-- Skin Tone Selection -->
+      <div class="selection-group">
+        <h3>Skin Tone</h3>
+        <div class="color-options">
+          <div
+            class="color-option"
+            style="background-color: #f7d7c4"
+            data-color="#f7d7c4"
+            onclick="selectOption(this, 'skin')"
+          ></div>
+          <div
+            class="color-option"
+            style="background-color: #e0b48d"
+            data-color="#e0b48d"
+            onclick="selectOption(this, 'skin')"
+          ></div>
+          <div
+            class="color-option"
+            style="background-color: #c78b63"
+            data-color="#c78b63"
+            onclick="selectOption(this, 'skin')"
+          ></div>
+          <div
+            class="color-option"
+            style="background-color: #a56a4a"
+            data-color="#a56a4a"
+            onclick="selectOption(this, 'skin')"
+          ></div>
+          <div
+            class="color-option"
+            style="background-color: #7a4a32"
+            data-color="#7a4a32"
+            onclick="selectOption(this, 'skin')"
+          ></div>
+        </div>
+      </div>
+
+      <!-- Hair Color Selection -->
+      <div class="selection-group">
+        <h3>Hair Color</h3>
+        <div class="color-options">
+          <div
+            class="color-option"
+            style="background-color: #000000"
+            data-color="#000000"
+            onclick="selectOption(this, 'hair')"
+          ></div>
+          <div
+            class="color-option"
+            style="background-color: #480d0d"
+            data-color="#480d0d"
+            onclick="selectOption(this, 'hair')"
+          ></div>
+          <div
+            class="color-option"
+            style="background-color: #9f3801"
+            data-color="#9f3801"
+            onclick="selectOption(this, 'hair')"
+          ></div>
+          <div
+            class="color-option"
+            style="background-color: #f8eba5"
+            data-color="#f8eba5"
+            onclick="selectOption(this, 'hair')"
+          ></div>
+          <div
+            class="color-option"
+            style="background-color: #dcdac6"
+            data-color="#dcdac6"
+            onclick="selectOption(this, 'hair')"
+          ></div>
+        </div>
+      </div>
+
+      <!-- Gender Selection -->
+      <div class="selection-group">
+        <h3>Gender</h3>
+        <div class="gender-options">
+          <div
+            class="gender-option"
+            data-gender="male"
+            onclick="selectGender(this)"
+          >
+            <span>👨 Male</span>
+          </div>
+          <div
+            class="gender-option"
+            data-gender="female"
+            onclick="selectGender(this)"
+          >
+            <span>👩 Female</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Preview Section -->
+      <div class="preview-section">
+        <h3>Your Selection</h3>
+        <div class="preview">
+          <div class="preview-skin" id="previewSkin"></div>
+          <div class="preview-hair" id="previewHair"></div>
+          <div class="preview-gender" id="previewGender"></div>
+        </div>
+        <button onclick="saveSelection()">Save and Continue</button>
+      </div>
+    </div>
+
+    <script>
+      // Function to handle color selection with bubbling effect
+      function selectOption(element, type) {
+        // Remove selected class from all options
+        const options = document.querySelectorAll(
+          ".color-options .color-option"
+        );
+        options.forEach((option) => option.classList.remove("selected"));
+
+        // Add selected class to the clicked option
+        element.classList.add("selected");
+
+        // Add bubbling effect
+        element.style.transform = "scale(1.2)";
+        setTimeout(() => {
+          element.style.transform = "scale(1)";
+        }, 200);
+
+        // Update preview
+        const color = element.getAttribute("data-color");
+        if (type === "skin") {
+          document.getElementById("previewSkin").style.backgroundColor = color;
+        } else if (type === "hair") {
+          document.getElementById("previewHair").style.backgroundColor = color;
+        }
+      }
+
+      // Function to handle gender selection
+      function selectGender(element) {
+        // Remove selected class from all options
+        const options = document.querySelectorAll(
+          ".gender-options .gender-option"
+        );
+        options.forEach((option) => option.classList.remove("selected"));
+
+        // Add selected class to the clicked option
+        element.classList.add("selected");
+
+        // Update preview
+        const gender = element.getAttribute("data-gender");
+        document.getElementById("previewGender").textContent =
+          gender === "male" ? "👨" : gender === "female" ? "👩" : "🌈";
+      }
+
+      // Function to save selection (simulated)
+      function saveSelection() {
+        const skinTone =
+          document.getElementById("previewSkin").style.backgroundColor;
+        const hairColor =
+          document.getElementById("previewHair").style.backgroundColor;
+        const gender = document.getElementById("previewGender").textContent;
+
+        if (skinTone && hairColor && gender) {
+          alert("Selection saved! Redirecting to your closet...");
+          window.location.href = "index.html"; // Redirect to dashboard
+        } else {
+          alert("Please select skin tone, hair color, and gender.");
+        }
+      }
+    </script>
+  </body>
+</html>
