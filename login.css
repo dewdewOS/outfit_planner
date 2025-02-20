@@ -1,0 +1,99 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-image: url('closet-background.jpg'); /* Add a fashion-themed background */
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    height: 100vh;
+    margin: 0;
+    color: #333;
+}
+
+.login-container {
+    background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white */
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    width: 350px;
+    height: 700px;
+    text-align: center;
+}
+
+.logo img {
+    width: 200px;
+    height: auto;
+}
+
+h2 {
+    margin-bottom: 10px;
+    font-size: 24px;
+    color: #444;
+}
+
+p {
+    margin-bottom: 20px;
+    font-size: 14px;
+    color: #666;
+}
+
+.input-group {
+    margin-bottom: 15px;
+    text-align: left;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-size: 14px;
+    color: #555;
+}
+
+input[type="text"],
+input[type="password"] {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+input[type="text"]:focus,
+input[type="password"]:focus {
+    border-color: #e5a052;
+    outline: none;
+}
+
+/* Button */
+button {
+    width: 100%;
+    padding: 12px;
+    background-color: #e5a052;
+    border: none;
+    border-radius: 6px;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #b57834; 
+}
+
+/* Sign Up Link */
+.signup-link {
+    margin-top: 15px;
+    font-size: 14px;
+    color: #666;
+}
+
+.signup-link a {
+    color: #e5a052; 
+    text-decoration: none;
+    font-weight: bold;
+}
+
+.signup-link a:hover {
+    text-decoration: underline;
+}

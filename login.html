@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Closet - Login</title>
+    <link rel="stylesheet" href="login.css" />
+  </head>
+  <body>
+    <div class="login-container">
+      <div class="logo">
+        <img
+          src="https://i.pinimg.com/736x/e5/15/69/e515692f60320700d9f86d9fe0691e03.jpg"
+          alt="My Closet Logo"
+        />
+      </div>
+      <h2>Welcome to Snatch&Match</h2>
+      <form id="loginForm">
+        <div class="input-group">
+          <label for="username">Username</label>
+          <input
+            type="text"
+            id="username"
+            name="username"
+            placeholder="Enter your username"
+            required
+          />
+        </div>
+        <div class="input-group">
+          <label for="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Enter your password"
+            required
+          />
+        </div>
+        <button type="submit">Log In</button>
+      </form>
+      <div class="signup-link">
+        <p>Don't have an account? <a href="signup.html">Sign Up</a></p>
+      </div>
+    </div>
+
+    <script>
+      document
+        .getElementById("loginForm")
+        .addEventListener("submit", function (event) {
+          event.preventDefault(); // Prevent form submission
+
+          // Get the values from the form
+          const username = document.getElementById("username").value;
+          const password = document.getElementById("password").value;
+
+          // Basic validation (replace with actual authentication logic)
+          if (username === "user" && password === "password") {
+            alert("Login successful! Redirecting to your closet...");
+            // Redirect to the closet dashboard or another page
+            window.location.href = "index.html";
+          } else {
+            alert("Invalid username or password. Please try again.");
+          }
+        });
+    </script>
+  </body>
+</html>

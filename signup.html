@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>My Closet - Sign Up</title>
+    <link rel="stylesheet" href="signup.css" />
+  </head>
+  <body>
+    <div class="signup-container">
+      <div class="logo">
+        <img
+          src="https://i.pinimg.com/736x/e5/15/69/e515692f60320700d9f86d9fe0691e03.jpg"
+          alt="My Closet Logo"
+        />
+      </div>
+      <h2>Create Your Account</h2>
+      <p>Join My Closet to organize your wardrobe and plan your outfits.</p>
+      <form id="signupForm">
+        <div class="input-group">
+          <label for="username">Username</label>
+          <input
+            type="text"
+            id="username"
+            name="username"
+            placeholder="Enter your username"
+            required
+          />
+        </div>
+        <div class="input-group">
+          <label for="email">Email</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="Enter your email"
+            required
+          />
+        </div>
+        <div class="input-group">
+          <label for="password">Password</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Enter your password"
+            required
+          />
+        </div>
+        <div class="input-group">
+          <label for="confirm-password">Confirm Password</label>
+          <input
+            type="password"
+            id="confirm-password"
+            name="confirm-password"
+            placeholder="Confirm your password"
+            required
+          />
+        </div>
+        <button type="submit">Sign Up</button>
+      </form>
+      <div class="login-link">
+        <p>Already have an account? <a href="login.html">Log In</a></p>
+      </div>
+    </div>
+
+    <script>
+      document
+        .getElementById("signupForm")
+        .addEventListener("submit", function (event) {
+          event.preventDefault(); // Prevent form submission
+
+          // Get the values from the form
+          const username = document.getElementById("username").value;
+          const email = document.getElementById("email").value;
+          const password = document.getElementById("password").value;
+          const confirmPassword =
+            document.getElementById("confirm-password").value;
+
+          // Basic validation
+          if (password !== confirmPassword) {
+            alert("Passwords do not match. Please try again.");
+            return;
+          }
+
+          // Simulate successful signup (replace with actual backend logic)
+          alert("Signup successful! Redirecting to your closet...");
+          window.location.href = "index.html";
+        });
+    </script>
+  </body>
+</html>

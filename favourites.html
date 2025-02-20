@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Favourites</title>
+    <link rel="stylesheet" href="styles.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+    />
+  </head>
+  <body>
+    <div class="app-container">
+      <header>
+        <div class="profile">
+          <img
+            src="https://i.pinimg.com/474x/db/3a/62/db3a623acc8396fb285ec899ad01cd10.jpg"
+            alt="Profile Picture"
+          />
+          <div class="user-info">
+            <h2>HelloWorld</h2>
+          </div>
+        </div>
+      </header>
+
+      <nav class="tabs">
+        <button onclick="window.location.href='index.html'">Closet</button>
+        <button onclick="window.location.href='outfit.html'">Outfits</button>
+        <button class="active">Favourites</button>
+      </nav>
+
+      <div class="clothes-section">
+        <div class="clothes-category">
+          <div class="clothes-grid">
+            <div class="clothes-box">
+              <div class="clothes-item"></div>
+            </div>
+            <div class="clothes-box">
+              <div class="clothes-item"></div>
+            </div>
+            <div class="clothes-box">
+              <div class="clothes-item"></div>
+            </div>
+            <div class="clothes-box">
+              <div class="clothes-item"></div>
+            </div>
+            <div class="clothes-box">
+              <div class="clothes-item"></div>
+            </div>
+            <div class="clothes-box">
+              <div class="clothes-item"></div>
+            </div>
+            <div class="clothes-box">
+              <div class="clothes-item"></div>
+            </div>
+            <div class="clothes-box">
+              <div class="clothes-item"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    <footer>
+      <button class="nav-btn"><i class="fa-solid fa-shirt"></i></button>
+      <button class="nav-btn" onclick="window.location.href='ai-recommendations.html'"><i class="fa-solid fa-brain"></i></button>
+      <button id="openCameraButton" class="plus-button">+</button>
+
+      <script>
+        // Add an event listener to open the camera page
+        document
+          .getElementById("openCameraButton")
+          .addEventListener("click", function () {
+            window.location.href = "camera.html"; // Navigate to the camera view
+          });
+      </script>
+
+      <button class="nav-btn" onclick="window.location.href='laundry.html'">
+        <i class="fa-solid fa-basket-shopping"></i>
+      </button>
+
+      <button class="nav-btn" onclick="window.location.href='settings.html'">
+        <i class="fa-solid fa-cog"></i>
+      </button>
+    </footer>
+  </body>
+</html>

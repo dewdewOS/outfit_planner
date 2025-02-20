@@ -3,14 +3,9 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Closet App</title>
+    <title>Outfits</title>
     <link rel="stylesheet" href="styles.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
-</head>
-    <script
-      src="https://kit.fontawesome.com/a076d05399.js"
-      crossorigin="anonymous"
-    ></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
   </head>
   <body>
     <div class="app-container">
@@ -27,80 +22,94 @@
       </header>
 
       <nav class="tabs">
-        <button class="active">Closet</button>
-        <a href="outfit.html"><button>Outfits</button></a>
-        <a href="favourites.html"><button>Favourites</button></a>
+        <button onclick="window.location.href='index.html'">Closet</button>
+        <button class="active">Outfits</button>
+        <button onclick="window.location.href='favourites.html'">Favourites</button>
       </nav>
 
+      <!-- Outfits Section -->
       <div class="clothes-section">
         <div class="clothes-category">
           <div class="clothes-grid">
             <div class="clothes-box">
               <div class="clothes-item">
-                <a href="all.html"
-                  ><img
+                <a href="all-outfits.html">
+                  <img
                     src="https://i.pinimg.com/736x/87/51/92/875192a684a77e919a7061d23d6fcc8f.jpg"
-                /></a>
+                  />
+                </a>
               </div>
-              <p>All Clothes</p>
+              <p>All Outfits</p>
             </div>
             <div class="clothes-box">
               <div class="clothes-item">
-                <a href="shirts.html"
-                  ><img
-                    src="https://i.pinimg.com/736x/85/79/fc/8579fcaa933d04479bfa6ddfabe89768.jpg"
-                /></a>
+                <a href="summer.html">
+                  <img
+                    src="https://i.pinimg.com/474x/9a/04/85/9a04858223c21bdb8f809ab03c3326c2.jpg"
+                  />
+                </a>
               </div>
-              <p>Shirts</p>
+              <p>Summer</p>
             </div>
             <div class="clothes-box">
               <div class="clothes-item">
-                <a href="pants.html"
-                  ><img
-                    src="https://i.pinimg.com/736x/77/fd/77/77fd77816ff1d4eaaadd8fcc34b96991.jpg"
-                /></a>
+                <a href="winter.html">
+                  <img
+                    src="https://i.pinimg.com/474x/c1/da/d4/c1dad4862597896f5b6195071356915d.jpg"
+                  />
+                </a>
               </div>
-              <p>Pants</p>
+              <p>Winter</p>
             </div>
             <div class="clothes-box">
               <div class="clothes-item">
-                <img
-                  src="https://i.pinimg.com/736x/66/31/37/6631370f3e1c15f9027246fb0b155e3a.jpg"
-                />
+                <a href="fall.html">
+                  <img
+                    src="https://i.pinimg.com/474x/da/f6/12/daf61230bc8e8089ef185d757b7ac02e.jpg"
+                  />
+                </a>
               </div>
-              <p>Jackets</p>
+              <p>Fall</p>
             </div>
             <div class="clothes-box">
               <div class="clothes-item">
-                <img
-                  src="https://i.pinimg.com/474x/db/4c/5b/db4c5b33ad76fd02046e9ec2329f5257.jpg"
-                />
+                <a href="formal.html">
+                  <img
+                    src="https://i.pinimg.com/736x/f8/38/f4/f838f4b9e7fb72d5940d4556e9708964.jpg"
+                  />
+                </a>
               </div>
-              <p>Shoes</p>
+              <p>Formal</p>
             </div>
             <div class="clothes-box">
               <div class="clothes-item">
-                <img
-                  src="https://i.pinimg.com/736x/4b/b2/e5/4bb2e5b66aa58c7a9f3dceffd871db1d.jpg"
-                />
+                <a href="casual.html">
+                  <img
+                    src="https://i.pinimg.com/736x/c7/20/48/c7204874cca9a33dbe4c440b51354522.jpg"
+                  />
+                </a>
               </div>
-              <p>Dresses</p>
+              <p>Casual</p>
             </div>
             <div class="clothes-box">
               <div class="clothes-item">
-                <img
-                  src="https://i.pinimg.com/736x/af/cb/03/afcb03c6fb796ab4efb1cf2ca0e920ed.jpg"
-                />
+                <a href="chic.html">
+                  <img
+                    src="https://i.pinimg.com/736x/b4/c9/d4/b4c9d410575f9a325d977493561931c1.jpg"
+                  />
+                </a>
+              </div>
+              <p>Chic</p>
+            </div>
+            <div class="clothes-box">
+              <div class="clothes-item">
+                <a href="ethnic.html">
+                  <img
+                    src="https://i.pinimg.com/736x/af/cb/03/afcb03c6fb796ab4efb1cf2ca0e920ed.jpg"
+                  />
+                </a>
               </div>
               <p>Ethnic</p>
-            </div>
-            <div class="clothes-box">
-              <div class="clothes-item">
-                <img
-                  src="https://i.pinimg.com/474x/83/49/ad/8349ad1d0508ba036b0d91289b8b3bb6.jpg"
-                />
-              </div>
-              <p>Skirts</p>
             </div>
           </div>
         </div>
@@ -130,6 +139,6 @@
         <i class="fa-solid fa-cog"></i>
     </button>
       </footer>
-    </div>
+
   </body>
 </html>
