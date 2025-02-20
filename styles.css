@@ -266,3 +266,27 @@ footer {
 .nav-btn i {
   font-size: 24px;
 }
+
+.laundry-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  max-width: 300px;
+  padding: 20px;
+  text-align: center;
+  border-radius: 10px;
+}
+
+.laundry-image {
+  width: 200px;
+  height: auto;
+}
+
+.laundry-text {
+  font-size: 20px;
+  font-weight: bold;
+  color: #444;
+  margin-top: 10px;
+}
