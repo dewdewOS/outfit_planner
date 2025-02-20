@@ -4,6 +4,69 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Settings</title>
+    <link rel="stylesheet" href="settings.css" />
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f4f4f9;
+        color: #333;
+      }
+
+      .header {
+        display: flex;
+        align-items: center;
+        padding: 16px;
+        background-color: #e3b178;
+        color: white;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      }
+
+      .back-button {
+        background-color: white;
+        color: #f3be81;
+        border: none;
+        padding: 8px 12px;
+        font-size: 16px;
+        border-radius: 4px;
+        cursor: pointer;
+        margin-right: 16px;
+      }
+
+      .settings-container {
+        padding: 20px;
+      }
+
+      .setting-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        background-color: white;
+        padding: 12px 16px;
+        margin-bottom: 10px;
+        border-radius: 8px;
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+      }
+
+      .setting-item span {
+        font-size: 18px;
+      }
+
+      .setting-item button {
+        padding: 8px 12px;
+        font-size: 14px;
+        color: white;
+        background-color: #5b452d;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+
+      .setting-item button:hover {
+        background-color: #d5a46c;
+      }
+    </style>
   </head>
   <body>
     <div class="header">
@@ -12,5 +75,54 @@
       </button>
       <h1>Settings</h1>
     </div>
+
+    <div class="settings-container">
+      <div class="setting-item">
+        <span>Your Activity</span>
+        <button onclick="navigateToActivity()">View</button>
+      </div>
+
+      <div class="setting-item">
+        <span>Edit Profile</span>
+        <button onclick="navigateToEditProfile()">Edit</button>
+      </div>
+
+      <div class="setting-item">
+        <span>Bin</span>
+        <button onclick="navigateToBin()">Manage</button>
+      </div>
+
+      <div class="setting-item">
+        <span>Theme</span>
+        <button onclick="toggleTheme()">Change</button>
+      </div>
+
+      <div class="setting-item">
+        <span>Logout</span>
+        <button onclick="logoutUser()">Logout</button>
+      </div>
+    </div>
+
+    <script>
+      function navigateToActivity() {
+        console.log("Navigating to Activity");
+      }
+
+      function navigateToEditProfile() {
+        console.log("Navigating to Edit Profile");
+      }
+
+      function navigateToBin() {
+        console.log("Navigating to Bin");
+      }
+
+      function toggleTheme() {
+        console.log("Theme toggled");
+      }
+
+      function logoutUser() {
+        console.log("User logged out");
+      }
+    </script>
   </body>
 </html>

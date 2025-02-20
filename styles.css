@@ -290,3 +290,48 @@ footer {
   color: #444;
   margin-top: 10px;
 }
+
+.outfit-container {
+  display: flex;
+  flex-direction: column; /* Stack items vertically */
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  gap: 20px;
+}
+
+.box {
+  width: 150px;
+  height: 180px;
+  background-color: #ddd;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.symbol {
+  font-size: 30px;
+  font-weight: bold;
+  color: #444;
+}
+
+.box {
+  width: 150px; /* Box size */
+  height: 150px; /* Make it square for better fit */
+  background-color: #ddd;
+  border-radius: 15px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  overflow: hidden; /* Prevents overflow */
+}
+
+.box img {
+  width: 100%; /* Make image fill the box */
+  height: 100%; /* Maintain aspect ratio */
+  object-fit: cover; /* Ensures the image covers the whole box without stretching */
+  border-radius: 15px; /* Match box corners */
+}
