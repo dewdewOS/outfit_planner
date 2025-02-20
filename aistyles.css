@@ -1,0 +1,50 @@
+body {
+  font-family: Arial, sans-serif;
+  text-align: center;
+  margin: 20px;
+  background-color: white; /* Keeping the original background */
+  color: black; /* Keeping text black */
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  font-size: 15px;
+}
+
+.back-button {
+  background-color: black; /* Keeping your button color */
+  color: white;
+  border: none;
+  padding: 8px 12px;
+  font-size: 13px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.back-button:hover {
+  background-color: gray; /* Slight hover effect */
+}
+
+/* Dialogue Box Styling */
+.dialogue-box {
+  background-color: beige; /* Beige background */
+  border: 3px solid #bca385; /* Brown border */
+  border-radius: 10px; /* Rounded corners */
+  padding: 30px;
+  width: 50%;
+  margin: 20px auto;
+  text-align: center;
+  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Ensure the weather text is properly styled and visible */
+#weather,
+#recommendation {
+  font-size: 20px;
+  font-weight: bold;
+  color: black; /* Ensuring visibility */
+  margin: 10px 0;
+}
