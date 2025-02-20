@@ -17,7 +17,7 @@ app.whenReady().then(() => {
   });
 
   // Load the main index.html
-  mainWindow.loadFile('index.html');
+  mainWindow.loadFile('signup.html');
 
   // Create a camera window when requested
   ipcMain.on('open-camera', () => {
