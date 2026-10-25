@@ -3,25 +3,124 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
     <title>AI Recommendations</title>
+
     <link rel="stylesheet" href="aistyles.css" />
-    <!-- Link to CSS -->
+
+    <style>
+      .dialogue-box {
+        padding: 20px;
+        margin: 20px;
+      }
+
+      .weather-section {
+        margin-bottom: 25px;
+      }
+
+      .weather-section h2,
+      .outfit-section h2 {
+        margin-bottom: 10px;
+      }
+
+      #weather {
+        font-size: 18px;
+        margin-bottom: 5px;
+      }
+
+      #weatherDetails {
+        font-size: 14px;
+        opacity: 0.8;
+      }
+
+      .outfit-card {
+        padding: 15px;
+        margin: 10px 0;
+        border-radius: 12px;
+        background: #f5f5f5;
+      }
+
+      .outfit-card h3 {
+        margin-top: 0;
+      }
+
+      .outfit-item {
+        margin: 6px 0;
+      }
+
+      #recommendation {
+        line-height: 1.6;
+      }
+
+      #styleReason {
+        margin-top: 15px;
+        line-height: 1.6;
+      }
+
+      #loading {
+        text-align: center;
+        margin: 20px 0;
+      }
+
+      #tryAgainButton {
+        display: block;
+        margin: 20px auto;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        font-size: 15px;
+      }
+
+      #tryAgainButton:disabled {
+        cursor: not-allowed;
+        opacity: 0.5;
+      }
+    </style>
   </head>
+
   <body>
     <div class="header">
-      <button class="back-button" onclick="window.location.href='index.html'">
+      <button
+        class="back-button"
+        onclick="window.location.href='index.html'"
+      >
         &lt; Back
       </button>
+
       <h1>AI Recommendations</h1>
     </div>
 
-    <!-- Wrapped everything inside the dialogue box -->
     <div class="dialogue-box">
-      <p id="weather">Fetching weather...</p>
-      <p id="recommendation"></p>
+
+      <div class="weather-section">
+        <h2>Today's Weather</h2>
+
+        <p id="weather">Fetching weather...</p>
+
+        <p id="weatherDetails"></p>
+      </div>
+
+      <div class="outfit-section">
+        <h2>Recommended Outfit</h2>
+
+        <div id="loading">
+          Creating your outfit recommendation...
+        </div>
+
+        <div id="outfit"></div>
+
+        <p id="recommendation"></p>
+
+        <p id="styleReason"></p>
+      </div>
+
+      <button id="tryAgainButton">
+        Try Another Outfit
+      </button>
+
     </div>
 
     <script src="airenderer.js"></script>
-    <!-- Link to JS -->
   </body>
 </html>

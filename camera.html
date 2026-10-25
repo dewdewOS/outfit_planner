@@ -1,89 +1,344 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Cloth Capture</title>
-    <link rel="stylesheet" href="camera.css" />
-    <style>
-      video {
-        transform: scaleX(-1);
-        -webkit-transform: scaleX(-1);
-        width: 100%;
-        max-width: 450px;
-      }
-      img {
-        width: 100%;
-        max-width: 500px;
-        display: none;
-      }
-    </style>
-  </head>
-  <body>
-    <div class="header">
-      <button class="back-button" onclick="window.location.href='index.html'">
-        &lt; Back
-      </button>
-      <h1>All Clothes</h1>
-    </div>
-    <video id="videoElement" autoplay></video>
-    <button id="captureButton">Capture Photo</button>
-    <button id="uploadButton" disabled>Upload</button>
-    <canvas id="canvasElement" style="display: none"></canvas>
-    <img id="photoElement" />
 
-    <script>
-      const { ipcRenderer } = require("electron");
-      const videoElement = document.getElementById("videoElement");
-      const canvasElement = document.getElementById("canvasElement");
-      const photoElement = document.getElementById("photoElement");
-      const captureButton = document.getElementById("captureButton");
-      const uploadButton = document.getElementById("uploadButton");
+<head>
 
-      let stream;
+  <meta charset="UTF-8">
 
-      async function startWebcam() {
-        try {
-          stream = await navigator.mediaDevices.getUserMedia({ video: true });
-          videoElement.srcObject = stream;
-          captureButton.disabled = false; // Enable capture button
-        } catch (error) {
-          console.error("Error accessing webcam:", error);
-        }
-      }
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
 
-      function capturePhoto() {
-        canvasElement.width = videoElement.videoWidth;
-        canvasElement.height = videoElement.videoHeight;
-        const ctx = canvasElement.getContext("2d");
+  <title>Cloth Capture</title>
 
-        // Flip image horizontally before drawing
-        ctx.translate(canvasElement.width, 0);
-        ctx.scale(-1, 1);
-        ctx.drawImage(
-          videoElement,
-          0,
-          0,
-          canvasElement.width,
-          canvasElement.height
+  <link
+    rel="stylesheet"
+    href="camera.css"
+  >
+
+  <style>
+
+    video {
+      width: 100%;
+      max-width: 450px;
+
+      display: block;
+
+      margin: 20px auto;
+
+      transform: scaleX(-1);
+      -webkit-transform: scaleX(-1);
+    }
+
+
+    img {
+      width: 100%;
+      max-width: 500px;
+
+      display: none;
+
+      margin: 20px auto;
+    }
+
+
+    #captureButton,
+    #uploadButton {
+
+      display: block;
+
+      margin: 10px auto;
+
+      padding: 10px 20px;
+
+      cursor: pointer;
+    }
+
+  </style>
+
+</head>
+
+
+<body>
+
+
+  <!-- HEADER -->
+
+  <div class="header">
+
+    <button
+      class="back-button"
+      onclick="window.location.href='index.html'"
+    >
+      &lt; Back
+    </button>
+
+    <h1>Cloth Capture</h1>
+
+  </div>
+
+
+  <!-- WEBCAM -->
+
+  <video
+    id="videoElement"
+    autoplay
+    playsinline
+  ></video>
+
+
+  <!-- CAPTURE BUTTON -->
+
+  <button
+    id="captureButton"
+    disabled
+  >
+    Capture Photo
+  </button>
+
+
+  <!-- UPLOAD BUTTON -->
+
+  <button
+    id="uploadButton"
+    disabled
+  >
+    Upload
+  </button>
+
+
+  <!-- CANVAS -->
+
+  <canvas
+    id="canvasElement"
+    style="display: none;"
+  ></canvas>
+
+
+  <!-- CAPTURED IMAGE -->
+
+  <img
+    id="photoElement"
+    alt="Captured Photo"
+  >
+
+
+  <script>
+
+    // Electron IPC
+    const { ipcRenderer } = require("electron");
+
+
+    // Get elements
+    const videoElement =
+      document.getElementById("videoElement");
+
+    const canvasElement =
+      document.getElementById("canvasElement");
+
+    const photoElement =
+      document.getElementById("photoElement");
+
+    const captureButton =
+      document.getElementById("captureButton");
+
+    const uploadButton =
+      document.getElementById("uploadButton");
+
+
+    // Store camera stream
+    let stream = null;
+
+
+    // ============================
+    // START WEBCAM
+    // ============================
+
+    async function startWebcam() {
+
+      try {
+
+        console.log("Requesting camera...");
+
+
+        stream =
+          await navigator.mediaDevices.getUserMedia({
+
+            video: true,
+
+            audio: false
+
+          });
+
+
+        console.log(
+          "Camera permission granted"
         );
 
-        // Convert to Base64 and display image
-        const photoDataUrl = canvasElement.toDataURL("image/jpeg");
-        photoElement.src = photoDataUrl;
-        photoElement.style.display = "block";
 
-        // Send data to Electron main process to save image
-        ipcRenderer.send("save-image", photoDataUrl);
+        // Connect camera to video element
+        videoElement.srcObject = stream;
+
+
+        // Start video
+        await videoElement.play();
+
+
+        // Enable capture button
+        captureButton.disabled = false;
+
+
+        console.log(
+          "Camera started successfully"
+        );
+
       }
 
-      // Start the webcam automatically when the page loads
-      window.onload = startWebcam;
+      catch (error) {
 
-      captureButton.addEventListener("click", capturePhoto);
-      uploadButton.addEventListener("click", () => {
-        alert("Upload feature is not implemented yet.");
-      });
-    </script>
-  </body>
+        console.error(
+          "Camera error:",
+          error
+        );
+
+
+        alert(
+          "Could not access camera.\n\n" +
+          "Error: " +
+          error.name +
+          "\n\n" +
+          error.message
+        );
+
+      }
+
+    }
+
+
+    // ============================
+    // CAPTURE PHOTO
+    // ============================
+
+    function capturePhoto() {
+
+      if (!stream) {
+
+        alert(
+          "Camera is not running."
+        );
+
+        return;
+
+      }
+
+
+      // Set canvas size
+      canvasElement.width =
+        videoElement.videoWidth;
+
+      canvasElement.height =
+        videoElement.videoHeight;
+
+
+      const ctx =
+        canvasElement.getContext("2d");
+
+
+      // Flip image horizontally
+      ctx.translate(
+        canvasElement.width,
+        0
+      );
+
+      ctx.scale(-1, 1);
+
+
+      // Draw video frame
+      ctx.drawImage(
+        videoElement,
+        0,
+        0,
+        canvasElement.width,
+        canvasElement.height
+      );
+
+
+      // Convert to JPEG
+      const photoDataUrl =
+        canvasElement.toDataURL(
+          "image/jpeg"
+        );
+
+
+      // Display photo
+      photoElement.src =
+        photoDataUrl;
+
+      photoElement.style.display =
+        "block";
+
+
+      // Enable upload button
+      uploadButton.disabled = false;
+
+
+      // Send image to main.js
+      ipcRenderer.send(
+        "save-image",
+        photoDataUrl
+      );
+
+
+      console.log(
+        "Photo captured successfully"
+      );
+
+    }
+
+
+    // ============================
+    // START CAMERA WHEN PAGE LOADS
+    // ============================
+
+    window.addEventListener(
+      "DOMContentLoaded",
+      () => {
+
+        startWebcam();
+
+      }
+    );
+
+
+    // ============================
+    // CAPTURE BUTTON
+    // ============================
+
+    captureButton.addEventListener(
+      "click",
+      capturePhoto
+    );
+
+
+    // ============================
+    // UPLOAD BUTTON
+    // ============================
+
+    uploadButton.addEventListener(
+      "click",
+      () => {
+
+        alert(
+          "Upload feature is not implemented yet."
+        );
+
+      }
+    );
+
+  </script>
+
+
+</body>
+
 </html>
+

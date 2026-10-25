@@ -1,136 +1,378 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Closet App</title>
-    <link rel="stylesheet" href="styles.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+<head>
+
+  <meta charset="UTF-8">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
+
+  <title>Closet App</title>
+
+
+  <!-- CSS -->
+  <link
+    rel="stylesheet"
+    href="styles.css"
+  >
+
+
+  <!-- Font Awesome -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+  >
+
 </head>
-    <script
-      src="https://kit.fontawesome.com/a076d05399.js"
-      crossorigin="anonymous"
-    ></script>
-  </head>
-  <body>
-    <div class="app-container">
-      <header>
-        <div class="profile">
-          <img
-            src="https://i.pinimg.com/474x/db/3a/62/db3a623acc8396fb285ec899ad01cd10.jpg"
-            alt="Profile Picture"
-          />
-          <div class="user-info">
-            <h2>HelloWorld</h2>
-          </div>
-        </div>
-      </header>
 
-      <nav class="tabs">
-        <button class="active">Closet</button>
-        <a href="outfit.html"><button>Outfits</button></a>
-        <a href="favourites.html"><button>Favourites</button></a>
-      </nav>
 
-      <div class="clothes-section">
-        <div class="clothes-category">
-          <div class="clothes-grid">
-            <div class="clothes-box">
-              <div class="clothes-item">
-                <a href="all.html"
-                  ><img
-                    src="https://i.pinimg.com/736x/87/51/92/875192a684a77e919a7061d23d6fcc8f.jpg"
-                /></a>
-              </div>
-              <p>All Clothes</p>
-            </div>
-            <div class="clothes-box">
-              <div class="clothes-item">
-                <a href="shirts.html"
-                  ><img
-                    src="https://i.pinimg.com/736x/85/79/fc/8579fcaa933d04479bfa6ddfabe89768.jpg"
-                /></a>
-              </div>
-              <p>Shirts</p>
-            </div>
-            <div class="clothes-box">
-              <div class="clothes-item">
-                <a href="pants.html"
-                  ><img
-                    src="https://i.pinimg.com/736x/77/fd/77/77fd77816ff1d4eaaadd8fcc34b96991.jpg"
-                /></a>
-              </div>
-              <p>Pants</p>
-            </div>
-            <div class="clothes-box">
-              <div class="clothes-item">
-                <a href="jackets.html"><img
-                  src="https://i.pinimg.com/736x/66/31/37/6631370f3e1c15f9027246fb0b155e3a.jpg"
-                /></a>
-              </div>
-              <p>Jackets</p>
-            </div>
-            <div class="clothes-box">
-              <div class="clothes-item">
-                <img
-                  src="https://i.pinimg.com/474x/db/4c/5b/db4c5b33ad76fd02046e9ec2329f5257.jpg"
-                />
-              </div>
-              <p>Shoes</p>
-            </div>
-            <div class="clothes-box">
-              <div class="clothes-item">
-                <img
-                  src="https://i.pinimg.com/736x/4b/b2/e5/4bb2e5b66aa58c7a9f3dceffd871db1d.jpg"
-                />
-              </div>
-              <p>Dresses</p>
-            </div>
-            <div class="clothes-box">
-              <div class="clothes-item">
-                <img
-                  src="https://i.pinimg.com/736x/af/cb/03/afcb03c6fb796ab4efb1cf2ca0e920ed.jpg"
-                />
-              </div>
-              <p>Ethnic</p>
-            </div>
-            <div class="clothes-box">
-              <div class="clothes-item">
-                <img
-                  src="https://i.pinimg.com/474x/83/49/ad/8349ad1d0508ba036b0d91289b8b3bb6.jpg"
-                />
-              </div>
-              <p>Skirts</p>
-            </div>
-          </div>
+<body>
+
+  <div class="app-container">
+
+
+    <!-- ========================= -->
+    <!-- HEADER -->
+    <!-- ========================= -->
+
+    <header>
+
+      <div class="profile">
+
+        <img
+          src="https://i.pinimg.com/474x/db/3a/62/db3a623acc8396fb285ec899ad01cd10.jpg"
+          alt="Profile Picture"
+        >
+
+        <div class="user-info">
+
+          <h2>HelloWorld</h2>
+
         </div>
+
       </div>
 
-      <footer>
-        <button class="nav-btn" onclick="window.location.href='create-outfit.html'">
-        <i class="fa-solid fa-shirt"></i></button> <!-- Dress Icon -->
-        <!-- Home Page HTML -->
-        <button class="nav-btn" onclick="window.location.href='ai-recommendations.html'">
-          <i class="fa-solid fa-brain"></i>
+    </header>
+
+
+    <!-- ========================= -->
+    <!-- TOP NAVIGATION -->
+    <!-- ========================= -->
+
+    <nav class="tabs">
+
+      <button class="active">
+        Closet
       </button>
 
-        <button id="openCameraButton" class="plus-button">+</button>
 
-        <script>
-          // Add an event listener to open the camera page
-          document.getElementById("openCameraButton").addEventListener("click", function () {
-          window.location.href = "camera.html"; // Navigate to the camera view
-          });
-        </script>
+      <a href="outfit.html">
+        <button>
+          Outfits
+        </button>
+      </a>
 
-        <button class="nav-btn" onclick="window.location.href='laundry.html'">
-        <i class="fa-solid fa-basket-shopping"></i>
-    </button> <!-- Laundry Basket Icon -->
 
-    <button class="nav-btn" onclick="window.location.href='settings.html'">
-        <i class="fa-solid fa-cog"></i>
-    </button>
-      </footer>
+      <a href="favourites.html">
+        <button>
+          Favourites
+        </button>
+      </a>
+
+    </nav>
+
+
+    <!-- ========================= -->
+    <!-- CLOTHES SECTION -->
+    <!-- ========================= -->
+
+    <div class="clothes-section">
+
+      <div class="clothes-category">
+
+        <div class="clothes-grid">
+
+
+          <!-- ALL CLOTHES -->
+
+          <div class="clothes-box">
+
+            <div class="clothes-item">
+
+              <a href="all.html">
+
+                <img
+                  src="https://i.pinimg.com/736x/87/51/92/875192a684a77e919a7061d23d6fcc8f.jpg"
+                  alt="All Clothes"
+                >
+
+              </a>
+
+            </div>
+
+            <p>All Clothes</p>
+
+          </div>
+
+
+          <!-- SHIRTS -->
+
+          <div class="clothes-box">
+
+            <div class="clothes-item">
+
+              <a href="shirts.html">
+
+                <img
+                  src="https://i.pinimg.com/736x/85/79/fc/8579fcaa933d04479bfa6ddfabe89768.jpg"
+                  alt="Shirts"
+                >
+
+              </a>
+
+            </div>
+
+            <p>Shirts</p>
+
+          </div>
+
+
+          <!-- PANTS -->
+
+          <div class="clothes-box">
+
+            <div class="clothes-item">
+
+              <a href="pants.html">
+
+                <img
+                  src="https://i.pinimg.com/736x/77/fd/77/77fd77816ff1d4eaaadd8fcc34b96991.jpg"
+                  alt="Pants"
+                >
+
+              </a>
+
+            </div>
+
+            <p>Pants</p>
+
+          </div>
+
+
+          <!-- JACKETS -->
+
+          <div class="clothes-box">
+
+            <div class="clothes-item">
+
+              <a href="jackets.html">
+
+                <img
+                  src="https://i.pinimg.com/736x/66/31/37/6631370f3e1c15f9027246fb0b155e3a.jpg"
+                  alt="Jackets"
+                >
+
+              </a>
+
+            </div>
+
+            <p>Jackets</p>
+
+          </div>
+
+
+          <!-- SHOES -->
+
+          <div class="clothes-box">
+
+            <div class="clothes-item">
+
+              <img
+                src="https://i.pinimg.com/474x/db/4c/5b/db4c5b33ad76fd02046e9ec2329f5257.jpg"
+                alt="Shoes"
+              >
+
+            </div>
+
+            <p>Shoes</p>
+
+          </div>
+
+
+          <!-- DRESSES -->
+
+          <div class="clothes-box">
+
+            <div class="clothes-item">
+
+              <img
+                src="https://i.pinimg.com/736x/4b/b2/e5/4bb2e5b66aa58c7a9f3dceffd871db1d.jpg"
+                alt="Dresses"
+              >
+
+            </div>
+
+            <p>Dresses</p>
+
+          </div>
+
+
+          <!-- ETHNIC -->
+
+          <div class="clothes-box">
+
+            <div class="clothes-item">
+
+              <img
+                src="https://i.pinimg.com/736x/af/cb/03/afcb03c6fb796ab4efb1cf2ca0e920ed.jpg"
+                alt="Ethnic"
+              >
+
+            </div>
+
+            <p>Ethnic</p>
+
+          </div>
+
+
+          <!-- SKIRTS -->
+
+          <div class="clothes-box">
+
+            <div class="clothes-item">
+
+              <img
+                src="https://i.pinimg.com/474x/83/49/ad/8349ad1d0508ba036b0d91289b8b3bb6.jpg"
+                alt="Skirts"
+              >
+
+            </div>
+
+            <p>Skirts</p>
+
+          </div>
+
+
+        </div>
+
+      </div>
+
     </div>
-  </body>
+
+
+    <!-- ========================= -->
+    <!-- BOTTOM NAVIGATION -->
+    <!-- ========================= -->
+
+    <footer>
+
+
+      <!-- CREATE OUTFIT -->
+
+      <button
+        class="nav-btn"
+        onclick="window.location.href='create-outfit.html'"
+      >
+
+        <i class="fa-solid fa-shirt"></i>
+
+      </button>
+
+
+      <!-- AI RECOMMENDATIONS -->
+
+      <button
+        class="nav-btn"
+        onclick="window.location.href='ai-recommendations.html'"
+      >
+
+        <i class="fa-solid fa-brain"></i>
+
+      </button>
+
+
+      <!-- ========================= -->
+      <!-- CAMERA / ADD BUTTON -->
+      <!-- ========================= -->
+
+      <button
+        id="openCameraButton"
+        class="plus-button"
+      >
+        +
+      </button>
+
+
+      <!-- LAUNDRY -->
+
+      <button
+        class="nav-btn"
+        onclick="window.location.href='laundry.html'"
+      >
+
+        <i class="fa-solid fa-basket-shopping"></i>
+
+      </button>
+
+
+      <!-- SETTINGS -->
+
+      <button
+        class="nav-btn"
+        onclick="window.location.href='settings.html'"
+      >
+
+        <i class="fa-solid fa-cog"></i>
+
+      </button>
+
+
+    </footer>
+
+
+  </div>
+
+
+  <!-- ========================= -->
+  <!-- ELECTRON CAMERA SCRIPT -->
+  <!-- ========================= -->
+
+  <script>
+
+    // Get Electron IPC
+    const { ipcRenderer } = require("electron");
+
+
+    // Get the + button
+    const openCameraButton =
+      document.getElementById(
+        "openCameraButton"
+      );
+
+
+    // Open camera window
+    openCameraButton.addEventListener(
+      "click",
+      () => {
+
+        console.log(
+          "Opening camera..."
+        );
+
+
+        ipcRenderer.send(
+          "open-camera"
+        );
+
+      }
+    );
+
+  </script>
+
+
+</body>
+
 </html>
