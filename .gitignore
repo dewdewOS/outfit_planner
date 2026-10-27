@@ -1,1 +1,12 @@
 node_modules/
+# Dependencies
+node_modules/
+
+# Environment secrets
+.env
+
+# Local SQLite database
+data/*.db
+
+# Downloaded clothing images
+clothing_images/

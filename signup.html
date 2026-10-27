@@ -63,29 +63,60 @@
         <p>Already have an account? <a href="login.html">Log In</a></p>
       </div>
     </div>
-
     <script>
+      const { ipcRenderer } = require('electron');
+
       document
-        .getElementById("signupForm")
-        .addEventListener("submit", function (event) {
-          event.preventDefault(); // Prevent form submission
+        .getElementById('signupForm')
+        .addEventListener('submit', async function (event) {
+          event.preventDefault();
 
-          // Get the values from the form
-          const username = document.getElementById("username").value;
-          const email = document.getElementById("email").value;
-          const password = document.getElementById("password").value;
+          const username = document.getElementById('username').value.trim();
+          const email = document.getElementById('email').value.trim();
+          const password = document.getElementById('password').value;
           const confirmPassword =
-            document.getElementById("confirm-password").value;
+            document.getElementById('confirm-password').value;
 
-          // Basic validation
+          // Check that passwords match
           if (password !== confirmPassword) {
-            alert("Passwords do not match. Please try again.");
+            alert('Passwords do not match. Please try again.');
             return;
           }
 
-          // Simulate successful signup (replace with actual backend logic)
-          alert("Signup successful! Moving on...");
-          window.location.href = "skin.html";
+          // Require a minimum password length
+          if (password.length < 8) {
+            alert('Password must contain at least 8 characters.');
+            return;
+          }
+
+          const submitButton = document.querySelector(
+            '#signupForm button[type="submit"]'
+          );
+
+          submitButton.disabled = true;
+
+          try {
+            // Send signup details to main.js
+            const result = await ipcRenderer.invoke('signup-user', {
+              username,
+              email,
+              password
+            });
+
+            alert(result.message);
+
+            if (result.success) {
+              document.getElementById('signupForm').reset();
+
+              // Navigate only after successful registration
+              window.location.href = 'skin.html';
+            }
+          } catch (error) {
+            console.error('Signup request failed:', error);
+            alert('Something went wrong. Please try again.');
+          } finally {
+            submitButton.disabled = false;
+          }
         });
     </script>
   </body>

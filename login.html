@@ -42,24 +42,48 @@
         <p>Don't have an account? <a href="signup.html">Sign Up</a></p>
       </div>
     </div>
-
     <script>
+      const { ipcRenderer } = require('electron');
+
       document
-        .getElementById("loginForm")
-        .addEventListener("submit", function (event) {
-          event.preventDefault(); // Prevent form submission
+        .getElementById('loginForm')
+        .addEventListener('submit', async function (event) {
+          event.preventDefault();
 
-          // Get the values from the form
-          const username = document.getElementById("username").value;
-          const password = document.getElementById("password").value;
+          const username = document.getElementById('username').value.trim();
+          const password = document.getElementById('password').value;
 
-          // Basic validation (replace with actual authentication logic)
-          if (username === "user" && password === "password") {
-            alert("Login successful! Redirecting to your closet...");
-            // Redirect to the closet dashboard or another page
-            window.location.href = "index.html";
-          } else {
-            alert("Invalid username or password. Please try again.");
+          const loginButton = document.querySelector(
+            '#loginForm button[type="submit"]'
+          );
+
+          loginButton.disabled = true;
+
+          try {
+            console.log('Sending login request...');
+
+            const result = await ipcRenderer.invoke('login-user', {
+              username: username,
+              password: password
+            });
+
+            console.log('Login response:', result);
+
+            alert(result.message);
+
+            if (result.success) {
+              localStorage.setItem(
+                'loggedInUser',
+                JSON.stringify(result.user)
+              );
+
+              window.location.href = 'index.html';
+            }
+          } catch (error) {
+            console.error('Login request failed:', error);
+            alert('Something went wrong. Please try again.');
+          } finally {
+            loginButton.disabled = false;
           }
         });
     </script>

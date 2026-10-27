@@ -1,3 +1,5 @@
+const bcrypt = require('bcryptjs');
+const db = require('./database/database');
 const {
   app,
   BrowserWindow,
@@ -5,11 +7,127 @@ const {
   session
 } = require("electron");
 
+
 const path = require("path");
 const fs = require("fs");
 
 let mainWindow;
 let cameraWindow;
+
+
+// Handle user registration
+ipcMain.handle('signup-user', async (event, userData) => {
+    try {
+        const username = userData.username?.trim();
+        const email = userData.email?.trim().toLowerCase();
+        const password = userData.password;
+
+        if (!username || !email || !password) {
+            return {
+                success: false,
+                message: 'Please fill in all required fields.'
+            };
+        }
+
+        if (password.length < 8) {
+            return {
+                success: false,
+                message: 'Password must contain at least 8 characters.'
+            };
+        }
+
+        // Hash the password
+        const hashedPassword = await bcrypt.hash(password, 12);
+
+        // Insert the user into SQLite
+        const insertUser = db.prepare(`
+            INSERT INTO users (name, email, password)
+            VALUES (?, ?, ?)
+        `);
+
+        insertUser.run(username, email, hashedPassword);
+
+        return {
+            success: true,
+            message: 'Account created successfully!'
+        };
+
+    } catch (error) {
+        if (error.code === 'SQLITE_CONSTRAINT_UNIQUE') {
+            return {
+                success: false,
+                message: 'This email is already registered. Please log in.'
+            };
+        }
+
+        console.error('Signup error:', error);
+
+        return {
+            success: false,
+            message: 'Registration failed. Please try again.'
+        };
+    }
+});
+
+// Handle user login
+ipcMain.handle('login-user', async (event, userData) => {
+    try {
+        const username = userData.username?.trim();
+        const password = userData.password;
+
+        if (!username || !password) {
+            return {
+                success: false,
+                message: 'Please enter your username and password.'
+            };
+        }
+
+        // Find the user by their registered username
+        const user = db.prepare(`
+            SELECT id, name, email, password
+            FROM users
+            WHERE LOWER(TRIM(name)) = LOWER(TRIM(?))
+        `).get(username);
+
+        if (!user) {
+            return {
+                success: false,
+                message: 'Invalid username or password.'
+            };
+        }
+
+        // Compare the entered password with its stored hash
+        const passwordMatches = await bcrypt.compare(
+            password,
+            user.password
+        );
+
+        if (!passwordMatches) {
+            return {
+                success: false,
+                message: 'Invalid username or password.'
+            };
+        }
+
+        return {
+            success: true,
+            message: 'Login successful!',
+            user: {
+                id: user.id,
+                name: user.name,
+                email: user.email
+            }
+        };
+
+    } catch (error) {
+        console.error('Login error:', error);
+
+        return {
+            success: false,
+            message: 'Unable to log in. Please try again.'
+        };
+    }
+});
 
 
 // =====================================================
@@ -33,6 +151,9 @@ app.whenReady().then(() => {
 
     }
   );
+  // Test SQLite database connection
+  const result = db.prepare('SELECT sqlite_version() AS version').get();
+  console.log('SQLite connected successfully! Version:', result.version);   
 
 
   // ===================================================
