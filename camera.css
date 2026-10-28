@@ -70,3 +70,35 @@ body {
     border-radius: 5px;
     font-size: 16;
   }
+
+  #clothingForm {
+    display: block;
+    visibility: visible;
+    opacity: 1;
+    width: 90%;
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    box-sizing: border-box;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+#clothingForm .form-group {
+    display: block;
+    margin-bottom: 15px;
+}
+
+#clothingForm label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: bold;
+}
+
+#clothingForm input,
+#clothingForm select {
+    width: 100%;
+    padding: 10px;
+    box-sizing: border-box;
+}
