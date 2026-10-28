@@ -1,344 +1,558 @@
+
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Clothing - My Wardrobe</title>
 
-  <meta charset="UTF-8">
+    <style>
+        * {
+            box-sizing: border-box;
+        }
 
-  <meta
-    name="viewport"
-    content="width=device-width, initial-scale=1.0"
-  >
+        body {
+            margin: 0;
+            padding: 24px;
+            font-family: Arial, sans-serif;
+            background: #f7f5f2;
+            color: #292929;
+        }
 
-  <title>Cloth Capture</title>
+        .container {
+            max-width: 650px;
+            margin: 0 auto;
+            background: white;
+            padding: 24px;
+            border-radius: 16px;
+            box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+        }
 
-  <link
-    rel="stylesheet"
-    href="camera.css"
-  >
+        h1 {
+            margin-top: 0;
+            text-align: center;
+        }
 
-  <style>
+        .hint {
+            color: #666;
+            font-size: 14px;
+            line-height: 1.5;
+        }
 
-    video {
-      width: 100%;
-      max-width: 450px;
+        button {
+            width: 100%;
+            padding: 13px;
+            margin-top: 12px;
+            border: none;
+            border-radius: 8px;
+            background: #292929;
+            color: white;
+            font-size: 15px;
+            cursor: pointer;
+        }
 
-      display: block;
+        button:disabled {
+            opacity: 0.6;
+            cursor: wait;
+        }
 
-      margin: 20px auto;
+        .secondary-button {
+            background: #e9e5e0;
+            color: #292929;
+        }
 
-      transform: scaleX(-1);
-      -webkit-transform: scaleX(-1);
-    }
+        #status {
+            margin: 16px 0;
+            font-size: 14px;
+            line-height: 1.5;
+            overflow-wrap: anywhere;
+        }
 
+        #photoPreview {
+            display: none;
+            width: 100%;
+            max-height: 300px;
+            object-fit: contain;
+            margin: 18px auto;
+            border-radius: 10px;
+            background: #f1efec;
+        }
 
-    img {
-      width: 100%;
-      max-width: 500px;
+        #clothingForm {
+            display: none;
+            margin-top: 24px;
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+        }
 
-      display: none;
+        .field {
+            margin: 16px 0;
+        }
 
-      margin: 20px auto;
-    }
+        label {
+            display: block;
+            margin-bottom: 7px;
+            font-weight: bold;
+            font-size: 14px;
+        }
 
+        input, select {
+            width: 100%;
+            padding: 11px;
+            border: 1px solid #ccc;
+            border-radius: 7px;
+            background: white;
+            font-size: 15px;
+        }
 
-    #captureButton,
-    #uploadButton {
+        input:focus, select:focus {
+            outline: 2px solid #b8a28b;
+            border-color: transparent;
+        }
 
-      display: block;
+        .primary-button {
+            background: #72543d;
+        }
 
-      margin: 10px auto;
+        .success {
+            color: #207245;
+        }
 
-      padding: 10px 20px;
-
-      cursor: pointer;
-    }
-
-  </style>
-
+        .error {
+            color: #b42318;
+        }
+    </style>
 </head>
 
-
 <body>
-
-
-  <!-- HEADER -->
-
-  <div class="header">
-
-    <button
-      class="back-button"
-      onclick="window.location.href='index.html'"
-    >
-      &lt; Back
-    </button>
-
-    <h1>Cloth Capture</h1>
-
-  </div>
-
-
-  <!-- WEBCAM -->
-
-  <video
-    id="videoElement"
-    autoplay
-    playsinline
-  ></video>
-
-
-  <!-- CAPTURE BUTTON -->
-
-  <button
-    id="captureButton"
-    disabled
-  >
-    Capture Photo
-  </button>
-
-
-  <!-- UPLOAD BUTTON -->
-
-  <button
-    id="uploadButton"
-    disabled
-  >
-    Upload
-  </button>
-
-
-  <!-- CANVAS -->
-
-  <canvas
-    id="canvasElement"
-    style="display: none;"
-  ></canvas>
-
-
-  <!-- CAPTURED IMAGE -->
-
-  <img
-    id="photoElement"
-    alt="Captured Photo"
-  >
-
-
-  <script>
-
-    // Electron IPC
-    const { ipcRenderer } = require("electron");
-
-
-    // Get elements
-    const videoElement =
-      document.getElementById("videoElement");
-
-    const canvasElement =
-      document.getElementById("canvasElement");
-
-    const photoElement =
-      document.getElementById("photoElement");
-
-    const captureButton =
-      document.getElementById("captureButton");
-
-    const uploadButton =
-      document.getElementById("uploadButton");
-
-
-    // Store camera stream
-    let stream = null;
-
-
-    // ============================
-    // START WEBCAM
-    // ============================
-
-    async function startWebcam() {
-
-      try {
-
-        console.log("Requesting camera...");
-
-
-        stream =
-          await navigator.mediaDevices.getUserMedia({
-
-            video: true,
-
-            audio: false
-
-          });
-
-
-        console.log(
-          "Camera permission granted"
-        );
-
-
-        // Connect camera to video element
-        videoElement.srcObject = stream;
-
-
-        // Start video
-        await videoElement.play();
-
-
-        // Enable capture button
-        captureButton.disabled = false;
-
-
-        console.log(
-          "Camera started successfully"
-        );
-
-      }
-
-      catch (error) {
-
-        console.error(
-          "Camera error:",
-          error
-        );
-
-
-        alert(
-          "Could not access camera.\n\n" +
-          "Error: " +
-          error.name +
-          "\n\n" +
-          error.message
-        );
-
-      }
-
-    }
-
-
-    // ============================
-    // CAPTURE PHOTO
-    // ============================
-
-    function capturePhoto() {
-
-      if (!stream) {
-
-        alert(
-          "Camera is not running."
-        );
-
-        return;
-
-      }
-
-
-      // Set canvas size
-      canvasElement.width =
-        videoElement.videoWidth;
-
-      canvasElement.height =
-        videoElement.videoHeight;
-
-
-      const ctx =
-        canvasElement.getContext("2d");
-
-
-      // Flip image horizontally
-      ctx.translate(
-        canvasElement.width,
-        0
-      );
-
-      ctx.scale(-1, 1);
-
-
-      // Draw video frame
-      ctx.drawImage(
-        videoElement,
-        0,
-        0,
-        canvasElement.width,
-        canvasElement.height
-      );
-
-
-      // Convert to JPEG
-      const photoDataUrl =
-        canvasElement.toDataURL(
-          "image/jpeg"
-        );
-
-
-      // Display photo
-      photoElement.src =
-        photoDataUrl;
-
-      photoElement.style.display =
-        "block";
-
-
-      // Enable upload button
-      uploadButton.disabled = false;
-
-
-      // Send image to main.js
-      ipcRenderer.send(
-        "save-image",
-        photoDataUrl
-      );
-
-
-      console.log(
-        "Photo captured successfully"
-      );
-
-    }
-
-
-    // ============================
-    // START CAMERA WHEN PAGE LOADS
-    // ============================
-
-    window.addEventListener(
-      "DOMContentLoaded",
-      () => {
-
-        startWebcam();
-
-      }
-    );
-
-
-    // ============================
-    // CAPTURE BUTTON
-    // ============================
-
-    captureButton.addEventListener(
-      "click",
-      capturePhoto
-    );
-
-
-    // ============================
-    // UPLOAD BUTTON
-    // ============================
-
-    uploadButton.addEventListener(
-      "click",
-      () => {
-
-        alert(
-          "Upload feature is not implemented yet."
-        );
-
-      }
-    );
-
-  </script>
-
-
+    <main class="container">
+        <h1>Add to My Wardrobe</h1>
+
+        <p class="hint">
+            Choose a clothing photo. The app will analyze it and suggest
+            details that you can review before saving.
+        </p>
+
+        <button type="button" id="choosePhotoButton">
+            Choose Clothing Photo
+        </button>
+
+        <img id="photoPreview" alt="Selected clothing photo">
+
+        <p id="status" role="status" aria-live="polite">
+            Choose a photo to get started.
+        </p>
+
+        <form id="clothingForm">
+            <h2>Review Clothing Details</h2>
+
+            <p class="hint">
+                Check the suggested details and correct anything that is wrong.
+            </p>
+
+            <div class="field">
+                <label for="itemName">Item name</label>
+                <input
+                    id="itemName"
+                    name="itemName"
+                    type="text"
+                    maxlength="100"
+                    placeholder="e.g. Blue jeans"
+                    required
+                >
+            </div>
+
+            <div class="field">
+                <label for="category">Category</label>
+                <select id="category" name="category" required>
+                    <option value="">Choose a category</option>
+                    <option value="shirt">Shirts / Tops</option>
+                    <option value="pants">Pants / Trousers</option>
+                    <option value="shorts">Shorts</option>
+                    <option value="sweater">Sweaters / Hoodies</option>
+                    <option value="jacket">Jackets / Coats</option>
+                    <option value="dress">Dresses</option>
+                    <option value="skirt">Skirts</option>
+                    <option value="shoes">Shoes / Sandals</option>
+                </select>
+            </div>
+
+            <div class="field">
+                <label for="color">Color</label>
+                <input
+                    id="color"
+                    name="color"
+                    type="text"
+                    maxlength="50"
+                    placeholder="e.g. blue"
+                >
+            </div>
+
+            <div class="field">
+                <label for="style">Style</label>
+                <select id="style" name="style">
+                    <option value="">Choose a style</option>
+                    <option value="casual">Casual</option>
+                    <option value="formal">Formal</option>
+                    <option value="smart casual">Smart casual</option>
+                    <option value="sportswear">Sportswear / Activewear</option>
+                    <option value="streetwear">Streetwear</option>
+                    <option value="partywear">Partywear</option>
+                    <option value="traditional">Traditional</option>
+                </select>
+            </div>
+
+            <div class="field">
+                <label for="pattern">Pattern</label>
+                <input
+                    id="pattern"
+                    name="pattern"
+                    type="text"
+                    maxlength="100"
+                    placeholder="e.g. plain, striped, floral"
+                >
+            </div>
+
+            <div class="field">
+                <label for="warmth">Warmth</label>
+                <select id="warmth" name="warmth">
+                    <option value="">Not specified</option>
+                    <option value="1">1 - Very light</option>
+                    <option value="2">2 - Light</option>
+                    <option value="3">3 - Medium</option>
+                    <option value="4">4 - Warm</option>
+                    <option value="5">5 - Very warm</option>
+                </select>
+            </div>
+
+            <div class="field">
+                <label for="formality">Formality</label>
+                <select id="formality" name="formality">
+                    <option value="">Not specified</option>
+                    <option value="1">1 - Casual</option>
+                    <option value="2">2 - Smart casual</option>
+                    <option value="3">3 - Formal</option>
+                </select>
+            </div>
+
+            <div class="field">
+                <label for="season">Season</label>
+                <select id="season" name="season">
+                    <option value="">Not specified</option>
+                    <option value="summer">Summer</option>
+                    <option value="monsoon">Monsoon</option>
+                    <option value="spring">Spring</option>
+                    <option value="autumn">Autumn</option>
+                    <option value="winter">Winter</option>
+                    <option value="all seasons">All seasons</option>
+                </select>
+            </div>
+
+            <p id="confidenceMessage" class="hint"></p>
+
+            <button type="submit" id="saveButton" class="primary-button">
+                Save to My Wardrobe
+            </button>
+
+            <button
+                type="button"
+                id="chooseAnotherButton"
+                class="secondary-button"
+            >
+                Choose Another Photo
+            </button>
+        </form>
+    </main>
+
+    <script>
+        const { ipcRenderer } = require("electron");
+
+        const choosePhotoButton =
+            document.getElementById("choosePhotoButton");
+
+        const chooseAnotherButton =
+            document.getElementById("chooseAnotherButton");
+
+        const photoPreview =
+            document.getElementById("photoPreview");
+
+        const clothingForm =
+            document.getElementById("clothingForm");
+
+        const saveButton =
+            document.getElementById("saveButton");
+
+        const statusElement =
+            document.getElementById("status");
+
+        const confidenceMessage =
+            document.getElementById("confidenceMessage");
+
+        let imageToken = null;
+        let classificationConfidence = null;
+        let isBusy = false;
+
+        function setStatus(message, type = "") {
+            statusElement.textContent = message;
+            statusElement.className = type;
+        }
+
+        function setBusy(busy) {
+            isBusy = busy;
+            choosePhotoButton.disabled = busy;
+            chooseAnotherButton.disabled = busy;
+            saveButton.disabled = busy;
+        }
+
+        function fillField(id, value) {
+            const field = document.getElementById(id);
+
+            if (!field || value === undefined || value === null) {
+                return;
+            }
+
+            const textValue = String(value).trim();
+
+            if (!textValue) {
+                return;
+            }
+
+            if (field.tagName === "SELECT") {
+                const option = Array.from(field.options).find(
+                    option =>
+                        option.value.toLowerCase() ===
+                        textValue.toLowerCase()
+                );
+
+                if (option) {
+                    field.value = option.value;
+                } else {
+                    console.warn(
+                        "No matching dropdown option for",
+                        id,
+                        textValue
+                    );
+                }
+            } else {
+                field.value = textValue;
+            }
+
+            field.dispatchEvent(
+                new Event("change", { bubbles: true })
+            );
+        }
+
+        async function choosePhoto() {
+            if (isBusy) return;
+
+            setBusy(true);
+            setStatus("Opening photo selector...");
+
+            try {
+                const imageResult = await ipcRenderer.invoke(
+                    "select-clothing-image"
+                );
+
+                console.log("Image result received:", imageResult);
+
+                if (!imageResult || !imageResult.success) {
+                    if (imageResult && imageResult.canceled) {
+                        setStatus("Photo selection cancelled.");
+                    } else {
+                        setStatus(
+                            imageResult?.message ||
+                            "Could not select the photo.",
+                            "error"
+                        );
+                    }
+
+                    return;
+                }
+
+                if (!imageResult.token) {
+                    setStatus(
+                        "The selected photo has no image token. Please try again.",
+                        "error"
+                    );
+                    return;
+                }
+
+                imageToken = imageResult.token;
+
+                // IMPORTANT: main.js returns imageDataUrl, not dataUrl.
+                const imageData =
+                    imageResult.imageDataUrl ||
+                    imageResult.dataUrl ||
+                    imageResult.dataURL ||
+                    imageResult.imageData ||
+                    imageResult.image ||
+                    null;
+
+                if (imageData && typeof imageData === "string") {
+                    photoPreview.src = imageData;
+                    photoPreview.style.display = "block";
+                } else {
+                    photoPreview.removeAttribute("src");
+                    photoPreview.style.display = "none";
+
+                    console.error(
+                        "Image data URL missing from selection result:",
+                        imageResult
+                    );
+                }
+
+                // Clear previous details when another photo is selected.
+                clothingForm.reset();
+                confidenceMessage.textContent = "";
+                classificationConfidence = null;
+
+                // Show the form while classification is running.
+                clothingForm.style.display = "block";
+
+                setStatus("Analyzing your clothing image...");
+
+                const result = await ipcRenderer.invoke(
+                    "classify-clothing-image",
+                    imageToken
+                );
+
+                console.log("Classification result received:", result);
+
+                if (!result || result.success === false) {
+                    setStatus(
+                        result?.message ||
+                        "Classification failed. You can still enter the details manually.",
+                        "error"
+                    );
+                    return;
+                }
+
+                fillField(
+                    "itemName",
+                    result.name || result.subcategory || result.category
+                );
+
+                fillField("category", result.category);
+                fillField("color", result.color);
+                fillField("style", result.style);
+                fillField("pattern", result.pattern);
+                fillField("warmth", result.warmth);
+                fillField("formality", result.formality);
+                fillField("season", result.season);
+
+                classificationConfidence =
+                    result.confidence !== undefined &&
+                    result.confidence !== null &&
+                    Number.isFinite(Number(result.confidence))
+                        ? Number(result.confidence)
+                        : null;
+
+                if (classificationConfidence !== null) {
+                    confidenceMessage.textContent =
+                        "AI confidence: " +
+                        (classificationConfidence * 100).toFixed(1) +
+                        "%";
+                }
+
+                clothingForm.style.display = "block";
+
+                setStatus(
+                    "Clothing analyzed! Review the details and save.",
+                    "success"
+                );
+
+                console.log("Finished populating clothing form.");
+
+            } catch (error) {
+                console.error("Photo selection/classification error:", error);
+
+                clothingForm.style.display = "block";
+
+                setStatus(
+                    "Something went wrong. You can enter the details manually or try another photo.",
+                    "error"
+                );
+            } finally {
+                setBusy(false);
+            }
+        }
+
+        choosePhotoButton.addEventListener("click", choosePhoto);
+        chooseAnotherButton.addEventListener("click", choosePhoto);
+
+        clothingForm.addEventListener("submit", async (event) => {
+            event.preventDefault();
+
+            if (isBusy) return;
+
+            if (!imageToken) {
+                setStatus("Please choose a clothing photo first.", "error");
+                return;
+            }
+
+            const item = {
+                token: imageToken,
+                name: document.getElementById("itemName").value.trim(),
+                category: document.getElementById("category").value,
+                color: document.getElementById("color").value.trim(),
+                style: document.getElementById("style").value,
+                pattern: document.getElementById("pattern").value.trim(),
+                warmth: document.getElementById("warmth").value,
+                formality: document.getElementById("formality").value,
+                season: document.getElementById("season").value,
+                confidence: classificationConfidence
+            };
+
+            if (!item.name || !item.category) {
+                setStatus(
+                    "Please enter an item name and choose a category.",
+                    "error"
+                );
+                return;
+            }
+
+            setBusy(true);
+            setStatus("Saving clothing to your wardrobe...");
+
+            try {
+                const result = await ipcRenderer.invoke(
+                    "save-clothing-item",
+                    item
+                );
+
+                console.log("Save result:", result);
+
+                if (!result || !result.success) {
+                    setStatus(
+                        result?.message || "Could not save the clothing item.",
+                        "error"
+                    );
+                    return;
+                }
+
+                setStatus(
+                    result.message || "Clothing saved successfully!",
+                    "success"
+                );
+
+                // Keep the photo visible and prevent accidental duplicate saves.
+                imageToken = null;
+                saveButton.disabled = true;
+
+            } catch (error) {
+                console.error("Save clothing error:", error);
+
+                setStatus(
+                    "An error occurred while saving. Please try again.",
+                    "error"
+                );
+            } finally {
+                isBusy = false;
+                choosePhotoButton.disabled = false;
+                chooseAnotherButton.disabled = false;
+                saveButton.disabled = !imageToken;
+            }
+        });
+    </script>
 </body>
-
 </html>
-

@@ -1,159 +1,250 @@
-/* General Styles */
+
+* {
+  box-sizing: border-box;
+}
+
 body {
-  font-family: "Arial", sans-serif;
-  background-image: url("closet-background.jpg"); /* Add a fashion-themed background */
-  background-size: cover;
-  background-position: center;
+  font-family: Arial, sans-serif;
+  background: #f5f2ef;
   display: flex;
   justify-content: center;
-  align-items: center;
-  height: 100vh;
+  align-items: flex-start;
+  min-height: 100vh;
   margin: 0;
+  padding: 24px 12px;
   color: #333;
 }
 
-/* Selection Container */
 .selection-container {
-  background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white */
-  padding: 30px;
-  border-radius: 12px;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  width: 400px;
+  background: rgba(255, 255, 255, 0.97);
+  padding: 28px;
+  border-radius: 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  width: 100%;
+  max-width: 540px;
   text-align: center;
 }
 
-/* Logo */
 .logo img {
-  width: 80px;
-  margin-bottom: 20px;
+  width: 65px;
+  height: 65px;
+  object-fit: contain;
+  margin-bottom: 12px;
 }
 
-/* Heading */
 h2 {
-  margin-bottom: 10px;
-  font-size: 24px;
+  margin: 8px 0;
+  font-size: 28px;
   color: #444;
 }
 
-/* Paragraph */
 p {
-  margin-bottom: 20px;
-  font-size: 14px;
   color: #666;
+  line-height: 1.5;
 }
 
-/* Selection Content */
-.selection-content {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
+.selection-group {
+  margin: 30px auto;
+  max-width: 360px;
 }
 
-.selection-group h3 {
-  margin-bottom: 10px;
-  font-size: 18px;
+.selection-group h3,
+.preview-section h3 {
+  margin-bottom: 8px;
+  font-size: 22px;
   color: #444;
 }
 
-/* Color Options */
-.color-options {
-  display: flex;
-  gap: 10px;
-  justify-content: center;
+.hint {
+  font-size: 13px;
+  margin: 6px 0 16px;
 }
 
-.color-option {
-  width: 40px;
-  height: 40px;
+.picker {
+  width: 100%;
+  text-align: left;
+}
+
+.color-square {
+  position: relative;
+  width: 100%;
+  height: 240px;
+  border-radius: 12px;
+  overflow: hidden;
+  cursor: crosshair;
+  touch-action: none;
+  background: hsl(25, 100%, 50%);
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1);
+}
+
+.white-gradient,
+.black-gradient {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.white-gradient {
+  background: linear-gradient(to right, #fff, transparent);
+}
+
+.black-gradient {
+  background: linear-gradient(to top, #000, transparent);
+}
+
+.picker-cursor {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 20px;
+  height: 20px;
+  border: 3px solid white;
   border-radius: 50%;
+  box-shadow: 0 0 0 2px #333;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+}
+
+.slider-label {
+  display: block;
+  margin-top: 18px;
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.hue-slider {
+  display: block;
+  width: 100%;
+  margin: 12px 0;
+  height: 18px;
   cursor: pointer;
-  border: 2px solid #ddd;
-  transition: transform 0.2s ease, border-color 0.2s ease;
-  display: inline-block; /* Ensure the divs are displayed inline */
+  accent-color: #ff6f61;
 }
 
-.color-option.selected {
-  border-color: #ff6f61; /* Coral color */
-  transform: scale(1.1);
+.color-details {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px;
+  margin-top: 12px;
+  border: 1px solid #e5e5e5;
+  border-radius: 12px;
 }
 
-.color-option:hover {
-  transform: scale(1.1);
-  border-color: #ff6f61; /* Coral color */
+.color-swatch {
+  width: 42px;
+  height: 42px;
+  flex-shrink: 0;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  background: #c78b63;
 }
 
-/* Gender Options */
+.color-details strong,
+.hex-value {
+  display: block;
+}
+
+.color-details strong {
+  font-size: 14px;
+  margin-bottom: 4px;
+}
+
+.hex-value {
+  color: #666;
+  font-family: monospace;
+  font-size: 14px;
+}
+
 .gender-options {
   display: flex;
-  gap: 10px;
   justify-content: center;
+  gap: 12px;
+  margin-top: 16px;
 }
 
 .gender-option {
-  padding: 10px 20px;
+  padding: 12px 22px;
+  background: white;
+  color: #333;
   border: 2px solid #ddd;
-  border-radius: 20px;
+  border-radius: 16px;
   cursor: pointer;
-  transition: background-color 0.3s ease, transform 0.2s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  font-size: 16px;
+  transition: 0.2s ease;
 }
 
+.gender-option:hover,
 .gender-option.selected {
-  background-color: #ff6f61; /* Coral color */
+  background: #ff6f61;
   color: white;
   border-color: #ff6f61;
 }
 
-.gender-option:hover {
-  transform: scale(1.05);
-  background-color: #ff6f61; /* Coral color */
-  color: white;
-}
-
 .preview-section {
-  margin-top: 20px;
-}
-
-.preview-section h3 {
-  margin-bottom: 10px;
-  font-size: 18px;
-  color: #444;
+  margin-top: 30px;
 }
 
 .preview {
   display: flex;
   justify-content: center;
-  gap: 20px;
-  margin-bottom: 20px;
+  gap: 24px;
+  margin: 20px 0 26px;
+}
+
+.preview-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  color: #666;
 }
 
 .preview-skin,
 .preview-hair,
 .preview-gender {
-  width: 60px;
-  height: 60px;
+  width: 64px;
+  height: 64px;
   border-radius: 50%;
   border: 2px solid #ddd;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 24px;
+  font-size: 28px;
 }
 
-button {
+#saveButton {
   width: 100%;
-  padding: 12px;
-  background-color: #ff6f61; /* Coral color */
+  padding: 16px;
+  background: #ff6f61;
   border: none;
-  border-radius: 6px;
-  color: #fff;
-  font-size: 16px;
+  border-radius: 10px;
+  color: white;
+  font-size: 17px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: background 0.2s ease;
 }
 
-button:hover {
-  background-color: #ff4a3d; /* Darker coral on hover */
+#saveButton:hover {
+  background: #ff4a3d;
+}
+
+#message {
+  font-size: 14px;
+  margin-bottom: 0;
+}
+
+@media (max-width: 480px) {
+  .selection-container {
+    padding: 20px 16px;
+  }
+
+  .color-square {
+    height: 210px;
+  }
+
+  h2 {
+    font-size: 24px;
+  }
 }

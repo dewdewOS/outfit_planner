@@ -1,191 +1,450 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>My Closet - Skin Tone & Hair Color</title>
-    <link rel="stylesheet" href="skin.css" />
-  </head>
-  <body>
-    <div class="selection-container">
-      <div class="logo">
-        <img
-          src="https://i.pinimg.com/736x/e5/15/69/e515692f60320700d9f86d9fe0691e03.jpg"
-          alt="My Closet Logo"
-        />
-      </div>
-      <h2>Customize Your Profile</h2>
-      <p>
-        Select your skin tone, hair color, and gender to personalize your
-        experience.
-      </p>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customize Your Profile</title>
+    <link rel="stylesheet" href="skin.css">
+</head>
 
-      <!-- Skin Tone Selection -->
-      <div class="selection-group">
-        <h3>Skin Tone</h3>
-        <div class="color-options">
-          <div
-            class="color-option"
-            style="background-color: #f7d7c4"
-            data-color="#f7d7c4"
-            onclick="selectOption(this, 'skin')"
-          ></div>
-          <div
-            class="color-option"
-            style="background-color: #e0b48d"
-            data-color="#e0b48d"
-            onclick="selectOption(this, 'skin')"
-          ></div>
-          <div
-            class="color-option"
-            style="background-color: #c78b63"
-            data-color="#c78b63"
-            onclick="selectOption(this, 'skin')"
-          ></div>
-          <div
-            class="color-option"
-            style="background-color: #a56a4a"
-            data-color="#a56a4a"
-            onclick="selectOption(this, 'skin')"
-          ></div>
-          <div
-            class="color-option"
-            style="background-color: #7a4a32"
-            data-color="#7a4a32"
-            onclick="selectOption(this, 'skin')"
-          ></div>
-        </div>
-      </div>
+<body>
+    <main class="selection-container">
+        <h1>Customize Your Profile</h1>
+        <p>Choose your skin tone, hair colour, and gender.</p>
 
-      <!-- Hair Color Selection -->
-      <div class="selection-group">
-        <h3>Hair Color</h3>
-        <div class="color-options">
-          <div
-            class="color-option"
-            style="background-color: #000000"
-            data-color="#000000"
-            onclick="selectOption(this, 'hair')"
-          ></div>
-          <div
-            class="color-option"
-            style="background-color: #480d0d"
-            data-color="#480d0d"
-            onclick="selectOption(this, 'hair')"
-          ></div>
-          <div
-            class="color-option"
-            style="background-color: #9f3801"
-            data-color="#9f3801"
-            onclick="selectOption(this, 'hair')"
-          ></div>
-          <div
-            class="color-option"
-            style="background-color: #f8eba5"
-            data-color="#f8eba5"
-            onclick="selectOption(this, 'hair')"
-          ></div>
-          <div
-            class="color-option"
-            style="background-color: #dcdac6"
-            data-color="#dcdac6"
-            onclick="selectOption(this, 'hair')"
-          ></div>
-        </div>
-      </div>
+        <!-- SKIN TONE PICKER -->
+        <section class="picker-section">
+            <h2>Skin tone</h2>
 
-      <!-- Gender Selection -->
-      <div class="selection-group">
-        <h3>Gender</h3>
-        <div class="gender-options">
-          <div
-            class="gender-option"
-            data-gender="male"
-            onclick="selectGender(this)"
-          >
-            <span>👨 Male</span>
-          </div>
-          <div
-            class="gender-option"
-            data-gender="female"
-            onclick="selectGender(this)"
-          >
-            <span>👩 Female</span>
-          </div>
-        </div>
-      </div>
+            <div class="color-picker">
+                <div class="color-square" id="skinSquare">
+                    <div class="white-gradient"></div>
+                    <div class="black-gradient"></div>
+                    <div class="picker-cursor" id="skinCursor"></div>
+                </div>
 
-      <!-- Preview Section -->
-      <div class="preview-section">
-        <h3>Your Selection</h3>
-        <div class="preview">
-          <div class="preview-skin" id="previewSkin"></div>
-          <div class="preview-hair" id="previewHair"></div>
-          <div class="preview-gender" id="previewGender"></div>
-        </div>
-        <button onclick="saveSelection()">Save and Continue</button>
-      </div>
-    </div>
+                <input
+                    class="hue-slider"
+                    id="skinHue"
+                    type="range"
+                    min="0"
+                    max="360"
+                    value="25"
+                    aria-label="Skin tone hue"
+                >
+
+                <div class="color-details">
+                    <span class="color-preview" id="skinPreview"></span>
+                    <code id="skinHex">#D9A078</code>
+                </div>
+            </div>
+        </section>
+
+        <!-- HAIR COLOUR PICKER -->
+        <section class="picker-section">
+            <h2>Hair colour</h2>
+
+            <div class="color-picker">
+                <div class="color-square" id="hairSquare">
+                    <div class="white-gradient"></div>
+                    <div class="black-gradient"></div>
+                    <div class="picker-cursor" id="hairCursor"></div>
+                </div>
+
+                <input
+                    class="hue-slider"
+                    id="hairHue"
+                    type="range"
+                    min="0"
+                    max="360"
+                    value="25"
+                    aria-label="Hair colour hue"
+                >
+
+                <div class="color-details">
+                    <span class="color-preview" id="hairPreview"></span>
+                    <code id="hairHex">#4A2C20</code>
+                </div>
+            </div>
+        </section>
+
+        <!-- GENDER SELECTION -->
+        <section class="picker-section">
+            <h2>Gender</h2>
+
+            <div class="gender-options">
+                <button
+                    type="button"
+                    class="gender-button"
+                    data-gender="male"
+                    aria-pressed="false"
+                >
+                    Male
+                </button>
+
+                <button
+                    type="button"
+                    class="gender-button"
+                    data-gender="female"
+                    aria-pressed="false"
+                >
+                    Female
+                </button>
+            </div>
+        </section>
+
+        <!-- PROFILE PREVIEW -->
+        <section class="profile-preview">
+            <h2>Preview</h2>
+
+            <div class="preview-person">
+                <div class="preview-hair" id="previewHair"></div>
+                <div class="preview-face" id="previewFace"></div>
+            </div>
+
+            <p id="saveStatus" role="status"></p>
+        </section>
+
+        <button
+            type="button"
+            class="save-button"
+            id="saveButton"
+        >
+            Save and Continue
+        </button>
+    </main>
 
     <script>
-      // Function to handle color selection with bubbling effect
-      function selectOption(element, type) {
-        // Remove selected class from all options
-        const options = document.querySelectorAll(
-          ".color-options .color-option"
-        );
-        options.forEach((option) => option.classList.remove("selected"));
+        const { ipcRenderer } = require("electron");
 
-        // Add selected class to the clicked option
-        element.classList.add("selected");
+        // The current selections.
+        const selections = {
+            skinTone: "#D9A078",
+            hairColor: "#4A2C20",
+            gender: null
+        };
 
-        // Add bubbling effect
-        element.style.transform = "scale(1.2)";
-        setTimeout(() => {
-          element.style.transform = "scale(1)";
-        }, 200);
+        const pickerState = {
+            skin: {
+                hue: 25,
+                saturation: 0.45,
+                value: 0.85
+            },
 
-        // Update preview
-        const color = element.getAttribute("data-color");
-        if (type === "skin") {
-          document.getElementById("previewSkin").style.backgroundColor = color;
-        } else if (type === "hair") {
-          document.getElementById("previewHair").style.backgroundColor = color;
+            hair: {
+                hue: 18,
+                saturation: 0.58,
+                value: 0.29
+            }
+        };
+
+        // Convert HSV colour values to HEX.
+        function hsvToHex(h, s, v) {
+            const c = v * s;
+            const x = c * (
+                1 - Math.abs((h / 60) % 2 - 1)
+            );
+            const m = v - c;
+
+            let rgb;
+
+            if (h < 60) {
+                rgb = [c, x, 0];
+            } else if (h < 120) {
+                rgb = [x, c, 0];
+            } else if (h < 180) {
+                rgb = [0, c, x];
+            } else if (h < 240) {
+                rgb = [0, x, c];
+            } else if (h < 300) {
+                rgb = [x, 0, c];
+            } else {
+                rgb = [c, 0, x];
+            }
+
+            return "#" + rgb.map(value =>
+                Math.round((value + m) * 255)
+                    .toString(16)
+                    .padStart(2, "0")
+            ).join("").toUpperCase();
         }
-      }
 
-      // Function to handle gender selection
-      function selectGender(element) {
-        // Remove selected class from all options
-        const options = document.querySelectorAll(
-          ".gender-options .gender-option"
-        );
-        options.forEach((option) => option.classList.remove("selected"));
+        // Convert HEX to RGB.
+        function hexToRgb(hex) {
+            const value = hex.replace("#", "");
 
-        // Add selected class to the clicked option
-        element.classList.add("selected");
-
-        // Update preview
-        const gender = element.getAttribute("data-gender");
-        document.getElementById("previewGender").textContent =
-          gender === "male" ? "👨" : gender === "female" ? "👩" : "🌈";
-      }
-
-      // Function to save selection (simulated)
-      function saveSelection() {
-        const skinTone =
-          document.getElementById("previewSkin").style.backgroundColor;
-        const hairColor =
-          document.getElementById("previewHair").style.backgroundColor;
-        const gender = document.getElementById("previewGender").textContent;
-
-        if (skinTone && hairColor && gender) {
-          alert("Selection saved! Redirecting to your closet...");
-          window.location.href = "index.html"; // Redirect to dashboard
-        } else {
-          alert("Please select skin tone, hair color, and gender.");
+            return {
+                r: parseInt(value.slice(0, 2), 16),
+                g: parseInt(value.slice(2, 4), 16),
+                b: parseInt(value.slice(4, 6), 16)
+            };
         }
-      }
+
+        // Convert HEX to HSV for restoring saved colours.
+        function rgbToHsv(hex) {
+            const { r, g, b } = hexToRgb(hex);
+
+            const rr = r / 255;
+            const gg = g / 255;
+            const bb = b / 255;
+
+            const max = Math.max(rr, gg, bb);
+            const min = Math.min(rr, gg, bb);
+            const delta = max - min;
+
+            let h = 0;
+
+            if (delta !== 0) {
+                if (max === rr) {
+                    h = 60 * (((gg - bb) / delta) % 6);
+                } else if (max === gg) {
+                    h = 60 * ((bb - rr) / delta + 2);
+                } else {
+                    h = 60 * ((rr - gg) / delta + 4);
+                }
+            }
+
+            if (h < 0) h += 360;
+
+            return {
+                h,
+                s: max === 0 ? 0 : delta / max,
+                v: max
+            };
+        }
+
+        // Set up a gradient picker.
+        function setupPicker(kind, initialColor) {
+            const prefix = kind === "skin" ? "skin" : "hair";
+
+            const square = document.getElementById(
+                prefix + "Square"
+            );
+
+            const cursor = document.getElementById(
+                prefix + "Cursor"
+            );
+
+            const hueSlider = document.getElementById(
+                prefix + "Hue"
+            );
+
+            const preview = document.getElementById(
+                prefix + "Preview"
+            );
+
+            const hexLabel = document.getElementById(
+                prefix + "Hex"
+            );
+
+            const initial = rgbToHsv(initialColor);
+
+            pickerState[kind] = {
+                hue: initial.h,
+                saturation: initial.s,
+                value: initial.v
+            };
+
+            hueSlider.value = initial.h;
+
+            function render() {
+                const state = pickerState[kind];
+
+                square.style.backgroundColor =
+                    `hsl(${state.hue}, 100%, 50%)`;
+
+                cursor.style.left =
+                    `${state.saturation * 100}%`;
+
+                cursor.style.top =
+                    `${(1 - state.value) * 100}%`;
+
+                const colour = hsvToHex(
+                    state.hue,
+                    state.saturation,
+                    state.value
+                );
+
+                if (kind === "skin") {
+                    selections.skinTone = colour;
+                } else {
+                    selections.hairColor = colour;
+                }
+
+                preview.style.backgroundColor = colour;
+                hexLabel.textContent = colour;
+
+                updatePersonPreview();
+            }
+
+            function updateFromPointer(event) {
+                const rect = square.getBoundingClientRect();
+
+                const x = Math.max(
+                    0,
+                    Math.min(rect.width, event.clientX - rect.left)
+                );
+
+                const y = Math.max(
+                    0,
+                    Math.min(rect.height, event.clientY - rect.top)
+                );
+
+                pickerState[kind].saturation =
+                    x / rect.width;
+
+                pickerState[kind].value =
+                    1 - y / rect.height;
+
+                render();
+            }
+
+            square.addEventListener("pointerdown", event => {
+                square.setPointerCapture(event.pointerId);
+                updateFromPointer(event);
+            });
+
+            square.addEventListener("pointermove", event => {
+                if (square.hasPointerCapture(event.pointerId)) {
+                    updateFromPointer(event);
+                }
+            });
+
+            hueSlider.addEventListener("input", () => {
+                pickerState[kind].hue =
+                    Number(hueSlider.value);
+
+                render();
+            });
+
+            render();
+        }
+
+        // Update the profile preview.
+        function updatePersonPreview() {
+            document.getElementById(
+                "previewFace"
+            ).style.backgroundColor = selections.skinTone;
+
+            document.getElementById(
+                "previewHair"
+            ).style.backgroundColor = selections.hairColor;
+        }
+
+        // Handle gender selection.
+        document.querySelectorAll(".gender-button").forEach(button => {
+            button.addEventListener("click", () => {
+                selections.gender = button.dataset.gender;
+
+                document.querySelectorAll(
+                    ".gender-button"
+                ).forEach(item => {
+                    const selected = item === button;
+
+                    item.classList.toggle("selected", selected);
+
+                    item.setAttribute(
+                        "aria-pressed",
+                        String(selected)
+                    );
+                });
+            });
+        });
+
+        // Load previously saved profile customizations.
+        async function loadSavedProfile() {
+            try {
+                const result = await ipcRenderer.invoke(
+                    "get-profile-customization"
+                );
+
+                if (!result.success || !result.profile) {
+                    return;
+                }
+
+                const profile = result.profile;
+
+                if (
+                    profile.skinTone &&
+                    /^#[0-9a-fA-F]{6}$/.test(profile.skinTone)
+                ) {
+                    setupPicker("skin", profile.skinTone);
+                }
+
+                if (
+                    profile.hairColor &&
+                    /^#[0-9a-fA-F]{6}$/.test(profile.hairColor)
+                ) {
+                    setupPicker("hair", profile.hairColor);
+                }
+
+                if (profile.gender) {
+                    const button = document.querySelector(
+                        `.gender-button[data-gender="${profile.gender}"]`
+                    );
+
+                    if (button) {
+                        button.click();
+                    }
+                }
+
+            } catch (error) {
+                console.error(
+                    "Could not load saved profile:",
+                    error
+                );
+            }
+        }
+
+        // Save profile customizations to SQLite.
+        document.getElementById("saveButton").addEventListener(
+            "click",
+            async () => {
+                const status = document.getElementById("saveStatus");
+                const button = document.getElementById("saveButton");
+
+                if (!selections.gender) {
+                    status.textContent =
+                        "Please select your gender before continuing.";
+                    return;
+                }
+
+                button.disabled = true;
+                status.textContent = "Saving...";
+
+                try {
+                    const result = await ipcRenderer.invoke(
+                        "save-profile-customization",
+                        selections
+                    );
+
+                    if (!result.success) {
+                        status.textContent =
+                            result.message || "Could not save your profile.";
+                        return;
+                    }
+
+                    status.textContent = "Profile saved!";
+
+                    window.location.href = "index.html";
+
+                } catch (error) {
+                    console.error("Profile save error:", error);
+
+                    status.textContent =
+                        "Something went wrong while saving.";
+
+                } finally {
+                    button.disabled = false;
+                }
+            }
+        );
+
+        // Initialize pickers, then restore saved values.
+        setupPicker("skin", selections.skinTone);
+        setupPicker("hair", selections.hairColor);
+
+        loadSavedProfile();
     </script>
-  </body>
+</body>
 </html>

@@ -1,65 +1,28 @@
+
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>All Clothes</title>
-    <link rel="stylesheet" href="styles.css" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Wardrobe</title>
+    <link rel="stylesheet" href="styles.css">
     <script defer src="all.js"></script>
-  </head>
-  <body>
+</head>
+<body>
     <div class="all-clothes-container">
-      <div class="header">
-        <button class="back-button" onclick="window.location.href='index.html'">
-          &lt; Back
-        </button>
-        <h1>All Clothes</h1>
-      </div>
+        <div class="header">
+            <button class="back-button"
+                onclick="window.location.href='index.html'">
+                &lt; Back
+            </button>
+            <h1>My Wardrobe</h1>
+        </div>
 
-      <div class="clothes-grid">
-        <div class="item">
-          <img
-            src="https://i.pinimg.com/474x/cf/32/ff/cf32ffd4c68284d1de7162ed0ec85282.jpg"
-            alt="Shirt 1"
-          />
-          <button class="heart-button">♡</button>
+        <p>All your clothing, in one place.</p>
+
+        <div id="savedClothesGrid" class="clothes-grid">
+            <p>Loading your wardrobe...</p>
         </div>
-        <div class="item">
-          <img
-            src="https://i.pinimg.com/736x/57/38/1a/57381adbe72fd832564110b06ea428ba.jpg"
-            alt="Shirt 2"
-          />
-          <button class="heart-button">♡</button>
-        </div>
-        <div class="item">
-          <img
-            src="https://i.pinimg.com/736x/76/b9/72/76b972beb1713edde32d6dd99f49f4ab.jpg"
-            alt="Shirt 3"
-          />
-          <button class="heart-button">♡</button>
-        </div>
-        <div class="item">
-          <img
-            src="https://i.pinimg.com/736x/54/7c/a9/547ca9c6a386b60134432aee3d43bbdf.jpg"
-            alt="Shirt 4"
-          />
-          <button class="heart-button">♡</button>
-        </div>
-        <div class="item">
-          <img
-            src="https://i.pinimg.com/736x/d0/86/8d/d0868dc45161613e4a9e17c5eb7c12e0.jpg"
-            alt="Shirt 5"
-          />
-          <button class="heart-button">♡</button>
-        </div>
-        <div class="item">
-          <img
-            src="https://i.pinimg.com/736x/ee/8e/df/ee8edfe7a2669dfafdb299c08d0a3abd.jpg"
-            alt="Shirt 6"
-          />
-          <button class="heart-button">♡</button>
-        </div>
-      </div>
     </div>
-  </body>
+</body>
 </html>

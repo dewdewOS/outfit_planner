@@ -25,6 +25,26 @@ db.exec(`
     );
 `);
 
+// Add profile customization columns to existing databases
+const userColumns = db
+    .prepare("PRAGMA table_info(users)")
+    .all()
+    .map(column => column.name);
+
+if (!userColumns.includes("skin_tone")) {
+    db.exec("ALTER TABLE users ADD COLUMN skin_tone TEXT");
+}
+
+if (!userColumns.includes("hair_color")) {
+    db.exec("ALTER TABLE users ADD COLUMN hair_color TEXT");
+}
+
+if (!userColumns.includes("gender")) {
+    db.exec("ALTER TABLE users ADD COLUMN gender TEXT");
+}
+
+console.log("Profile customization columns are ready.");
+
 // Create the clothing items table
 db.exec(`
     CREATE TABLE IF NOT EXISTS clothing_items (
@@ -70,4 +90,33 @@ if (!columnNames.includes("image_format")) {
 }
 
 console.log("Image storage columns are ready.");
+
+
+/* Add extra clothing attributes without deleting existing data */
+const clothingColumns = db
+    .prepare("PRAGMA table_info(clothing_items)")
+    .all()
+    .map(column => column.name);
+
+const extraColumns = {
+    subcategory: "TEXT",
+    style: "TEXT",
+    pattern: "TEXT",
+    warmth: "INTEGER",
+    formality: "INTEGER",
+    season: "TEXT",
+    classification_confidence: "REAL"
+};
+
+for (const [columnName, columnType] of Object.entries(extraColumns)) {
+    if (!clothingColumns.includes(columnName)) {
+        db.exec(
+            `ALTER TABLE clothing_items ADD COLUMN ${columnName} ${columnType}`
+        );
+    }
+}
+
+console.log("Clothing attribute columns are ready.");
+
+
 module.exports = db;

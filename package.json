@@ -14,6 +14,7 @@
     "electron": "^44.6.0"
   },
   "dependencies": {
+    "@huggingface/transformers": "^4.3.2",
     "bcryptjs": "^3.0.3",
     "better-sqlite3": "^13.0.3"
   }
