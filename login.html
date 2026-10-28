@@ -1,91 +1,242 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
     <title>My Closet - Login</title>
-    <link rel="stylesheet" href="login.css" />
-  </head>
-  <body>
+
+    <link rel="stylesheet" href="login.css">
+</head>
+
+<body>
+
+    <!-- Login Container -->
     <div class="login-container">
-      <div class="logo">
-        <img
-          src="https://i.pinimg.com/736x/e5/15/69/e515692f60320700d9f86d9fe0691e03.jpg"
-          alt="My Closet Logo"
-        />
-      </div>
-      <h2>Welcome to Snatch&Match</h2>
-      <form id="loginForm">
-        <div class="input-group">
-          <label for="username">Username</label>
-          <input
-            type="text"
-            id="username"
-            name="username"
-            placeholder="Enter your username"
-            required
-          />
+
+        <div class="logo">
+            <img
+                src="https://i.pinimg.com/736x/e5/15/69/e515692f60320700d9f86d9fe0691e03.jpg"
+                alt="My Closet Logo"
+            >
         </div>
-        <div class="input-group">
-          <label for="password">Password</label>
-          <input
-            type="password"
-            id="password"
-            name="password"
-            placeholder="Enter your password"
-            required
-          />
+
+        <h2>Welcome to Snatch&Match</h2>
+
+        <form id="loginForm">
+
+            <div class="input-group">
+                <label for="username">Username</label>
+
+                <input
+                    type="text"
+                    id="username"
+                    name="username"
+                    placeholder="Enter your username"
+                    required
+                >
+            </div>
+
+            <div class="input-group">
+                <label for="password">Password</label>
+
+                <input
+                    type="password"
+                    id="password"
+                    name="password"
+                    placeholder="Enter your password"
+                    required
+                >
+            </div>
+
+            <button type="submit">Log In</button>
+
+        </form>
+
+        <div class="signup-link">
+            <p>
+                Don't have an account?
+                <a href="signup.html">Sign Up</a>
+            </p>
         </div>
-        <button type="submit">Log In</button>
-      </form>
-      <div class="signup-link">
-        <p>Don't have an account? <a href="signup.html">Sign Up</a></p>
-      </div>
+
     </div>
+
+
+    <!-- Kawaii Pixel Popup -->
+    <div
+        id="successPopup"
+        class="pixel-popup-overlay"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="popupTitle"
+        aria-describedby="popupMessage"
+    >
+
+        <div class="pixel-popup">
+
+            <!-- Popup Header -->
+            <div class="pixel-popup-header">
+                <span>♡ NOTIFICATION ♡</span>
+
+                <button
+                    type="button"
+                    id="closePopup"
+                    aria-label="Close popup"
+                >
+                    ×
+                </button>
+            </div>
+
+            <!-- Popup Content -->
+            <div class="pixel-popup-content">
+
+                <div class="pixel-heart">♥</div>
+
+                <h2 id="popupTitle">Yay! 🎀</h2>
+
+                <p id="popupMessage">
+                    Login successful!
+                </p>
+
+                <button type="button" id="popupOk">
+                    OK ♡
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- JavaScript -->
     <script>
-      const { ipcRenderer } = require('electron');
+        const { ipcRenderer } = require('electron');
 
-      document
-        .getElementById('loginForm')
-        .addEventListener('submit', async function (event) {
-          event.preventDefault();
+        let redirectAfterPopup = false;
 
-          const username = document.getElementById('username').value.trim();
-          const password = document.getElementById('password').value;
+        // Display the custom popup
+        function showPopup(
+            message,
+            title = 'Yay! 🎀',
+            shouldRedirect = false
+        ) {
+            const popup = document.getElementById('successPopup');
 
-          const loginButton = document.querySelector(
-            '#loginForm button[type="submit"]'
-          );
+            document.getElementById('popupTitle').textContent = title;
+            document.getElementById('popupMessage').textContent = message;
 
-          loginButton.disabled = true;
+            redirectAfterPopup = shouldRedirect;
 
-          try {
-            console.log('Sending login request...');
+            popup.classList.add('show');
 
-            const result = await ipcRenderer.invoke('login-user', {
-              username: username,
-              password: password
-            });
+            document.getElementById('popupOk').focus();
+        }
 
-            console.log('Login response:', result);
+        // Close the popup
+        function closePopup() {
+            const popup = document.getElementById('successPopup');
 
-            alert(result.message);
+            popup.classList.remove('show');
 
-            if (result.success) {
-              localStorage.setItem(
-                'loggedInUser',
-                JSON.stringify(result.user)
-              );
-
-              window.location.href = 'index.html';
+            // Redirect only after a successful login
+            if (redirectAfterPopup) {
+                redirectAfterPopup = false;
+                window.location.href = 'index.html';
             }
-          } catch (error) {
-            console.error('Login request failed:', error);
-            alert('Something went wrong. Please try again.');
-          } finally {
-            loginButton.disabled = false;
-          }
-        });
+        }
+
+        // Popup buttons
+        document
+            .getElementById('popupOk')
+            .addEventListener('click', closePopup);
+
+        document
+            .getElementById('closePopup')
+            .addEventListener('click', closePopup);
+
+
+        // Login form submission
+        document
+            .getElementById('loginForm')
+            .addEventListener('submit', async function (event) {
+
+                event.preventDefault();
+
+                const username = document
+                    .getElementById('username')
+                    .value
+                    .trim();
+
+                const password = document
+                    .getElementById('password')
+                    .value;
+
+                const loginButton = document.querySelector(
+                    '#loginForm button[type="submit"]'
+                );
+
+                // Prevent repeated submissions
+                loginButton.disabled = true;
+
+                try {
+
+                    console.log('Sending login request...');
+
+                    // Call the existing Electron login handler
+                    const result = await ipcRenderer.invoke(
+                        'login-user',
+                        {
+                            username: username,
+                            password: password
+                        }
+                    );
+
+                    console.log('Login response:', result);
+
+                    if (result && result.success) {
+
+                        // Save logged-in user
+                        localStorage.setItem(
+                            'loggedInUser',
+                            JSON.stringify(result.user)
+                        );
+
+                        // Show success popup before redirecting
+                        showPopup(
+                            result.message || 'Welcome back!',
+                            'Login Successful! ♡',
+                            true
+                        );
+
+                    } else {
+
+                        // Display login error in the custom popup
+                        showPopup(
+                            result?.message || 'Please check your credentials.',
+                            'Oops! Try Again ♡'
+                        );
+
+                    }
+
+                } catch (error) {
+
+                    console.error('Login request failed:', error);
+
+                    showPopup(
+                        'Something went wrong. Please try again.',
+                        'Oops! ♡'
+                    );
+
+                } finally {
+
+                    loginButton.disabled = false;
+
+                }
+
+            });
     </script>
-  </body>
+
+</body>
 </html>

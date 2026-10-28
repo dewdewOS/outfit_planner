@@ -28,6 +28,23 @@ let clothingClassifierPromise = null;
 /* =========================================
    SELECT A CLOTHING IMAGE
 ========================================= */
+// Add laundry_status to existing clothing records if it doesn't exist
+const clothingColumns = db
+    .prepare("PRAGMA table_info(clothing_items)")
+    .all();
+
+const hasLaundryStatus = clothingColumns.some(
+    column => column.name === "laundry_status"
+);
+
+if (!hasLaundryStatus) {
+    db.exec(`
+        ALTER TABLE clothing_items
+        ADD COLUMN laundry_status TEXT NOT NULL DEFAULT 'To Wash'
+    `);
+
+    console.log("Laundry status column added successfully.");
+}
 
 ipcMain.handle("select-clothing-image", async (event) => {
   try {
@@ -537,56 +554,121 @@ ipcMain.handle("save-clothing-item", async (event, item) => {
 ========================================= */
 
 ipcMain.handle("get-clothing-items", async () => {
-  try {
-    if (!currentUserId) {
-      return {
-        success: false,
-        message: "Please log in first.",
-        items: []
-      };
-    }
+    try {
+        if (!currentUserId) {
+            return {
+                success: false,
+                message: "Please log in first.",
+                items: []
+            };
+        }
 
-    const rows = db.prepare(`
+        const rows = db.prepare(`
             SELECT
                 id, name, category, color, image_data,
                 image_format, subcategory, style, pattern,
                 warmth, formality, season,
-                classification_confidence
+                classification_confidence,
+                laundry_status
             FROM clothing_items
             WHERE user_id = ?
             ORDER BY id DESC
         `).all(currentUserId);
 
-    const items = rows.map(row => ({
-      id: row.id,
-      name: row.name,
-      category: row.category,
-      color: row.color,
-      subcategory: row.subcategory,
-      style: row.style,
-      pattern: row.pattern,
-      warmth: row.warmth,
-      formality: row.formality,
-      season: row.season,
-      confidence: row.classification_confidence,
-      imageDataUrl: row.image_data
-        ? `data:${row.image_format || "image/jpeg"};base64,${Buffer.from(row.image_data).toString("base64")}`
-        : null
-    }));
+        const items = rows.map(row => ({
+            id: row.id,
+            name: row.name,
+            category: row.category,
+            color: row.color,
 
-    return {
-      success: true,
-      items
-    };
-  } catch (error) {
-    console.error("Load clothing error:", error);
+            // Laundry status
+            laundryStatus: row.laundry_status || "To Wash",
 
-    return {
-      success: false,
-      message: "Could not load your wardrobe.",
-      items: []
-    };
-  }
+            subcategory: row.subcategory,
+            style: row.style,
+            pattern: row.pattern,
+            warmth: row.warmth,
+            formality: row.formality,
+            season: row.season,
+            confidence: row.classification_confidence,
+
+            imageDataUrl: row.image_data
+                ? `data:${row.image_format || "image/jpeg"};base64,${Buffer.from(row.image_data).toString("base64")}`
+                : null
+        }));
+
+        return {
+            success: true,
+            items
+        };
+
+    } catch (error) {
+        console.error("Load clothing error:", error);
+
+        return {
+            success: false,
+            message: "Could not load your wardrobe.",
+            items: []
+        };
+    }
+});
+
+ipcMain.handle("update-laundry-status", async (event, data) => {
+    try {
+        if (!currentUserId) {
+            return {
+                success: false,
+                message: "Please log in first."
+            };
+        }
+
+        const { id, laundryStatus } = data;
+
+        const validStatuses = ["To Wash", "Washing", "Clean"];
+
+        if (!validStatuses.includes(laundryStatus)) {
+            return {
+                success: false,
+                message: "Invalid laundry status."
+            };
+        }
+
+        const update = db.prepare(`
+            UPDATE clothing_items
+            SET laundry_status = ?
+            WHERE id = ? AND user_id = ?
+        `);
+
+        const result = update.run(
+            laundryStatus,
+            id,
+            currentUserId
+        );
+
+        if (result.changes === 0) {
+            return {
+                success: false,
+                message: "Clothing item not found."
+            };
+        }
+
+        console.log(
+            `Laundry status updated: item ${id} -> ${laundryStatus}`
+        );
+
+        return {
+            success: true,
+            message: "Laundry status updated successfully."
+        };
+
+    } catch (error) {
+        console.error("Update laundry status error:", error);
+
+        return {
+            success: false,
+            message: "Could not update laundry status."
+        };
+    }
 });
 
 ipcMain.handle("signup-user", async (event, userData) => {

@@ -1,99 +1,436 @@
-body {
-    font-family: 'Arial', sans-serif;
-    background-image: url('closet-background.jpg'); /* Add a fashion-themed background */
-    background-size: cover;
-    background-position: center;
-    display: flex;
-    height: 100vh;
-    margin: 0;
-    color: #333;
+
+/* ========================================
+   MY WARDROBE - KAWAII PIXEL LOGIN THEME
+   Baby Pink + 8-bit Aesthetic
+   ======================================== */
+
+/* Colour Palette */
+:root {
+    --baby-pink: #FFF0F5;
+    --light-pink: #FFDCE8;
+    --bubblegum-pink: #F49AB5;
+    --dusty-pink: #DF829C;
+    --dark-pink: #8B4059;
+    --pixel-black: #39232D;
+    --text-color: #694653;
+    --white: #FFFFFF;
+    --lavender: #E9DDF7;
 }
 
+/* ========================================
+   PAGE BACKGROUND
+   Keeps the original closet-background.jpg
+   ======================================== */
+
+body {
+    font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+
+    background-image:
+        linear-gradient(
+            rgba(255, 220, 234, 0.35),
+            rgba(255, 240, 245, 0.45)
+        ),
+        url("closet-background.jpg");
+
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    min-height: 100vh;
+    margin: 0;
+    padding: 30px 16px;
+    box-sizing: border-box;
+
+    color: var(--text-color);
+}
+
+/* ========================================
+   LOGIN CARD
+   ======================================== */
+
 .login-container {
-    background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white */
+    position: relative;
+
+    background-color: rgba(255, 240, 245, 0.96);
+
     padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     width: 350px;
-    height: 700px;
+    max-width: 100%;
+    min-height: 600px;
+    height: auto;
+
+    box-sizing: border-box;
     text-align: center;
+
+    border: 4px solid var(--pixel-black);
+    border-radius: 0;
+
+    box-shadow:
+        8px 8px 0 var(--pixel-black),
+        12px 12px 0 rgba(57, 35, 45, 0.25);
+}
+
+/* Decorative pixel corners */
+
+.login-container::before {
+    content: "♥";
+    position: absolute;
+
+    top: -22px;
+    left: -18px;
+
+    font-size: 30px;
+    color: var(--bubblegum-pink);
+
+    text-shadow:
+        2px 2px 0 var(--pixel-black),
+        4px 4px 0 var(--pixel-black);
+
+    transform: rotate(-12deg);
+}
+
+.login-container::after {
+    content: "✦";
+    position: absolute;
+
+    right: -18px;
+    bottom: -18px;
+
+    font-size: 30px;
+    color: var(--lavender);
+
+    -webkit-text-stroke: 1px var(--pixel-black);
+
+    text-shadow: 3px 3px 0 var(--pixel-black);
+}
+
+/* ========================================
+   LOGO
+   ======================================== */
+
+.logo {
+    margin-bottom: 20px;
 }
 
 .logo img {
     width: 200px;
+    max-width: 100%;
     height: auto;
+    image-rendering: auto;
 }
 
+/* ========================================
+   HEADINGS
+   ======================================== */
+
 h2 {
-    margin-bottom: 10px;
-    font-size: 24px;
-    color: #444;
+    margin: 10px 0;
+    font-size: 25px;
+    font-weight: 900;
+
+    color: var(--dark-pink);
+
+    text-transform: uppercase;
+    letter-spacing: 1px;
+
+    text-shadow: 2px 2px 0 var(--light-pink);
 }
+
+/* ========================================
+   PARAGRAPHS
+   ======================================== */
 
 p {
     margin-bottom: 20px;
+
     font-size: 14px;
-    color: #666;
+    line-height: 1.6;
+
+    color: var(--text-color);
 }
 
+/* ========================================
+   INPUT GROUPS
+   ======================================== */
+
 .input-group {
-    margin-bottom: 15px;
+    margin-bottom: 18px;
     text-align: left;
 }
 
+/* Labels */
+
 label {
     display: block;
-    margin-bottom: 5px;
-    font-size: 14px;
-    color: #555;
+    margin-bottom: 7px;
+
+    font-size: 13px;
+    font-weight: 800;
+
+    color: var(--dark-pink);
+    letter-spacing: 0.5px;
 }
+
+/* Text and Password Inputs */
 
 input[type="text"],
 input[type="password"] {
+    display: block;
+
     width: 100%;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 6px;
+    padding: 12px;
+
     box-sizing: border-box;
+
+    background-color: var(--white);
+    color: var(--pixel-black);
+
+    border: 3px solid var(--pixel-black);
+    border-radius: 0;
+
+    font-family: inherit;
     font-size: 14px;
+
+    outline: none;
+
+    box-shadow: 4px 4px 0 var(--light-pink);
+
+    transition:
+        background-color 0.2s ease,
+        box-shadow 0.2s ease;
 }
+
+/* Input Placeholder */
+
+input::placeholder {
+    color: #B58B9A;
+    opacity: 1;
+}
+
+/* Input Focus */
 
 input[type="text"]:focus,
 input[type="password"]:focus {
-    border-color: #d89850;
-    outline: none;
+    background-color: #FFF9FB;
+
+    border-color: var(--dark-pink);
+
+    box-shadow: 4px 4px 0 var(--bubblegum-pink);
 }
 
-/* Button */
+/* ========================================
+   BUTTONS
+   ======================================== */
+
 button {
+    display: block;
+
     width: 100%;
-    padding: 12px;
-    background-color: #e5a052;
-    border: none;
-    border-radius: 6px;
-    color: #fff;
-    font-size: 16px;
+    padding: 13px 12px;
+
+    margin-top: 10px;
+
+    background-color: var(--bubblegum-pink);
+    color: var(--pixel-black);
+
+    border: 3px solid var(--pixel-black);
+    border-radius: 0;
+
+    font-family: inherit;
+    font-size: 15px;
+    font-weight: 900;
+
+    text-transform: uppercase;
+    letter-spacing: 1px;
+
     cursor: pointer;
-    transition: background-color 0.3s ease;
+
+    box-shadow: 5px 5px 0 var(--pixel-black);
+
+    transition:
+        transform 0.1s ease,
+        box-shadow 0.1s ease,
+        background-color 0.2s ease;
 }
+
+/* Button Hover */
 
 button:hover {
-    background-color: #b57834; 
+    background-color: var(--light-pink);
+
+    transform: translate(2px, 2px);
+
+    box-shadow: 3px 3px 0 var(--pixel-black);
 }
 
-/* Sign Up Link */
+/* Button Click */
+
+button:active {
+    transform: translate(5px, 5px);
+
+    box-shadow: 0 0 0 var(--pixel-black);
+}
+
+/* Keyboard Focus */
+
+button:focus-visible,
+a:focus-visible {
+    outline: 3px dashed var(--dark-pink);
+    outline-offset: 4px;
+}
+
+/* ========================================
+   SIGN-UP LINK
+   ======================================== */
+
 .signup-link {
-    margin-top: 15px;
+    margin-top: 25px;
+
     font-size: 14px;
-    color: #666;
+    line-height: 1.8;
+
+    color: var(--text-color);
 }
 
 .signup-link a {
-    color: #e5a052; 
+    color: var(--dark-pink);
+
+    font-weight: 900;
     text-decoration: none;
-    font-weight: bold;
+
+    border-bottom: 2px dashed var(--bubblegum-pink);
+
+    transition:
+        color 0.2s ease,
+        border-color 0.2s ease;
 }
 
 .signup-link a:hover {
-    text-decoration: underline;
+    color: #C65379;
+
+    border-bottom-color: var(--dark-pink);
+}
+
+/* ========================================
+   RESPONSIVE DESIGN
+   ======================================== */
+
+@media (max-width: 480px) {
+    body {
+        padding: 25px 18px;
+        background-attachment: scroll;
+    }
+
+    .login-container {
+        width: 100%;
+        max-width: 350px;
+
+        padding: 25px 22px;
+
+        box-shadow:
+            6px 6px 0 var(--pixel-black);
+    }
+
+    .logo img {
+        width: 170px;
+    }
+
+    h2 {
+        font-size: 22px;
+    }
+
+    input[type="text"],
+    input[type="password"] {
+        padding: 11px;
+    }
+
+    button {
+        padding: 12px;
+    }
+}
+/* ===== Kawaii Pixel Notification ===== */
+
+.pixel-popup-overlay {
+    display: none;
+    position: fixed;
+    inset: 0;
+    z-index: 99999;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    background: rgba(57, 35, 45, 0.45);
+    box-sizing: border-box;
+}
+
+.pixel-popup-overlay.show {
+    display: flex;
+}
+
+.pixel-popup {
+    width: 100%;
+    max-width: 350px;
+    background: #FFF7FA;
+    border: 4px solid #39232D;
+    box-shadow: 7px 7px 0 #F49AB5;
+    text-align: center;
+    box-sizing: border-box;
+}
+
+.pixel-popup-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 14px;
+    background: #FFDCE8;
+    border-bottom: 4px solid #39232D;
+    color: #8B4059;
+    font-weight: bold;
+}
+
+.pixel-popup-header button {
+    background: transparent;
+    border: none;
+    color: #8B4059;
+    font-size: 24px;
+    cursor: pointer;
+}
+
+.pixel-popup-content {
+    padding: 20px;
+}
+
+.pixel-heart {
+    font-size: 42px;
+    color: #F49AB5;
+    text-shadow: 3px 3px 0 #39232D;
+}
+
+.pixel-popup-content h2 {
+    color: #8B4059;
+    margin: 10px 0;
+}
+
+.pixel-popup-content p {
+    color: #694653;
+    margin: 15px 0 22px;
+    overflow-wrap: anywhere;
+}
+
+#popupOk {
+    padding: 10px 30px;
+    background: #FFDCE8;
+    color: #8B4059;
+    border: 3px solid #39232D;
+    box-shadow: 4px 4px 0 #F49AB5;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+#popupOk:hover {
+    background: #F49AB5;
 }

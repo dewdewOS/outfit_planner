@@ -1,50 +1,228 @@
-body {
-  font-family: Arial, sans-serif;
-  text-align: center;
-  margin: 20px;
-  background-color: white; /* Keeping the original background */
-  color: black; /* Keeping text black */
+
+/* ==========================================
+   🎀 MY WARDROBE — PIXEL PINK THEME 🎀
+   Baby Pink | Retro Pixel Art | Kawaii
+   ========================================== */
+
+:root {
+    --baby-pink: #FFF0F5;
+    --light-pink: #FFDCE8;
+    --bubblegum: #F49AB5;
+    --dusty-pink: #DF829C;
+    --dark-pink: #8B4059;
+    --pixel-black: #39232D;
+    --text-color: #694653;
+    --white: #FFFFFF;
+    --lavender: #E9DDF7;
 }
+
+/* ---------- Main Page ---------- */
+
+body {
+    font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+    text-align: center;
+    margin: 0;
+    padding: 25px;
+    background-color: var(--baby-pink);
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+/* ---------- Headings ---------- */
+
+h1,
+h2,
+h3 {
+    color: var(--dark-pink);
+    font-weight: 800;
+}
+
+h1 {
+    font-size: 30px;
+    text-shadow: 3px 3px 0 var(--light-pink);
+}
+
+h2 {
+    font-size: 23px;
+}
+
+/* ---------- Header ---------- */
 
 .header {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 10px;
-  font-size: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    font-size: 16px;
+    color: var(--dark-pink);
+    margin-bottom: 25px;
 }
 
+/* ---------- Back Button ---------- */
+
 .back-button {
-  background-color: black; /* Keeping your button color */
-  color: white;
-  border: none;
-  padding: 8px 12px;
-  font-size: 13px;
-  cursor: pointer;
-  border-radius: 5px;
+    background-color: var(--bubblegum);
+    color: var(--pixel-black);
+    border: 3px solid var(--pixel-black);
+    padding: 10px 16px;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 0;
+    box-shadow: 4px 4px 0 var(--pixel-black);
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
 }
 
 .back-button:hover {
-  background-color: gray; /* Slight hover effect */
+    background-color: var(--light-pink);
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0 var(--pixel-black);
 }
 
-/* Dialogue Box Styling */
+.back-button:active {
+    transform: translate(4px, 4px);
+    box-shadow: none;
+}
+
+/* ---------- Dialogue Box ---------- */
+
 .dialogue-box {
-  background-color: beige; /* Beige background */
-  border: 3px solid #bca385; /* Brown border */
-  border-radius: 10px; /* Rounded corners */
-  padding: 30px;
-  width: 50%;
-  margin: 20px auto;
-  text-align: center;
-  box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.2);
+    position: relative;
+    background-color: var(--white);
+    border: 3px solid var(--pixel-black);
+    border-radius: 0;
+    padding: 30px;
+    width: min(50%, 650px);
+    margin: 25px auto;
+    text-align: center;
+    box-shadow: 6px 6px 0 var(--bubblegum);
+    box-sizing: border-box;
 }
 
-/* Ensure the weather text is properly styled and visible */
+/* Pixel-style top decoration */
+
+.dialogue-box::before {
+    content: "♥  ✦  ♥";
+    display: block;
+    color: var(--dusty-pink);
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 12px;
+    letter-spacing: 5px;
+}
+
+/* ---------- Weather and Recommendations ---------- */
+
 #weather,
 #recommendation {
-  font-size: 20px;
-  font-weight: bold;
-  color: black; /* Ensuring visibility */
-  margin: 10px 0;
+    font-size: 19px;
+    font-weight: bold;
+    color: var(--dark-pink);
+    margin: 15px 0;
+    line-height: 1.8;
+}
+
+/* ---------- General Buttons ---------- */
+
+button,
+input[type="button"],
+input[type="submit"] {
+    background-color: var(--bubblegum);
+    color: var(--pixel-black);
+    border: 3px solid var(--pixel-black);
+    border-radius: 0;
+    padding: 11px 18px;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    box-shadow: 4px 4px 0 var(--pixel-black);
+    transition: transform 0.1s ease, box-shadow 0.1s ease;
+}
+
+button:hover,
+input[type="button"]:hover,
+input[type="submit"]:hover {
+    background-color: var(--light-pink);
+    transform: translate(2px, 2px);
+    box-shadow: 2px 2px 0 var(--pixel-black);
+}
+
+button:active,
+input[type="button"]:active,
+input[type="submit"]:active {
+    transform: translate(4px, 4px);
+    box-shadow: none;
+}
+
+/* ---------- Input Fields ---------- */
+
+input,
+select,
+textarea {
+    max-width: 100%;
+    box-sizing: border-box;
+    padding: 11px 12px;
+    background-color: #FFFAFC;
+    color: var(--text-color);
+    border: 2px solid var(--dusty-pink);
+    border-radius: 0;
+    font-family: inherit;
+    font-size: 14px;
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+    outline: 3px solid var(--light-pink);
+    border-color: var(--dark-pink);
+}
+
+/* ---------- Links ---------- */
+
+a {
+    color: var(--dark-pink);
+    font-weight: bold;
+    text-decoration: none;
+}
+
+a:hover {
+    color: var(--dusty-pink);
+    text-decoration: underline;
+}
+
+/* ---------- Cute Selection Effect ---------- */
+
+::selection {
+    background-color: var(--light-pink);
+    color: var(--pixel-black);
+}
+
+/* ---------- Responsive Layout ---------- */
+
+@media (max-width: 700px) {
+    body {
+        padding: 15px;
+    }
+
+    .header {
+        gap: 10px;
+    }
+
+    .dialogue-box {
+        width: 100%;
+        padding: 20px;
+        box-shadow: 4px 4px 0 var(--bubblegum);
+    }
+
+    h1 {
+        font-size: 24px;
+    }
+
+    #weather,
+    #recommendation {
+        font-size: 16px;
+    }
 }

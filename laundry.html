@@ -1,25 +1,667 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Laundry Status</title>
-    <link rel="stylesheet" href="styles.css" />
-  </head>
-  <body>
-    <div class="header">
-      <button class="back-button" onclick="window.location.href='index.html'">
-        &lt; Back
-      </button>
-      <h1>Laundry Status</h1>
-    </div>
-    <div class="laundry-container">
-      <img
-        src="https://i.pinimg.com/736x/18/20/e8/1820e865edd6ca0dcbfcd4d9721b6f58.jpg"
-        alt="Laundry Basket"
-        class="laundry-image"
-      />
-      <p class="laundry-text">Nothing Pending !!</p>
-    </div>
-  </body>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Laundry Status ♡</title>
+
+    <link rel="stylesheet" href="styles.css">
+
+    <style>
+        /* Laundry Tracker — Baby Pink Pixel Theme */
+
+        .laundry-page {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 20px;
+            color: #694653;
+        }
+
+        .laundry-heading {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .laundry-heading h1 {
+            color: #8B4059;
+            font-size: 30px;
+        }
+
+        .laundry-heading p {
+            font-weight: bold;
+        }
+
+        .laundry-banner {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 20px;
+            padding: 20px;
+            margin-bottom: 25px;
+            background: #FFFFFF;
+            border: 3px solid #39232D;
+            box-shadow: 6px 6px 0 #F49AB5;
+        }
+
+        .laundry-banner img {
+            width: 110px;
+            height: 130px;
+            object-fit: cover;
+            border: 3px solid #DF829C;
+        }
+
+        .laundry-banner-text {
+            text-align: center;
+        }
+
+        .laundry-banner-text h2 {
+            margin: 5px 0;
+            color: #8B4059;
+        }
+
+        .laundry-banner-text p {
+            margin-bottom: 0;
+        }
+
+        /* Summary cards */
+
+        .laundry-stats {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 15px;
+            margin-bottom: 25px;
+        }
+
+        .laundry-stat {
+            padding: 18px 10px;
+            text-align: center;
+            background: #FFFFFF;
+            border: 3px solid #39232D;
+            box-shadow: 4px 4px 0 #F49AB5;
+        }
+
+        .laundry-stat .stat-icon {
+            display: block;
+            font-size: 26px;
+            margin-bottom: 8px;
+        }
+
+        .laundry-stat h3 {
+            margin: 5px 0;
+            font-size: 15px;
+        }
+
+        .laundry-stat p {
+            margin: 0;
+            font-size: 25px;
+            font-weight: bold;
+            color: #8B4059;
+        }
+
+        /* Progress section */
+
+        .laundry-progress {
+            background: #FFFFFF;
+            border: 3px solid #39232D;
+            box-shadow: 5px 5px 0 #F49AB5;
+            padding: 20px;
+            margin-bottom: 30px;
+        }
+
+        .laundry-progress h3 {
+            margin-top: 0;
+            color: #8B4059;
+        }
+
+        .progress-track {
+            width: 100%;
+            height: 24px;
+            background: #FFE1EB;
+            border: 2px solid #DF829C;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            width: 0%;
+            background: #F49AB5;
+            transition: width 0.3s ease;
+        }
+
+        #progressText {
+            text-align: right;
+            font-weight: bold;
+            margin-bottom: 0;
+        }
+
+        /* Clothing section */
+
+        .laundry-list-heading {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 15px;
+        }
+
+        .laundry-list-heading h2 {
+            color: #8B4059;
+        }
+
+        .laundry-filter {
+            padding: 10px;
+            background: #FFFFFF;
+            color: #694653;
+            border: 2px solid #DF829C;
+            font: inherit;
+        }
+
+        .laundry-items {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 20px;
+        }
+
+        .laundry-card {
+            min-width: 0;
+            background: #FFFFFF;
+            border: 3px solid #39232D;
+            box-shadow: 5px 5px 0 #F49AB5;
+            padding: 12px;
+            text-align: center;
+        }
+
+        .laundry-card img {
+            width: 100%;
+            height: 180px;
+            object-fit: contain;
+            background: #FFF0F5;
+            border: 2px solid #DF829C;
+        }
+
+        .laundry-card h3 {
+            font-size: 16px;
+            overflow-wrap: anywhere;
+            margin: 12px 0 5px;
+        }
+
+        .laundry-category {
+            font-size: 13px;
+            margin: 5px 0 12px;
+            color: #8B4059;
+        }
+
+        .laundry-card label {
+            display: block;
+            text-align: left;
+            font-weight: bold;
+            margin-bottom: 6px;
+        }
+
+        .laundry-card select {
+            width: 100%;
+            padding: 10px 5px;
+            background: #FFF0F5;
+            color: #694653;
+            border: 2px solid #DF829C;
+            font: inherit;
+            font-size: 14px;
+        }
+
+        .laundry-status-label {
+            display: inline-block;
+            margin-top: 12px;
+            padding: 5px 9px;
+            border: 2px solid #DF829C;
+            background: #FFE1EB;
+            font-size: 12px;
+            font-weight: bold;
+        }
+
+        .laundry-message {
+            text-align: center;
+            background: #FFFFFF;
+            border: 3px dashed #DF829C;
+            padding: 25px 15px;
+            margin: 20px 0;
+            line-height: 1.6;
+        }
+
+        .laundry-message .message-icon {
+            font-size: 35px;
+        }
+
+        .laundry-retry {
+            margin-top: 10px;
+            padding: 10px 18px;
+            background: #F49AB5;
+            color: #39232D;
+            border: 2px solid #39232D;
+            box-shadow: 3px 3px 0 #DF829C;
+            cursor: pointer;
+            font: inherit;
+            font-weight: bold;
+        }
+
+        .laundry-retry:hover {
+            background: #FFDCE8;
+        }
+
+        @media (max-width: 700px) {
+            .laundry-items {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+                gap: 12px;
+            }
+
+            .laundry-card {
+                padding: 8px;
+            }
+
+            .laundry-card img {
+                height: 140px;
+            }
+
+            .laundry-banner {
+                flex-direction: column;
+            }
+
+            .laundry-heading h1 {
+                font-size: 24px;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .laundry-page {
+                padding: 12px;
+            }
+
+            .laundry-stats {
+                gap: 8px;
+            }
+
+            .laundry-stat {
+                padding: 12px 5px;
+            }
+
+            .laundry-stat h3 {
+                font-size: 12px;
+            }
+
+            .laundry-items {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <button
+        class="back-button"
+        onclick="window.location.href='index.html'">
+        <span class="pixel-arrow">◀</span> Back
+    </button>
+
+    <main class="laundry-page">
+
+        <header class="laundry-heading">
+            <h1>♡ Laundry Status ♡</h1>
+            <p>Let's keep your wardrobe fresh and lovely! 🎀</p>
+        </header>
+
+        <!-- Laundry banner -->
+
+        <section class="laundry-banner">
+            <img
+                src="https://i.pinimg.com/736x/18/20/e8/1820e865edd6ca0dcbfcd4d9721b6f58.jpg"
+                alt="Laundry Basket">
+
+            <div class="laundry-banner-text">
+                <h2 id="laundryGreeting">Your Laundry Corner ♡</h2>
+                <p id="laundrySummary">
+                    Loading your clothes...
+                </p>
+            </div>
+        </section>
+
+        <!-- Summary cards -->
+
+        <section class="laundry-stats">
+
+            <div class="laundry-stat">
+                <span class="stat-icon">🧺</span>
+                <h3>To Wash</h3>
+                <p id="toWashCount">0</p>
+            </div>
+
+            <div class="laundry-stat">
+                <span class="stat-icon">🫧</span>
+                <h3>Washing</h3>
+                <p id="washingCount">0</p>
+            </div>
+
+            <div class="laundry-stat">
+                <span class="stat-icon">🎀</span>
+                <h3>Clean</h3>
+                <p id="cleanCount">0</p>
+            </div>
+
+        </section>
+
+        <!-- Laundry progress -->
+
+        <section class="laundry-progress">
+            <h3>♡ Fresh Wardrobe Progress</h3>
+
+            <div
+                class="progress-track"
+                role="progressbar"
+                aria-label="Clean clothing percentage"
+                aria-valuemin="0"
+                aria-valuemax="100"
+                aria-valuenow="0"
+                id="progressTrack">
+
+                <div
+                    class="progress-fill"
+                    id="progressFill">
+                </div>
+
+            </div>
+
+            <p id="progressText">0% Clean</p>
+        </section>
+
+        <!-- Clothing items -->
+
+        <section>
+            <div class="laundry-list-heading">
+                <h2>♡ My Laundry ♡</h2>
+
+                <select
+                    id="laundryFilter"
+                    class="laundry-filter"
+                    aria-label="Filter clothing by laundry status">
+
+                    <option value="All">All Clothes</option>
+                    <option value="To Wash">To Wash</option>
+                    <option value="Washing">Washing</option>
+                    <option value="Clean">Clean</option>
+
+                </select>
+            </div>
+
+            <div id="laundryItems" class="laundry-items">
+                <div class="laundry-message">
+                    <div class="message-icon">🧺</div>
+                    Loading your wardrobe...
+                </div>
+            </div>
+
+            <div
+                id="laundryMessage"
+                class="laundry-message"
+                hidden>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        const { ipcRenderer } = require("electron");
+
+        const laundryItems = document.getElementById("laundryItems");
+        const laundryMessage = document.getElementById("laundryMessage");
+        const laundryFilter = document.getElementById("laundryFilter");
+
+        let clothingItems = [];
+
+        async function loadLaundryItems() {
+            laundryItems.replaceChildren();
+            laundryMessage.hidden = true;
+
+            try {
+                const result = await ipcRenderer.invoke("get-clothing-items");
+
+                if (!result.success) {
+                    showMessage(
+                        "Oops! ♡",
+                        result.message || "Could not load your wardrobe."
+                    );
+                    return;
+                }
+
+                clothingItems = (result.items || []).map(item => ({
+                    ...item,
+                    laundryStatus: item.laundryStatus || "To Wash"
+                }));
+
+                updateLaundrySummary();
+                renderLaundryItems();
+
+            } catch (error) {
+                console.error("Load laundry error:", error);
+
+                showMessage(
+                    "Oh no! ♡",
+                    "Could not load your wardrobe. Please check the terminal."
+                );
+            }
+        }
+
+        function showMessage(title, message) {
+            laundryItems.replaceChildren();
+
+            laundryMessage.hidden = false;
+            laundryMessage.replaceChildren();
+
+            const icon = document.createElement("div");
+            icon.className = "message-icon";
+            icon.textContent = "🎀";
+
+            const heading = document.createElement("h3");
+            heading.textContent = title;
+
+            const paragraph = document.createElement("p");
+            paragraph.textContent = message;
+
+            laundryMessage.append(icon, heading, paragraph);
+        }
+
+        function updateLaundrySummary() {
+            const total = clothingItems.length;
+
+            const toWash = clothingItems.filter(
+                item => item.laundryStatus === "To Wash"
+            ).length;
+
+            const washing = clothingItems.filter(
+                item => item.laundryStatus === "Washing"
+            ).length;
+
+            const clean = clothingItems.filter(
+                item => item.laundryStatus === "Clean"
+            ).length;
+
+            document.getElementById("toWashCount").textContent = toWash;
+            document.getElementById("washingCount").textContent = washing;
+            document.getElementById("cleanCount").textContent = clean;
+
+            const percentage = total === 0
+                ? 0
+                : Math.round((clean / total) * 100);
+
+            document.getElementById("progressFill").style.width =
+                percentage + "%";
+
+            document.getElementById("progressTrack").setAttribute(
+                "aria-valuenow",
+                percentage
+            );
+
+            document.getElementById("progressText").textContent =
+                percentage + "% Clean";
+
+            const summary = document.getElementById("laundrySummary");
+            const greeting = document.getElementById("laundryGreeting");
+
+            if (total === 0) {
+                greeting.textContent = "Your Closet Is Waiting ♡";
+                summary.textContent = "Add some clothes to start tracking!";
+            } else if (clean === total) {
+                greeting.textContent = "Everything Is Fresh! ✨";
+                summary.textContent = "All your clothes are clean. Great job!";
+            } else {
+                greeting.textContent = "One Load at a Time ♡";
+                summary.textContent =
+                    `${total} clothing items · ${clean} clean`;
+            }
+        }
+
+        function renderLaundryItems() {
+            laundryItems.replaceChildren();
+
+            const filter = laundryFilter.value;
+
+            const filteredItems = clothingItems.filter(item =>
+                filter === "All" || item.laundryStatus === filter
+            );
+
+            if (clothingItems.length === 0) {
+                showMessage(
+                    "Your Wardrobe Is Empty ♡",
+                    "Add some clothing items to start tracking your laundry!"
+                );
+                return;
+            }
+
+            if (filteredItems.length === 0) {
+                showMessage(
+                    "Nothing Here! ♡",
+                    `You don't have any clothes marked "${filter}".`
+                );
+                return;
+            }
+
+            laundryMessage.hidden = true;
+
+            filteredItems.forEach(item => {
+                const card = document.createElement("article");
+                card.className = "laundry-card";
+
+                if (item.imageDataUrl) {
+                    const image = document.createElement("img");
+                    image.src = item.imageDataUrl;
+                    image.alt = item.name || "Clothing item";
+                    card.appendChild(image);
+                } else {
+                    const placeholder = document.createElement("div");
+                    placeholder.className = "laundry-message";
+                    placeholder.textContent = "♡ No image ♡";
+                    card.appendChild(placeholder);
+                }
+
+                const name = document.createElement("h3");
+                name.textContent = item.name || "Untitled Clothing";
+                card.appendChild(name);
+
+                const category = document.createElement("p");
+                category.className = "laundry-category";
+                category.textContent = item.category || "Uncategorized";
+                card.appendChild(category);
+
+                if (item.color) {
+                    const color = document.createElement("p");
+                    color.className = "laundry-category";
+                    color.textContent = "Color: " + item.color;
+                    card.appendChild(color);
+                }
+
+                const label = document.createElement("label");
+                label.textContent = "Laundry Status";
+                label.htmlFor = "laundry-status-" + item.id;
+                card.appendChild(label);
+
+                const select = document.createElement("select");
+                select.id = "laundry-status-" + item.id;
+
+                ["To Wash", "Washing", "Clean"].forEach(status => {
+                    const option = document.createElement("option");
+                    option.value = status;
+                    option.textContent = status;
+                    option.selected = item.laundryStatus === status;
+                    select.appendChild(option);
+                });
+
+                select.addEventListener("change", async () => {
+                    await updateItemStatus(item.id, select.value, select);
+                });
+
+                card.appendChild(select);
+
+                const statusLabel = document.createElement("span");
+                statusLabel.className = "laundry-status-label";
+                statusLabel.textContent = "♡ " + item.laundryStatus;
+                card.appendChild(statusLabel);
+
+                laundryItems.appendChild(card);
+            });
+        }
+
+        async function updateItemStatus(itemId, newStatus, selectElement) {
+            const item = clothingItems.find(item => item.id === itemId);
+
+            if (!item) return;
+
+            const previousStatus = item.laundryStatus;
+
+            selectElement.disabled = true;
+
+            try {
+                const result = await ipcRenderer.invoke(
+                    "update-laundry-status",
+                    {
+                        id: itemId,
+                        laundryStatus: newStatus
+                    }
+                );
+
+                if (!result.success) {
+                    selectElement.value = previousStatus;
+
+                    showMessage(
+                        "Couldn't Update! ♡",
+                        result.message || "Please try again."
+                    );
+                    return;
+                }
+
+                item.laundryStatus = newStatus;
+
+                updateLaundrySummary();
+                renderLaundryItems();
+
+            } catch (error) {
+                console.error("Update laundry status error:", error);
+
+                selectElement.value = previousStatus;
+
+                showMessage(
+                    "Oops! ♡",
+                    "Could not save the laundry status."
+                );
+
+            } finally {
+                selectElement.disabled = false;
+            }
+        }
+
+        laundryFilter.addEventListener("change", renderLaundryItems);
+
+        loadLaundryItems();
+    </script>
+
+</body>
 </html>

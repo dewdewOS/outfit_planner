@@ -4,300 +4,27 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add Clothing - My Wardrobe</title>
-
+    <title>My Wardrobe - Add Clothing</title>
     <link rel="stylesheet" href="camera.css">
 
-    <style>
-        * {
-            box-sizing: border-box;
-        }
-
-        body {
-            display: block;
-            min-height: 100vh;
-            margin: 0;
-            padding: 100px 20px 40px;
-            font-family: Arial, sans-serif;
-            background: #f4f4f9;
-            color: #333;
-        }
-
-        .header {
-            position: fixed;
-            z-index: 1000;
-            top: 0;
-            left: 0;
-            width: 100%;
-            min-height: 70px;
-            padding: 15px 20px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background: #e5a052;
-            color: white;
-        }
-
-        .header h1 {
-            position: static;
-            transform: none;
-            margin: 0;
-            font-size: 22px;
-            text-align: center;
-        }
-
-        .back-button {
-            padding: 10px;
-            margin: 0;
-            color: white;
-            background: transparent;
-            border: none;
-            cursor: pointer;
-        }
-
-        .page-container {
-            width: 100%;
-            max-width: 850px;
-            margin: 0 auto;
-        }
-
-        .panel {
-            padding: 22px;
-            margin-bottom: 22px;
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
-        }
-
-        h2 {
-            margin-top: 0;
-        }
-
-        .camera-controls,
-        .form-buttons {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 10px;
-            margin: 15px 0;
-        }
-
-        button {
-            padding: 11px 17px;
-            margin: 0;
-            border: none;
-            border-radius: 6px;
-            background: #86551e;
-            color: white;
-            font-size: 14px;
-            cursor: pointer;
-        }
-
-        button:hover:not(:disabled) {
-            background: #694016;
-        }
-
-        button:disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-        }
-
-        .upload-button {
-            display: inline-block;
-            padding: 11px 17px;
-            border-radius: 6px;
-            background: #86551e;
-            color: white;
-            cursor: pointer;
-            font-size: 14px;
-        }
-
-        .upload-button input {
-            display: none;
-        }
-
-        #cameraPreview,
-        #photoPreview {
-            display: none;
-            width: 100%;
-            max-width: 500px;
-            max-height: 420px;
-            object-fit: contain;
-            margin: 15px auto;
-            border-radius: 10px;
-            background: #eee;
-        }
-
-        #captureCanvas {
-            display: none;
-        }
-
-        #status {
-            padding: 12px;
-            margin: 15px 0;
-            border-radius: 6px;
-            background: #eee;
-            text-align: center;
-            overflow-wrap: anywhere;
-        }
-
-        #status.success {
-            color: #176b35;
-            background: #e5f6e9;
-        }
-
-        #status.error {
-            color: #9b1c1c;
-            background: #ffebeb;
-        }
-
-        #status.loading {
-            color: #75460d;
-            background: #fff2d9;
-        }
-
-        /*
-         * Keep the clothing form visible.
-         * This also overrides the browser's default hidden styling.
-         */
-        #clothingForm,
-        #clothingForm[hidden] {
-            display: block !important;
-            visibility: visible !important;
-            opacity: 1 !important;
-        }
-
-        #clothingForm {
-            width: 100%;
-            padding: 22px;
-            margin: 20px auto;
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
-        }
-
-        #clothingForm h2 {
-            margin-top: 0;
-        }
-
-        .hint {
-            color: #666;
-            line-height: 1.5;
-        }
-
-        .form-group {
-            display: block;
-            margin-bottom: 16px;
-        }
-
-        .form-group label {
-            display: block;
-            margin-bottom: 7px;
-            font-weight: bold;
-        }
-
-        .form-group input,
-        .form-group select {
-            display: block;
-            width: 100%;
-            min-height: 42px;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 6px;
-            background: white;
-            color: #333;
-            font-size: 15px;
-        }
-
-        .form-group input:focus,
-        .form-group select:focus {
-            outline: 2px solid #e5a052;
-            border-color: #86551e;
-        }
-
-        .save-button {
-            background: #287a45;
-            font-size: 15px;
-        }
-
-        .save-button:hover:not(:disabled) {
-            background: #1e6035;
-        }
-
-        #confidenceMessage {
-            color: #555;
-            font-size: 14px;
-        }
-
-        @media (max-width: 550px) {
-            body {
-                padding: 90px 12px 25px;
-            }
-
-            .header h1 {
-                font-size: 18px;
-            }
-
-            .panel,
-            #clothingForm {
-                padding: 15px;
-            }
-
-            .camera-controls button,
-            .form-buttons button {
-                width: 100%;
-            }
-        }
-    </style>
 </head>
 
 <body>
-    <header class="header">
-        <button type="button" id="backButton" class="back-button">
-            ← Back
+    <main class="container">
+        <button type="button" class="back-button" id="backButton">
+            <span class="pixel-arrow">◀</span> Back
         </button>
-        <h1>Add Clothing</h1>
-        <span aria-hidden="true" style="width: 50px;"></span>
-    </header>
 
-    <main class="page-container">
+        <h1>Add Clothing Item</h1>
 
-        <section class="panel">
-            <h2>Take or Upload a Photo</h2>
+        <p class="hint">
+            Take a photo or upload an existing image. The AI will analyse
+            the clothing and fill in the details for you.
+        </p>
 
-            <p>
-                Take a photo of your clothing item or upload an existing
-                image. AI will suggest the item's details.
-            </p>
-
-            <div class="camera-controls">
-                <button type="button" id="startCameraButton">
-                    Start Camera
-                </button>
-
-                <button type="button" id="capturePhotoButton" disabled>
-                    Capture Photo
-                </button>
-
-                <button type="button" id="stopCameraButton" disabled>
-                    Stop Camera
-                </button>
-
-                <label class="upload-button">
-                    Upload Photo
-                    <input
-                        type="file"
-                        id="photoFileInput"
-                        accept="image/*">
-                </label>
-
-                <button
-                    type="button"
-                    id="chooseAnotherButton"
-                    style="display: none;">
-                    Choose Another Photo
-                </button>
-            </div>
+        <!-- Camera section -->
+        <section class="section" id="cameraSection">
+            <h2>Take a Photo</h2>
 
             <video
                 id="cameraPreview"
@@ -308,23 +35,56 @@
 
             <canvas id="captureCanvas"></canvas>
 
-            <img
-                id="photoPreview"
-                alt="Selected clothing preview">
+            <div>
+                <button type="button" id="startCameraButton">
+                    Start Camera
+                </button>
 
-            <p id="status" role="status" aria-live="polite">
-                Start the camera or upload a photo to begin.
-            </p>
+                <button type="button" id="capturePhotoButton" disabled>
+                    Take Photo
+                </button>
+
+                <button
+                    type="button"
+                    id="stopCameraButton"
+                    class="secondary-button"
+                    disabled>
+                    Stop Camera
+                </button>
+            </div>
         </section>
 
-        <!-- The form is visible immediately and remains available
-             even if AI classification fails. -->
-        <form id="clothingForm" novalidate>
+        <!-- Upload section -->
+        <section class="section">
+            <h2>Or Upload a Photo</h2>
+
+            <button type="button" id="choosePhotoButton">
+                Choose Clothing Photo
+            </button>
+
+            <button
+                type="button"
+                id="chooseAnotherButton"
+                class="secondary-button"
+                style="display:none;">
+                Choose Another Photo
+            </button>
+
+            <img id="photoPreview" alt="Selected clothing photo">
+        </section>
+
+        <!-- Status -->
+        <div id="status" role="status" aria-live="polite">
+            Start the camera or choose a clothing photo to begin.
+        </div>
+
+        <!-- AI-generated and editable clothing details -->
+        <form id="clothingForm">
             <h2>Clothing Details</h2>
 
             <p class="hint">
-                AI-generated details will appear below. Review them and
-                correct anything inaccurate before saving.
+                AI-generated details will appear below. Check them and
+                correct anything that is inaccurate before saving.
             </p>
 
             <div class="form-group">
@@ -421,15 +181,10 @@
                 </select>
             </div>
 
-            <p id="confidenceMessage">
-                Take or upload a photo to generate AI suggestions.
-            </p>
+            <p id="confidenceMessage"></p>
 
             <div class="form-buttons">
-                <button
-                    type="submit"
-                    id="saveButton"
-                    class="save-button">
+                <button type="submit" id="saveButton" class="save-button">
                     Save to My Wardrobe
                 </button>
             </div>
@@ -439,51 +194,24 @@
     <script>
         const { ipcRenderer } = require("electron");
 
-        // --------------------------------------------------
-        // HTML ELEMENTS
-        // --------------------------------------------------
-
         const cameraPreview = document.getElementById("cameraPreview");
         const captureCanvas = document.getElementById("captureCanvas");
-
-        const startCameraButton =
-            document.getElementById("startCameraButton");
-        const capturePhotoButton =
-            document.getElementById("capturePhotoButton");
-        const stopCameraButton =
-            document.getElementById("stopCameraButton");
-        const chooseAnotherButton =
-            document.getElementById("chooseAnotherButton");
-        const photoFileInput =
-            document.getElementById("photoFileInput");
-
+        const startCameraButton = document.getElementById("startCameraButton");
+        const capturePhotoButton = document.getElementById("capturePhotoButton");
+        const stopCameraButton = document.getElementById("stopCameraButton");
+        const choosePhotoButton = document.getElementById("choosePhotoButton");
+        const chooseAnotherButton = document.getElementById("chooseAnotherButton");
         const photoPreview = document.getElementById("photoPreview");
         const clothingForm = document.getElementById("clothingForm");
         const statusElement = document.getElementById("status");
-        const confidenceMessage =
-            document.getElementById("confidenceMessage");
+        const confidenceMessage = document.getElementById("confidenceMessage");
         const saveButton = document.getElementById("saveButton");
         const backButton = document.getElementById("backButton");
-
-        // --------------------------------------------------
-        // STATE
-        // --------------------------------------------------
 
         let cameraStream = null;
         let imageToken = null;
         let classificationConfidence = null;
-        let classificationSubcategory = null;
         let isBusy = false;
-        let isSaving = false;
-        let operationId = 0;
-
-        // Ensure the form is visible on page load.
-        clothingForm.hidden = false;
-        clothingForm.style.display = "block";
-
-        // --------------------------------------------------
-        // STATUS
-        // --------------------------------------------------
 
         function setStatus(message, type = "") {
             statusElement.textContent = message;
@@ -493,16 +221,13 @@
         function setBusy(busy) {
             isBusy = busy;
 
-            startCameraButton.disabled = busy || !!cameraStream;
+            choosePhotoButton.disabled = busy;
+            chooseAnotherButton.disabled = busy;
+            startCameraButton.disabled = busy || Boolean(cameraStream);
             capturePhotoButton.disabled = busy || !cameraStream;
             stopCameraButton.disabled = busy || !cameraStream;
-            photoFileInput.disabled = busy;
-            chooseAnotherButton.disabled = busy;
+            saveButton.disabled = busy;
         }
-
-        // --------------------------------------------------
-        // FORM HELPERS
-        // --------------------------------------------------
 
         function fillField(id, value) {
             const field = document.getElementById(id);
@@ -516,33 +241,23 @@
             if (!textValue) return;
 
             if (field.tagName === "SELECT") {
-                const options = Array.from(field.options);
-                const match = options.find(
+                const matchingOption = Array.from(field.options).find(
                     option =>
-                        option.value.toLowerCase() === textValue.toLowerCase()
+                        option.value.toLowerCase() === textValue.toLowerCase() ||
+                        option.textContent.trim().toLowerCase() === textValue.toLowerCase()
                 );
 
-                if (match) {
-                    field.value = match.value;
+                if (matchingOption) {
+                    field.value = matchingOption.value;
                 } else {
                     console.warn(
-                        `AI value "${textValue}" is not a valid option for ${id}.`
+                        `AI value "${textValue}" has no matching option for ${id}.`
                     );
                 }
             } else {
                 field.value = textValue;
             }
         }
-
-        function clearClassificationState() {
-            classificationConfidence = null;
-            classificationSubcategory = null;
-            confidenceMessage.textContent = "";
-        }
-
-        // --------------------------------------------------
-        // STOP CAMERA
-        // --------------------------------------------------
 
         function stopCamera() {
             if (cameraStream) {
@@ -552,27 +267,20 @@
 
             cameraPreview.srcObject = null;
             cameraPreview.style.display = "none";
-
-            startCameraButton.disabled = isBusy;
             capturePhotoButton.disabled = true;
             stopCameraButton.disabled = true;
+            startCameraButton.disabled = false;
         }
-
-        // --------------------------------------------------
-        // START CAMERA
-        // --------------------------------------------------
 
         async function startCamera() {
             if (isBusy) return;
 
             try {
                 if (!navigator.mediaDevices?.getUserMedia) {
-                    throw new Error(
-                        "Camera access is unavailable. Upload a photo instead."
-                    );
+                    throw new Error("Camera access is not available.");
                 }
 
-                stopCamera();
+                if (cameraStream) stopCamera();
 
                 cameraStream = await navigator.mediaDevices.getUserMedia({
                     video: { facingMode: { ideal: "environment" } },
@@ -581,7 +289,6 @@
 
                 cameraPreview.srcObject = cameraStream;
                 cameraPreview.style.display = "block";
-
                 await cameraPreview.play();
 
                 startCameraButton.disabled = true;
@@ -597,90 +304,14 @@
                 stopCamera();
 
                 setStatus(
-                    "Could not start the camera. Check permissions or upload a photo instead.",
+                    "Could not start the camera. Check camera permissions, or upload a photo instead.",
                     "error"
                 );
             }
         }
 
-        // --------------------------------------------------
-        // CAPTURE PHOTO
-        // --------------------------------------------------
-
-        async function capturePhoto() {
-            if (isBusy || !cameraStream) return;
-
-            if (
-                !cameraPreview.videoWidth ||
-                !cameraPreview.videoHeight
-            ) {
-                setStatus(
-                    "The camera is not ready yet. Please wait a moment.",
-                    "error"
-                );
-                return;
-            }
-
-            captureCanvas.width = cameraPreview.videoWidth;
-            captureCanvas.height = cameraPreview.videoHeight;
-
-            const context = captureCanvas.getContext("2d");
-
-            context.drawImage(
-                cameraPreview,
-                0,
-                0,
-                captureCanvas.width,
-                captureCanvas.height
-            );
-
-            const imageDataUrl =
-                captureCanvas.toDataURL("image/jpeg", 0.9);
-
-            await processImageResult(
-                await ipcRenderer.invoke(
-                    "prepare-captured-clothing-image",
-                    imageDataUrl
-                )
-            );
-        }
-
-        // --------------------------------------------------
-        // UPLOAD PHOTO
-        // --------------------------------------------------
-
-        async function choosePhoto() {
-            if (isBusy) return;
-
-            try {
-                setBusy(true);
-                setStatus("Opening photo selection...");
-
-                const imageResult = await ipcRenderer.invoke(
-                    "select-clothing-image"
-                );
-
-                if (imageResult?.canceled) {
-                    setStatus("Photo selection cancelled.");
-                    return;
-                }
-
-                await processImageResult(imageResult);
-            } catch (error) {
-                console.error("Photo selection error:", error);
-
-                setStatus(
-                    "Could not select the photo. Please try again.",
-                    "error"
-                );
-            } finally {
-                setBusy(false);
-            }
-        }
-
-        // --------------------------------------------------
-        // PROCESS PHOTO AND CLASSIFY
-        // --------------------------------------------------
+        
+        
 
         async function processImageResult(imageResult) {
             if (!imageResult || !imageResult.success) {
@@ -688,8 +319,7 @@
                     setStatus("Photo selection cancelled.");
                 } else {
                     setStatus(
-                        imageResult?.message ||
-                        "Could not prepare the photo.",
+                        imageResult?.message || "Could not prepare the photo.",
                         "error"
                     );
                 }
@@ -710,31 +340,22 @@
                 typeof imageData !== "string" ||
                 !imageData.startsWith("data:image/")
             ) {
-                setStatus(
-                    "The photo preview could not be loaded.",
-                    "error"
-                );
+                setStatus("The photo preview could not be loaded.", "error");
                 console.error("Invalid image result:", imageResult);
                 return;
             }
 
-            const thisOperation = ++operationId;
-
             imageToken = imageResult.token;
-
             photoPreview.src = imageData;
             photoPreview.style.display = "block";
             chooseAnotherButton.style.display = "inline-block";
 
-            // Reset old values but keep the form visible.
             clothingForm.reset();
-            clearClassificationState();
-
-            clothingForm.hidden = false;
+            confidenceMessage.textContent = "";
+            classificationConfidence = null;
             clothingForm.style.display = "block";
 
-            setStatus("Analyzing your clothing image...", "loading");
-            setBusy(true);
+            setStatus("Analyzing your clothing image...");
 
             try {
                 const result = await ipcRenderer.invoke(
@@ -742,34 +363,29 @@
                     imageToken
                 );
 
-                if (thisOperation !== operationId) return;
-
-                console.log("Classification result:", result);
-
                 if (!result || result.success === false) {
                     setStatus(
                         result?.message ||
-                        "AI classification failed. Enter the details manually.",
+                        "AI classification failed. You can enter the details manually.",
                         "error"
                     );
                     return;
                 }
 
-                // Fill the fields returned by the existing classifier.
+                // Populate the form with the AI-detected attributes.
                 fillField(
                     "itemName",
                     result.name || result.subcategory || result.category
                 );
-
                 fillField("category", result.category);
                 fillField("color", result.color);
+                classificationSubcategory = result.subcategory || null;
                 fillField("style", result.style);
                 fillField("pattern", result.pattern);
                 fillField("warmth", result.warmth);
                 fillField("formality", result.formality);
                 fillField("season", result.season);
-
-                classificationSubcategory = result.subcategory || null;
+                
 
                 classificationConfidence =
                     result.confidence !== undefined &&
@@ -778,15 +394,10 @@
                         ? Number(result.confidence)
                         : null;
 
-                // Explicitly show the form after classification.
-                clothingForm.hidden = false;
-                clothingForm.style.display = "block";
-                clothingForm.style.visibility = "visible";
-
                 confidenceMessage.textContent =
                     classificationConfidence !== null
-                        ? `AI confidence: ${(classificationConfidence * 100).toFixed(1)}%. Please review the details.`
-                        : "AI suggestions generated. Please review the details.";
+                        ? `AI confidence: ${(classificationConfidence * 100).toFixed(1)}%`
+                        : "AI attributes generated. Please review them before saving.";
 
                 setStatus(
                     "Clothing analyzed! Review the details and save your item.",
@@ -794,12 +405,71 @@
                 );
             } catch (error) {
                 console.error("AI classification error:", error);
-
-                clothingForm.hidden = false;
-                clothingForm.style.display = "block";
-
                 setStatus(
-                    "Could not analyze the image. You can enter the details manually.",
+                    "Could not analyse the image. You can enter the details manually.",
+                    "error"
+                );
+            }
+        }
+
+        async function choosePhoto() {
+            if (isBusy) return;
+
+            setBusy(true);
+            setStatus("Opening photo selector...");
+
+            try {
+                const imageResult = await ipcRenderer.invoke(
+                    "select-clothing-image"
+                );
+
+                await processImageResult(imageResult);
+            } catch (error) {
+                console.error("Photo selection error:", error);
+                setStatus("Could not select or process the photo.", "error");
+            } finally {
+                setBusy(false);
+            }
+        }
+
+        async function capturePhoto() {
+            if (isBusy || !cameraStream) return;
+
+            if (!cameraPreview.videoWidth || !cameraPreview.videoHeight) {
+                setStatus("The camera is not ready yet. Please try again.", "error");
+                return;
+            }
+
+            setBusy(true);
+            setStatus("Capturing photo...");
+
+            try {
+                captureCanvas.width = cameraPreview.videoWidth;
+                captureCanvas.height = cameraPreview.videoHeight;
+
+                const context = captureCanvas.getContext("2d");
+
+                context.drawImage(
+                    cameraPreview,
+                    0,
+                    0,
+                    captureCanvas.width,
+                    captureCanvas.height
+                );
+
+                const photoDataUrl = captureCanvas.toDataURL("image/jpeg", 0.9);
+
+                const imageResult = await ipcRenderer.invoke(
+                    "prepare-captured-clothing-image",
+                    photoDataUrl
+                );
+
+                stopCamera();
+                await processImageResult(imageResult);
+            } catch (error) {
+                console.error("Photo capture error:", error);
+                setStatus(
+                    "Could not capture or analyse the photo. Please try again or upload an image.",
                     "error"
                 );
             } finally {
@@ -807,68 +477,35 @@
             }
         }
 
-        // --------------------------------------------------
-        // SAVE ITEM
-        // --------------------------------------------------
-
         clothingForm.addEventListener("submit", async event => {
             event.preventDefault();
 
-            if (isSaving) return;
-
-            const name =
-                document.getElementById("itemName").value.trim();
-            const category =
-                document.getElementById("category").value;
-            const color =
-                document.getElementById("color").value.trim();
-            const style =
-                document.getElementById("style").value;
-            const pattern =
-                document.getElementById("pattern").value.trim();
-            const warmth =
-                document.getElementById("warmth").value;
-            const formality =
-                document.getElementById("formality").value;
-            const season =
-                document.getElementById("season").value;
-
-            if (
-                !name || !category || !color || !style ||
-                !pattern || !warmth || !formality || !season
-            ) {
-                setStatus(
-                    "Please complete all clothing fields before saving.",
-                    "error"
-                );
-                return;
-            }
+            if (isBusy) return;
 
             if (!imageToken) {
                 setStatus(
-                    "Please take or upload a clothing photo before saving.",
+                    "Please take or upload a photo before saving.",
                     "error"
                 );
                 return;
             }
 
             const item = {
-                token: imageToken,
-                name,
-                category,
-                subcategory: classificationSubcategory,
-                color,
-                style,
-                pattern,
-                warmth: Number(warmth),
-                formality: Number(formality),
-                season,
-                confidence: classificationConfidence
-            };
+    token: imageToken,
+    name: document.getElementById("itemName").value.trim(),
+    category: document.getElementById("category").value,
+    color: document.getElementById("color").value.trim(),
+    subcategory: classificationSubcategory,
+    style: document.getElementById("style").value,
+    pattern: document.getElementById("pattern").value.trim(),
+    warmth: Number(document.getElementById("warmth").value),
+    formality: Number(document.getElementById("formality").value),
+    season: document.getElementById("season").value,
+    confidence: classificationConfidence
+};
 
-            isSaving = true;
-            saveButton.disabled = true;
-            saveButton.textContent = "Saving...";
+            setBusy(true);
+            setStatus("Saving clothing item...");
 
             try {
                 const result = await ipcRenderer.invoke(
@@ -879,66 +516,50 @@
                 console.log("Save result:", result);
 
                 if (!result || result.success === false) {
-                    throw new Error(
-                        result?.message || "Could not save the clothing item."
+                    setStatus(
+                        result?.message || "Could not save the clothing item.",
+                        "error"
                     );
+                    return;
                 }
 
-                setStatus(
-                    result.message || "Clothing item saved successfully!",
-                    "success"
-                );
+                setStatus("Clothing item saved to your wardrobe!", "success");
 
-                // Clear the previous image token after a successful save.
-                imageToken = null;
-                clearClassificationState();
-
+                // Clear the form after a successful save.
+                let cameraStream = null;
+let imageToken = null;
+let classificationConfidence = null;
+let classificationSubcategory = null;
+let isBusy = false;
                 clothingForm.reset();
+                clothingForm.style.display = "none";
                 photoPreview.removeAttribute("src");
                 photoPreview.style.display = "none";
                 chooseAnotherButton.style.display = "none";
-
-                confidenceMessage.textContent =
-                    "Upload another photo to add your next item.";
-
-                clothingForm.hidden = false;
-                clothingForm.style.display = "block";
+                confidenceMessage.textContent = "";
             } catch (error) {
                 console.error("Save clothing item error:", error);
-
                 setStatus(
-                    error.message || "Could not save the clothing item.",
+                    "An error occurred while saving. Check the console for details.",
                     "error"
                 );
             } finally {
-                isSaving = false;
-                saveButton.disabled = false;
-                saveButton.textContent = "Save to My Wardrobe";
+                setBusy(false);
             }
         });
-
-        // --------------------------------------------------
-        // BUTTON EVENT LISTENERS
-        // --------------------------------------------------
 
         startCameraButton.addEventListener("click", startCamera);
         capturePhotoButton.addEventListener("click", capturePhoto);
         stopCameraButton.addEventListener("click", stopCamera);
-        photoFileInput.addEventListener("change", choosePhoto);
-
-        chooseAnotherButton.addEventListener("click", () => {
-            photoFileInput.click();
-        });
+        choosePhotoButton.addEventListener("click", choosePhoto);
+        chooseAnotherButton.addEventListener("click", choosePhoto);
 
         backButton.addEventListener("click", () => {
             stopCamera();
             window.location.href = "index.html";
         });
 
-        // Release the camera when this page is unloaded.
         window.addEventListener("beforeunload", stopCamera);
-
-        console.log("Camera page initialized successfully.");
     </script>
 </body>
 </html>

@@ -1,107 +1,365 @@
-/* General Styles */
-body {
-    font-family: 'Arial', sans-serif;
-    background-image: url('closet-background.jpg'); /* Add a fashion-themed background */
-    background-size: cover;
-    background-position: center;
-    display: flex;
-    height: 100vh;
-    margin: 0;
-    color: #333;
+
+/* =========================================
+   MY CLOSET — KAWAII PIXEL SIGNUP 🎀
+   Baby Pink | Poppins | Black Pixel Borders
+========================================= */
+
+/* Reset */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-/* Signup Container */
+/* Theme colors */
+
+:root {
+  --pink-bg: #ffe6ef;
+  --pink-light: #fff5f8;
+  --pink-main: #f49ab5;
+  --pink-dark: #df829c;
+  --pink-hover: #ffb5cb;
+  --pink-deep: #8b4059;
+  --black: #000000;
+  --white: #ffffff;
+  --text: #694653;
+}
+
+/* Page background */
+
+body {
+  min-height: 100vh;
+  padding: 35px 20px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  position: relative;
+  overflow-x: hidden;
+
+  background-color: var(--pink-bg);
+
+  background-image:
+    radial-gradient(circle, var(--pink-main) 2px, transparent 2px),
+    radial-gradient(circle, var(--white) 3px, transparent 3px);
+
+  background-size: 35px 35px, 55px 55px;
+  background-position: 0 0, 20px 20px;
+
+  font-family: "Poppins", sans-serif;
+  color: var(--text);
+}
+
+/* Decorative hearts */
+
+body::before,
+body::after {
+  position: fixed;
+  z-index: 0;
+  pointer-events: none;
+
+  font-size: 55px;
+  color: var(--pink-dark);
+  opacity: 0.8;
+
+  text-shadow: 4px 4px 0 var(--white);
+}
+
+body::before {
+  content: "♥";
+  top: 8%;
+  left: 8%;
+}
+
+body::after {
+  content: "♡";
+  right: 8%;
+  bottom: 8%;
+}
+
+/* Main signup card */
+
 .signup-container {
-    background-color: rgba(255, 255, 255, 0.9); /* Semi-transparent white */
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    width: 350px;
-    height: 700px;
-    text-align: center;
+  position: relative;
+  z-index: 1;
+
+  width: 100%;
+  max-width: 470px;
+
+  padding: 32px 35px;
+
+  background: var(--pink-light);
+
+  border: 4px solid var(--black);
+  border-radius: 0;
+
+  box-shadow: 8px 8px 0 var(--black);
+
+  text-align: center;
 }
 
 /* Logo */
+
+.logo {
+  margin-bottom: 18px;
+}
+
 .logo img {
-    width: 200px; 
-    height: auto;
+  width: 110px;
+  height: 110px;
+
+  object-fit: cover;
+
+  background: var(--white);
+
+  border: 4px solid var(--black);
+  border-radius: 0;
+
+  box-shadow: 5px 5px 0 var(--black);
 }
 
 /* Heading */
-h2 {
-    margin-bottom: 10px;
-    font-size: 24px;
-    color: #444;
+
+.signup-container h2 {
+  margin-bottom: 12px;
+
+  color: var(--pink-deep);
+
+  font-size: 25px;
+  line-height: 1.4;
+  font-weight: 800;
+
+  text-transform: uppercase;
+  letter-spacing: 1px;
 }
 
-/* Paragraph */
-p {
-    margin-bottom: 20px;
-    font-size: 14px;
-    color: #666;
+.signup-container > p {
+  margin-bottom: 25px;
+
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.8;
 }
 
-/* Input Fields */
+/* Signup form */
+
+#signupForm {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+
+  text-align: left;
+}
+
 .input-group {
-    margin-bottom: 15px;
-    text-align: left;
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
 }
 
-label {
-    display: block;
-    margin-bottom: 5px;
-    font-size: 14px;
-    color: #555;
+/* Input labels */
+
+.input-group label {
+  color: var(--pink-deep);
+
+  font-size: 14px;
+  font-weight: 700;
 }
 
-input[type="text"],
-input[type="email"],
-input[type="password"] {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 6px;
-    box-sizing: border-box;
-    font-size: 14px;
+/* Input boxes */
+
+.input-group input {
+  display: block;
+  width: 100%;
+  min-height: 52px;
+
+  padding: 13px 14px;
+
+  font-family: "Poppins", sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+
+  color: var(--text);
+  background: var(--white);
+
+  /* Always black borders */
+
+  border: 3px solid var(--black) !important;
+  border-radius: 0;
+
+  outline: none;
+
+  box-shadow: 4px 4px 0 var(--pink-main);
+
+  transition:
+    box-shadow 0.2s ease,
+    background-color 0.2s ease;
 }
 
-input[type="text"]:focus,
-input[type="email"]:focus,
-input[type="password"]:focus {
-    border-color: #e5a052; 
-    outline: none;
+/* Placeholder text */
+
+.input-group input::placeholder {
+  color: #bd8b9b;
+  opacity: 1;
 }
 
-/* Button */
-button {
-    width: 100%;
-    padding: 12px;
-    background-color: #e5a052; 
-    border: none;
-    border-radius: 6px;
-    color: #fff;
-    font-size: 16px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
+/* Focused input */
+
+.input-group input:focus {
+  color: var(--text);
+  background: #fffafd;
+
+  /* Keep the border black even when selected */
+
+  border-color: var(--black) !important;
+
+  box-shadow: 5px 5px 0 var(--pink-main);
 }
 
-button:hover {
-    background-color: #b57834; 
+/* Signup button */
+
+#signupForm button[type="submit"] {
+  width: 100%;
+
+  margin-top: 8px;
+  padding: 15px 12px;
+
+  font-family: "Poppins", sans-serif;
+  font-size: 15px;
+  font-weight: 800;
+
+  letter-spacing: 1px;
+  text-transform: uppercase;
+
+  color: var(--black);
+  background: var(--pink-main);
+
+  border: 3px solid var(--black);
+  border-radius: 0;
+
+  box-shadow: 5px 5px 0 var(--black);
+
+  cursor: pointer;
+
+  transition:
+    transform 0.15s ease,
+    box-shadow 0.15s ease,
+    background-color 0.15s ease;
 }
 
-/* Login Link */
+/* Button hover */
+
+#signupForm button[type="submit"]:hover {
+  background: var(--pink-hover);
+
+  transform: translate(2px, 2px);
+
+  box-shadow: 3px 3px 0 var(--black);
+}
+
+/* Button press */
+
+#signupForm button[type="submit"]:active {
+  transform: translate(5px, 5px);
+  box-shadow: none;
+}
+
+/* Button while submitting */
+
+#signupForm button[type="submit"]:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+
+  transform: none;
+
+  box-shadow: 5px 5px 0 var(--black);
+}
+
+/* Login link section */
+
 .login-link {
-    margin-top: 15px;
-    font-size: 14px;
-    color: #666;
+  margin-top: 24px;
+  padding-top: 18px;
+
+  border-top: 2px dashed var(--pink-dark);
+}
+
+.login-link p {
+  font-size: 13px;
+  font-weight: 400;
+  line-height: 1.8;
 }
 
 .login-link a {
-    color: #e5a052; 
-    text-decoration: none;
-    font-weight: bold;
+  color: var(--pink-deep);
+
+  font-weight: 700;
+  text-decoration: none;
+
+  border-bottom: 2px solid var(--black);
+
+  transition:
+    color 0.2s ease,
+    background-color 0.2s ease;
 }
 
 .login-link a:hover {
-    text-decoration: underline;
+  color: var(--black);
+  background: #ffe0eb;
+}
+
+/* Responsive design */
+
+@media (max-width: 500px) {
+  body {
+    padding: 25px 18px;
+  }
+
+  .signup-container {
+    padding: 25px 22px;
+
+    box-shadow: 6px 6px 0 var(--black);
+  }
+
+  .signup-container h2 {
+    font-size: 21px;
+  }
+
+  .signup-container > p {
+    font-size: 12px;
+  }
+
+  .logo img {
+    width: 90px;
+    height: 90px;
+  }
+
+  .input-group label {
+    font-size: 13px;
+  }
+
+  .input-group input {
+    min-height: 48px;
+    padding: 11px 10px;
+    font-size: 13px;
+  }
+
+  #signupForm button[type="submit"] {
+    font-size: 14px;
+  }
+
+  body::before,
+  body::after {
+    font-size: 35px;
+  }
+}
+
+/* Short screens */
+
+@media (max-height: 750px) {
+  body {
+    align-items: flex-start;
+  }
 }

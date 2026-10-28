@@ -1,28 +1,78 @@
+
+/* =========================================
+   MY WARDROBE - KAWAII PIXEL THEME
+   Baby Pink • 8-bit • Retro Cute
+   ========================================= */
+
+:root {
+  --baby-pink: #FFF0F5;
+  --light-pink: #FFDCE8;
+  --bubblegum-pink: #F49AB5;
+  --dusty-pink: #DF829C;
+  --dark-pink: #8B4059;
+  --pixel-black: #39232D;
+  --text-color: #694653;
+  --white: #FFFFFF;
+  --lavender: #E9DDF7;
+  --soft-pink: #FFF9FB;
+}
+
+/* =========================================
+   GENERAL PAGE STYLES
+   ========================================= */
+
 body {
-  font-family: Arial, sans-serif;
+  font-family: "Trebuchet MS", "Segoe UI", sans-serif;
   margin: 0;
   padding: 0;
-  background-color: #f8f8f8;
+  background-color: var(--baby-pink);
+  background-image: radial-gradient(
+    var(--bubblegum-pink) 1.5px,
+    transparent 1.5px
+  );
+  background-size: 22px 22px;
+  color: var(--text-color);
 }
+
+/* Headings */
+
+h1,
+h2,
+h3 {
+  color: var(--dark-pink);
+  font-weight: 900;
+  text-shadow: 2px 2px 0 var(--light-pink);
+}
+
+/* =========================================
+   MAIN APPLICATION CONTAINER
+   ========================================= */
 
 .app-container {
   width: 100%;
   max-width: 1500px;
   min-height: 100vh;
   margin: auto;
-  background: white;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  border-radius: 10px;
+  background: var(--soft-pink);
+  border: 3px solid var(--pixel-black);
+  box-shadow: 7px 7px 0 var(--pixel-black);
+  border-radius: 0;
   overflow: hidden;
 }
+
+/* =========================================
+   HEADER
+   ========================================= */
 
 header {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  flex-wrap: wrap;
+  gap: 15px;
   padding: 25px;
-  background: #fdead4;
-  border-bottom: 1px solid #ddd;
+  background: var(--light-pink);
+  border-bottom: 4px solid var(--pixel-black);
 }
 
 .profile {
@@ -33,41 +83,64 @@ header {
 .profile img {
   width: 60px;
   height: 60px;
-  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid var(--pixel-black);
+  border-radius: 0;
   margin-right: 10px;
 }
+
+/* =========================================
+   TABS
+   ========================================= */
 
 .tabs {
   display: flex;
   justify-content: space-around;
-  background: #fff;
-  padding: 10px 0;
+  flex-wrap: wrap;
+  gap: 8px;
+  background: var(--white);
+  padding: 12px 8px;
+  border-bottom: 3px solid var(--pixel-black);
 }
 
 .tabs button {
-  border: none;
-  background: none;
-  font-size: 16px;
-  padding: 5px 10px;
+  border: 2px solid transparent;
+  background: transparent;
+  color: var(--dark-pink);
+  font-family: inherit;
+  font-size: 15px;
+  font-weight: bold;
+  padding: 8px 12px;
   cursor: pointer;
 }
 
-.tabs .active {
-  font-weight: bold;
-  border-bottom: 2px solid black;
+.tabs button:hover {
+  background: var(--light-pink);
+  border: 2px solid var(--pixel-black);
 }
 
+.tabs .active {
+  font-weight: 900;
+  background: var(--light-pink);
+  border: 2px solid var(--pixel-black);
+  box-shadow: 3px 3px 0 var(--bubblegum-pink);
+}
+
+/* =========================================
+   CLOTHES SECTION
+   ========================================= */
+
 .clothes-section {
-  padding: 15px;
-  max-height: 500px; /* Adjust based on item size */
-  overflow-y: auto; /* Enable scrolling */
+  padding: 20px;
+  max-height: 500px;
+  overflow-y: auto;
 }
 
 .clothes-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr); /* Keep 2 columns */
-  gap: 10px;
-  margin-top: 10px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+  margin-top: 15px;
   text-align: left;
 }
 
@@ -75,127 +148,133 @@ header {
   display: flex;
   flex-direction: column;
   align-items: center;
+  min-width: 0;
+  padding: 8px;
+  background: var(--white);
+  border: 3px solid var(--pixel-black);
+  box-shadow: 4px 4px 0 var(--light-pink);
 }
 
 .clothes-item {
   width: 100%;
   height: 200px;
-  background: #ddd;
-  border-radius: 5px;
+  background: var(--light-pink);
+  border: 2px solid var(--pixel-black);
+  border-radius: 0;
+  overflow: hidden;
 }
 
 .clothes-item img {
   width: 100%;
-  height: 200px; /* Adjust if needed */
-
-  border-radius: 5px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 0;
 }
 
 .clothes-box p {
-  margin-top: 5px;
+  margin-top: 8px;
   font-size: 14px;
   font-weight: bold;
-  color: black;
+  color: var(--dark-pink);
+  text-align: center;
 }
+
+/* =========================================
+   FOOTER
+   ========================================= */
 
 footer {
   display: flex;
   justify-content: space-around;
   align-items: center;
-  padding: 10px;
-  background: #fff;
-  border-top: 1px solid #ddd;
+  gap: 10px;
+  padding: 12px;
+  background: var(--light-pink);
+  border-top: 3px solid var(--pixel-black);
 }
+
+/* =========================================
+   PLUS BUTTON
+   ========================================= */
 
 .plus-button {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  border: none;
-  background: #723d00;
-  color: white;
-  font-size: 20px;
+  width: 44px;
+  height: 44px;
+  padding: 0;
+  border: 3px solid var(--pixel-black);
+  border-radius: 0;
+  background: var(--bubblegum-pink);
+  color: var(--pixel-black);
+  font-size: 25px;
+  font-weight: 900;
   cursor: pointer;
+  box-shadow: 4px 4px 0 var(--pixel-black);
 }
 
-/* ALL CLOTHES PAGE */
+.plus-button:hover {
+  background: var(--lavender);
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 var(--pixel-black);
+}
+
+/* =========================================
+   ALL CLOTHES PAGE
+   ========================================= */
+
 .all-clothes-container {
+  width: 100%;
   max-width: 500px;
   margin: auto;
   padding: 20px;
-  background: white;
+  box-sizing: border-box;
+  background: var(--soft-pink);
+  min-height: 100vh;
 }
 
+/* Back Button */
+
 .back-button {
-  background: #ddd;
-  border: none;
+  background: var(--bubblegum-pink);
+  color: var(--pixel-black);
+  border: 3px solid var(--pixel-black);
+  border-radius: 0;
   padding: 10px 15px;
-  font-size: 16px;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 900;
   cursor: pointer;
-  border-radius: 5px;
+  box-shadow: 4px 4px 0 var(--pixel-black);
+  transition: transform 0.1s ease, box-shadow 0.1s ease;
 }
 
 .back-button:hover {
-  background: #bbb;
+  background: var(--light-pink);
+  transform: translate(2px, 2px);
+  box-shadow: 2px 2px 0 var(--pixel-black);
 }
+
+/* =========================================
+   ALL CLOTHES GRID
+   ========================================= */
 
 .allclothes-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 15px;
 }
 
-.item {
-  width: 100%;
-  height: 200px;
-  background: #ddd;
-  border-radius: 5px;
-}
+/* Individual Clothing Items */
 
-/* SHIRTS PAGE */
-.shirts-container {
-  max-width: 500px;
-  margin: auto;
-  padding: 20px;
-  background: white;
-}
-
-.shirts-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
-}
-
-/* PANTS PAGE */
-
-.pants-container {
-  max-width: 500px;
-  margin: auto;
-  padding: 20px;
-  background: white;
-}
-
-.pants-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 10px;
-}
-
-/* HEART BUTTON */
-
-/* Grid Layout */
-.allclothes-grid {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr); /* 2 items per row */
-  gap: 10px;
-}
-
-/* Individual items */
 .item {
   position: relative;
-  background: #e0e0e0;
+  width: 100%;
   height: 200px;
-  border-radius: 10px;
+  box-sizing: border-box;
+  background: var(--light-pink);
+  border: 3px solid var(--pixel-black);
+  border-radius: 0;
+  box-shadow: 4px 4px 0 var(--bubblegum-pink);
   overflow: hidden;
   display: flex;
   justify-content: center;
@@ -208,64 +287,137 @@ footer {
   object-fit: cover;
 }
 
-/* Heart Button */
+/* =========================================
+   SHIRTS PAGE
+   ========================================= */
+
+.shirts-container {
+  width: 100%;
+  max-width: 500px;
+  margin: auto;
+  padding: 20px;
+  box-sizing: border-box;
+  background: var(--soft-pink);
+}
+
+.shirts-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+/* =========================================
+   PANTS PAGE
+   ========================================= */
+
+.pants-container {
+  width: 100%;
+  max-width: 500px;
+  margin: auto;
+  padding: 20px;
+  box-sizing: border-box;
+  background: var(--soft-pink);
+}
+
+.pants-grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 14px;
+}
+
+/* =========================================
+   HEART / FAVOURITES BUTTON
+   ========================================= */
+
 .heart-button {
   position: absolute;
-  top: 10px;
-  right: 10px;
-  background: none;
-  border: none;
-  font-size: 24px;
+  top: 8px;
+  right: 8px;
+  z-index: 2;
+  background: var(--white);
+  border: 2px solid var(--pixel-black);
+  border-radius: 0;
+  padding: 5px 8px;
+  font-size: 23px;
   cursor: pointer;
-  color: black;
-  transition: color 0.3s ease;
+  color: var(--dark-pink);
+  box-shadow: 2px 2px 0 var(--pixel-black);
+  transition: transform 0.1s ease;
 }
 
-/* Filled heart */
+.heart-button:hover {
+  transform: scale(1.08);
+}
+
 .heart-button.active {
-  color: red;
+  color: #E04478;
 }
 
-/* Bottom Navigation */
+/* =========================================
+   BOTTOM NAVIGATION
+   ========================================= */
+
 .footer {
   display: flex;
   justify-content: space-around;
-  padding: 10px;
-  background: white;
-  border-top: 1px solid #ddd;
+  align-items: center;
+  gap: 8px;
+  padding: 12px;
+  box-sizing: border-box;
+  background: var(--light-pink);
+  border-top: 3px solid var(--pixel-black);
   position: fixed;
   bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
   width: 100%;
   max-width: 500px;
+  z-index: 100;
 }
 
-/* Style for buttons */
 .nav-btn {
-  border: none;
-  background: none;
+  border: 2px solid transparent;
+  background: transparent;
   font-size: 24px;
   cursor: pointer;
-  color: #723d00; /* Ensures black icons */
+  color: var(--dark-pink);
+  padding: 5px;
 }
 
-/* Middle Plus Button */
-.add-btn {
-  font-size: 28px;
-  background: #723d00;
-  color: white;
-  padding: 10px 15px;
-  border-radius: 50%;
+.nav-btn:hover {
+  background: var(--white);
+  border: 2px solid var(--pixel-black);
 }
 
-/* If using SVGs */
 .nav-btn img {
   width: 24px;
   height: 24px;
+  object-fit: contain;
 }
 
 .nav-btn i {
   font-size: 24px;
 }
+
+/* Middle Add Button */
+
+.add-btn {
+  font-size: 28px;
+  background: var(--bubblegum-pink);
+  color: var(--pixel-black);
+  padding: 8px 14px;
+  border: 3px solid var(--pixel-black);
+  border-radius: 0;
+  box-shadow: 3px 3px 0 var(--pixel-black);
+}
+
+.add-btn:hover {
+  background: var(--lavender);
+}
+
+/* =========================================
+   LAUNDRY PAGE
+   ========================================= */
 
 .laundry-container {
   display: flex;
@@ -274,64 +426,333 @@ footer {
   align-items: center;
   width: 80%;
   max-width: 300px;
+  margin: auto;
   padding: 20px;
   text-align: center;
-  border-radius: 10px;
+  background: var(--white);
+  border: 3px solid var(--pixel-black);
+  border-radius: 0;
+  box-shadow: 5px 5px 0 var(--bubblegum-pink);
 }
 
 .laundry-image {
   width: 200px;
+  max-width: 100%;
   height: auto;
 }
 
 .laundry-text {
   font-size: 20px;
   font-weight: bold;
-  color: #444;
+  color: var(--dark-pink);
   margin-top: 10px;
 }
 
+/* =========================================
+   CREATE OUTFIT PAGE
+   ========================================= */
+
 .outfit-container {
   display: flex;
-  flex-direction: column; /* Stack items vertically */
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  gap: 20px;
+  min-height: 100vh;
+  gap: 16px;
+  padding: 70px 20px 30px;
+  box-sizing: border-box;
 }
+
+/* Outfit Image Boxes */
 
 .box {
   width: 150px;
-  height: 180px;
-  background-color: #ddd;
-  border-radius: 15px;
+  height: 150px;
+  flex-shrink: 0;
+  background-color: var(--white);
+  border: 4px solid var(--pixel-black);
+  border-radius: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-}
-
-.symbol {
-  font-size: 30px;
-  font-weight: bold;
-  color: #444;
-}
-
-.box {
-  width: 150px; /* Box size */
-  height: 150px; /* Make it square for better fit */
-  background-color: #ddd;
-  border-radius: 15px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-  overflow: hidden; /* Prevents overflow */
+  box-shadow: 5px 5px 0 var(--bubblegum-pink);
+  overflow: hidden;
 }
 
 .box img {
-  width: 100%; /* Make image fill the box */
-  height: 100%; /* Maintain aspect ratio */
-  object-fit: cover; /* Ensures the image covers the whole box without stretching */
-  border-radius: 15px; /* Match box corners */
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0;
+}
+
+/* Plus and Equals Symbols */
+
+.symbol {
+  font-size: 30px;
+  font-weight: 900;
+  color: var(--dark-pink);
+  text-shadow: 2px 2px 0 var(--light-pink);
+}
+
+/* =========================================
+   GENERAL BUTTON INTERACTIONS
+   ========================================= */
+
+button:focus-visible,
+a:focus-visible {
+  outline: 3px dashed var(--dark-pink);
+  outline-offset: 3px;
+}
+
+/* =========================================
+   RESPONSIVE DESIGN
+   ========================================= */
+
+@media (max-width: 480px) {
+  .app-container {
+    border-width: 2px;
+    box-shadow: 4px 4px 0 var(--pixel-black);
+  }
+
+  header {
+    padding: 16px;
+  }
+
+  .clothes-section {
+    padding: 12px;
+  }
+
+  .clothes-grid,
+  .allclothes-grid,
+  .shirts-grid,
+  .pants-grid {
+    gap: 10px;
+  }
+
+  .clothes-item,
+  .clothes-item img,
+  .item {
+    height: 160px;
+  }
+
+  .all-clothes-container,
+  .shirts-container,
+  .pants-container {
+    padding: 15px;
+  }
+
+  .box {
+    width: 130px;
+    height: 130px;
+  }
+
+  .outfit-container {
+    gap: 12px;
+  }
+}
+/* ===== Kawaii All Outfits Page ===== */
+
+.all-clothes-container {
+    min-height: 100vh;
+    padding: 20px;
+    box-sizing: border-box;
+    background-color: #FFF7FA;
+}
+
+.all-clothes-container .header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    flex-wrap: wrap;
+
+    padding: 18px;
+    margin-bottom: 15px;
+
+    background-color: #FFDCE8;
+    border: 3px solid #39232D;
+    box-shadow: 5px 5px 0 #F49AB5;
+}
+
+.all-clothes-container .header h1 {
+    margin: 0;
+    color: #8B4059;
+    font-size: 25px;
+    text-align: center;
+}
+
+.all-clothes-container .back-button {
+    padding: 10px 14px;
+    background-color: #FFF0F5;
+    color: #8B4059;
+    border: 3px solid #39232D;
+    box-shadow: 3px 3px 0 #F49AB5;
+
+    font-family: inherit;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.all-clothes-container .back-button:hover {
+    background-color: #F49AB5;
+    transform: translate(-1px, -1px);
+}
+
+.wardrobe-description {
+    margin: 25px 0;
+    color: #8B4059;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+}
+
+#savedClothesGrid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 18px;
+    margin-top: 20px;
+}
+
+#savedClothesGrid > p {
+    grid-column: 1 / -1;
+    text-align: center;
+    color: #8B4059;
+}
+
+@media (max-width: 400px) {
+    .all-clothes-container {
+        padding: 12px;
+    }
+
+    .all-clothes-container .header h1 {
+        font-size: 20px;
+    }
+
+    #savedClothesGrid {
+        gap: 12px;
+    }
+}
+/* ===== My Wardrobe: Clothing Card Layout ===== */
+
+#savedClothesGrid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 16px;
+    padding: 12px;
+    align-items: start;
+}
+
+/* Individual clothing card */
+#savedClothesGrid .item {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+
+    min-width: 0;
+    overflow: hidden;
+    padding: 8px;
+
+    background: #FFF7FA;
+    border: 3px solid #39232D;
+    box-shadow: 4px 4px 0 #F49AB5;
+
+    box-sizing: border-box;
+    text-align: center;
+}
+
+/* Clothing image */
+#savedClothesGrid .item img {
+    display: block;
+
+    width: 100%;
+    height: 145px;
+
+    object-fit: contain;
+    object-position: center;
+
+    background: #FFE5EE;
+    border: 2px solid #39232D;
+
+    box-sizing: border-box;
+}
+
+/* Clothing name */
+#savedClothesGrid .item .item-name {
+    display: block;
+    width: 100%;
+
+    margin: 10px 0 5px;
+    padding: 0;
+
+    color: #8B4059;
+    font-size: 14px;
+    font-weight: bold;
+
+    overflow-wrap: anywhere;
+    line-height: 1.4;
+
+    box-sizing: border-box;
+}
+
+/* Category and color */
+#savedClothesGrid .item .sample-label {
+    display: block;
+    width: 100%;
+
+    margin: 3px 0;
+    padding: 0;
+
+    color: #694653;
+    font-size: 12px;
+
+    overflow-wrap: anywhere;
+    line-height: 1.4;
+
+    box-sizing: border-box;
+}
+
+/* Hover effect */
+#savedClothesGrid .item:hover {
+    transform: translateY(-3px);
+    box-shadow: 5px 7px 0 #F49AB5;
+}
+
+/* Smaller Electron windows */
+@media (max-width: 350px) {
+    #savedClothesGrid {
+        grid-template-columns: 1fr;
+    }
+
+    #savedClothesGrid .item img {
+        height: 200px;
+    }
+}
+/* ===== Pixel Pink Back Arrows ===== */
+
+.back-button {
+    color: #C94F7C !important;
+    background-color: #FFF0F5 !important;
+    border: 3px solid #39232D !important;
+    box-shadow: 4px 4px 0 #E58BAA !important;
+    font-weight: bold;
+}
+
+/* Style the arrow separately while keeping Back unchanged */
+.back-button {
+    position: relative;
+}
+
+/* Pixel-style arrow appearance */
+.back-button {
+    text-shadow: 1px 1px 0 #E58BAA;
+}
+
+/* Hover effect */
+.back-button:hover {
+    background-color: #FFDCE8 !important;
+    color: #B83D6C !important;
+    box-shadow: 2px 2px 0 #D96F95 !important;
+    transform: translate(2px, 2px);
 }
